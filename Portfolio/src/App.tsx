@@ -5,6 +5,7 @@ import LiquidGlassCard from './components/LiquidGlassCard';
 import LiquidGlassButton from './components/LiquidGlassButton';
 import LiquidGlassNav from './components/LiquidGlassNav';
 import LiquidGlassModal from './components/LiquidGlassModal';
+import AppleGlowName from './components/AppleGlowName';
 
 function App() {
   const [activeNavItem, setActiveNavItem] = useState('home');
@@ -29,37 +30,14 @@ function App() {
           />
         </nav>
 
-        {/* Header */}
-        <header style={{ marginTop: '100px', textAlign: 'center', padding: '40px 20px' }}>
-          <LiquidGlassCard style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <h1 style={{ 
-              fontSize: '3rem', 
-              margin: '0 0 20px 0', 
-              background: 'linear-gradient(45deg, #fff, #a8edea)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>
-              Welcome to My Portfolio
-            </h1>
-            <p style={{ fontSize: '1.2rem', margin: '0 0 30px 0', opacity: 0.9 }}>
-              Move your mouse to create beautiful fluid effects and explore the liquid glass components
-            </p>
-            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <LiquidGlassButton onClick={() => setIsModalOpen(true)}>
-                View Demo
-              </LiquidGlassButton>
-              <LiquidGlassButton variant="secondary">
-                Download CV
-              </LiquidGlassButton>
-            </div>
-          </LiquidGlassCard>
-        </header>
+        {/* Apple Glow Name Hero (no glass) */}
+        <div style={{ marginTop: '120px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
+          <AppleGlowName />
+        </div>
 
         {/* Main Content */}
         <main style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ display: 'grid', gap: '32px', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
-            
             {/* About Section */}
             <LiquidGlassCard>
               <h2 style={{ margin: '0 0 20px 0', fontSize: '1.8rem' }}>About Me</h2>
@@ -130,7 +108,7 @@ function App() {
                 </LiquidGlassButton>
               </div>
             </LiquidGlassCard>
-      </div>
+          </div>
         </main>
 
         {/* Footer */}
