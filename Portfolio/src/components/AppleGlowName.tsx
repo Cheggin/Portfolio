@@ -26,7 +26,7 @@ const AppleGlowName = () => {
     }}>
       <h1
         style={{
-          fontSize: "clamp(2.5rem, 8vw, 6rem)",
+          fontSize: "clamp(2.5rem, 8vw, 7rem)",
           fontWeight: 900,
           letterSpacing: "-0.01em",
           margin: 0,

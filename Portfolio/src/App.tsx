@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import FluidCursor from './components/FluidCursor';
 import LiquidGlassCard from './components/LiquidGlassCard';
@@ -10,6 +10,7 @@ import AppleGlowName from './components/AppleGlowName';
 function App() {
   const [activeNavItem, setActiveNavItem] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showButtons, setShowButtons] = useState([false, false, false]);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -17,6 +18,16 @@ function App() {
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
   ];
+
+  useEffect(() => {
+    setShowButtons([false, false, false]);
+    const timers = [
+      setTimeout(() => setShowButtons(s => [true, s[1], s[2]]), 800),
+      setTimeout(() => setShowButtons(s => [true, true, s[2]]), 1000),
+      setTimeout(() => setShowButtons([true, true, true]), 1200),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
 
   return (
     <div className="App">
@@ -66,9 +77,27 @@ function App() {
         gap: '24px',
         zIndex: 2000,
       }}>
-        <LiquidGlassButton size="large" variant="primary">Hire Me</LiquidGlassButton>
-        <LiquidGlassButton size="large" variant="secondary">About Me</LiquidGlassButton>
-        <LiquidGlassButton size="large" variant="ghost">Projects</LiquidGlassButton>
+        <div style={{
+          opacity: showButtons[0] ? 1 : 0,
+          transform: showButtons[0] ? 'translateY(0)' : 'translateY(30px)',
+          transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
+        }}>
+          <LiquidGlassButton size="large" variant="primary">Hire Me</LiquidGlassButton>
+        </div>
+        <div style={{
+          opacity: showButtons[1] ? 1 : 0,
+          transform: showButtons[1] ? 'translateY(0)' : 'translateY(30px)',
+          transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
+        }}>
+          <LiquidGlassButton size="large" variant="secondary">About Me</LiquidGlassButton>
+        </div>
+        <div style={{
+          opacity: showButtons[2] ? 1 : 0,
+          transform: showButtons[2] ? 'translateY(0)' : 'translateY(30px)',
+          transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
+        }}>
+          <LiquidGlassButton size="large" variant="ghost">Projects</LiquidGlassButton>
+        </div>
       </div>
     </div>
   );
