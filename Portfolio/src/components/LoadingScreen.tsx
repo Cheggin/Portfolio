@@ -89,12 +89,12 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ animateTo, onFinish, visi
     function animate(ts: number) {
       if (start === null) start = ts;
       const elapsed = ts - start;
-      const progress = Math.min(elapsed / 900, 1); // 0.9s
+      const progress = Math.min(elapsed / 1500, 1); // 1.5s
       setAnimProgress(progress);
       if (progress < 1) {
         animRef.current = requestAnimationFrame(animate);
       } else {
-        setTimeout(() => setIsFadingOut(true), 400); // slight pause after animation
+        setTimeout(() => setIsFadingOut(true), 300); // longer pause after animation
       }
     }
     animRef.current = requestAnimationFrame(animate);
