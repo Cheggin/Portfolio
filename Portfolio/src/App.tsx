@@ -1,62 +1,166 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import FluidCursor from './components/FluidCursor';
+import LiquidGlassCard from './components/LiquidGlassCard';
+import LiquidGlassButton from './components/LiquidGlassButton';
+import LiquidGlassNav from './components/LiquidGlassNav';
+import LiquidGlassModal from './components/LiquidGlassModal';
 
 function App() {
+  const [activeNavItem, setActiveNavItem] = useState('home');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
+  ];
+
   return (
     <div className="App">
-      <FluidCursor />
       <div className="content">
-        <header className="header">
-          <h1>Welcome to My Portfolio</h1>
-          <p>Move your mouse or touch to create beautiful fluid effects</p>
-        </header>
-        
-        <main className="main">
-          <section className="section">
-            <h2>About Me</h2>
-            <p>
-              I'm a passionate developer who loves creating beautiful, interactive experiences. 
-              This fluid cursor background demonstrates my interest in graphics programming and 
-              real-time visual effects.
+        {/* Navigation */}
+        <nav style={{ position: 'fixed', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 1000 }}>
+          <LiquidGlassNav
+            items={navItems}
+            activeItem={activeNavItem}
+            onItemClick={setActiveNavItem}
+          />
+        </nav>
+
+        {/* Header */}
+        <header style={{ marginTop: '100px', textAlign: 'center', padding: '40px 20px' }}>
+          <LiquidGlassCard style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <h1 style={{ 
+              fontSize: '3rem', 
+              margin: '0 0 20px 0', 
+              background: 'linear-gradient(45deg, #fff, #a8edea)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Welcome to My Portfolio
+            </h1>
+            <p style={{ fontSize: '1.2rem', margin: '0 0 30px 0', opacity: 0.9 }}>
+              Move your mouse to create beautiful fluid effects and explore the liquid glass components
             </p>
-          </section>
-          
-          <section className="section">
-            <h2>Skills</h2>
-            <div className="skills">
-              <div className="skill">React</div>
-              <div className="skill">TypeScript</div>
-              <div className="skill">WebGL</div>
-              <div className="skill">Three.js</div>
-              <div className="skill">Node.js</div>
-              <div className="skill">Python</div>
+            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <LiquidGlassButton onClick={() => setIsModalOpen(true)}>
+                View Demo
+              </LiquidGlassButton>
+              <LiquidGlassButton variant="secondary">
+                Download CV
+              </LiquidGlassButton>
             </div>
-          </section>
-          
-          <section className="section">
-            <h2>Projects</h2>
-            <div className="projects">
-              <div className="project">
-                <h3>Fluid Simulation</h3>
-                <p>Real-time WebGL fluid dynamics with interactive cursor effects</p>
+          </LiquidGlassCard>
+        </header>
+
+        {/* Main Content */}
+        <main style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gap: '32px', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
+            
+            {/* About Section */}
+            <LiquidGlassCard>
+              <h2 style={{ margin: '0 0 20px 0', fontSize: '1.8rem' }}>About Me</h2>
+              <p style={{ lineHeight: '1.6', margin: '0 0 20px 0' }}>
+                I'm a passionate developer who loves creating beautiful, interactive experiences. 
+                This portfolio showcases my expertise in modern web technologies and creative design.
+              </p>
+              <LiquidGlassButton variant="ghost" size="small">
+                Learn More
+              </LiquidGlassButton>
+            </LiquidGlassCard>
+
+            {/* Skills Section */}
+            <LiquidGlassCard>
+              <h2 style={{ margin: '0 0 20px 0', fontSize: '1.8rem' }}>Skills</h2>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {['React', 'TypeScript', 'WebGL', 'Three.js', 'Node.js', 'Python'].map(skill => (
+                  <span key={skill} style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    padding: '6px 12px',
+                    borderRadius: '20px',
+                    fontSize: '0.9rem',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                  }}>
+                    {skill}
+                  </span>
+                ))}
               </div>
-              <div className="project">
-                <h3>3D Graphics Engine</h3>
-                <p>Custom 3D rendering engine built with WebGL</p>
+            </LiquidGlassCard>
+
+            {/* Projects Section */}
+            <LiquidGlassCard>
+              <h2 style={{ margin: '0 0 20px 0', fontSize: '1.8rem' }}>Featured Projects</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ padding: '16px', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px' }}>
+                  <h3 style={{ margin: '0 0 8px 0', fontSize: '1.2rem' }}>Fluid Simulation</h3>
+                  <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', opacity: 0.8 }}>
+                    Real-time WebGL fluid dynamics with interactive cursor effects
+                  </p>
+                  <LiquidGlassButton size="small" variant="secondary">
+                    View Project
+                  </LiquidGlassButton>
+                </div>
+                <div style={{ padding: '16px', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px' }}>
+                  <h3 style={{ margin: '0 0 8px 0', fontSize: '1.2rem' }}>Liquid Glass UI</h3>
+                  <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', opacity: 0.8 }}>
+                    Modern glassmorphism components with fluid animations
+                  </p>
+                  <LiquidGlassButton size="small" variant="secondary">
+                    View Project
+                  </LiquidGlassButton>
+                </div>
               </div>
-              <div className="project">
-                <h3>Interactive Portfolio</h3>
-                <p>Dynamic portfolio website with fluid animations</p>
+            </LiquidGlassCard>
+
+            {/* Contact Section */}
+            <LiquidGlassCard>
+              <h2 style={{ margin: '0 0 20px 0', fontSize: '1.8rem' }}>Get In Touch</h2>
+              <p style={{ lineHeight: '1.6', margin: '0 0 20px 0' }}>
+                Interested in working together? Let's create something amazing!
+              </p>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <LiquidGlassButton variant="primary">
+                  Contact Me
+                </LiquidGlassButton>
+                <LiquidGlassButton variant="ghost">
+                  LinkedIn
+                </LiquidGlassButton>
               </div>
-            </div>
-          </section>
+            </LiquidGlassCard>
+      </div>
         </main>
-        
-        <footer className="footer">
-          <p>© 2024 My Portfolio. Built with React, TypeScript, and WebGL.</p>
+
+        {/* Footer */}
+        <footer style={{ textAlign: 'center', padding: '40px 20px', marginTop: '60px' }}>
+          <LiquidGlassCard style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ margin: 0, opacity: 0.8 }}>
+              © 2024 My Portfolio. Built with React, TypeScript, and WebGL.
+            </p>
+          </LiquidGlassCard>
         </footer>
       </div>
+
+      {/* Modal */}
+      <LiquidGlassModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Portfolio Demo"
+      >
+        <div style={{ textAlign: 'center' }}>
+          <h3 style={{ margin: '0 0 20px 0' }}>Welcome to the Demo!</h3>
+          <p style={{ margin: '0 0 30px 0', lineHeight: '1.6' }}>
+            This modal showcases the liquid glass effect. Notice how it blurs the background
+            and creates a beautiful glassmorphism effect that matches the overall design.
+          </p>
+          <LiquidGlassButton onClick={() => setIsModalOpen(false)}>
+            Close Demo
+          </LiquidGlassButton>
+        </div>
+      </LiquidGlassModal>
+      <FluidCursor />
     </div>
   );
 }
