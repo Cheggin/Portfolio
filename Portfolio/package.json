@@ -12,7 +12,9 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-native": "^0.80.1"
+    "react-native": "^0.80.1",
+    "react-router": "^7.6.3",
+    "react-router-dom": "^7.6.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

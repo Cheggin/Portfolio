@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import FluidCursor from './components/FluidCursor';
-import LiquidGlassCard from './components/LiquidGlassCard';
 import LiquidGlassButton from './components/LiquidGlassButton';
 import LiquidGlassNav from './components/LiquidGlassNav';
 import LiquidGlassModal from './components/LiquidGlassModal';
 import AppleGlowName from './components/AppleGlowName';
 import LoadingScreen from './components/LoadingScreen';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import RecruiterPage from './components/RecruiterPage';
 
 function App() {
   const [activeNavItem, setActiveNavItem] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showButtons, setShowButtons] = useState([false, false, false]);
   const [showLoading, setShowLoading] = useState<null | string>(null);
+  const navigate = useNavigate();
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -36,7 +38,10 @@ function App() {
       <LoadingScreen
         animateTo={showLoading || undefined}
         visible={!!showLoading}
-        onFinish={() => setShowLoading(null)}
+        onFinish={() => {
+          if (showLoading === 'recruiter') navigate('/recruiter');
+          setShowLoading(null);
+        }}
       />
 
       {/* Minimal Glassy Navbar */}
@@ -118,7 +123,7 @@ function App() {
           transform: showButtons[1] ? 'translateY(0)' : 'translateY(30px)',
           transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
         }}>
-          <LiquidGlassButton size="large" variant="secondary" onClick={() => setShowLoading('friends/family')}>Friends/Family</LiquidGlassButton>
+          <LiquidGlassButton size="large" variant="secondary" onClick={() => setShowLoading('friends/family')}>Friends & Family</LiquidGlassButton>
         </div>
         <div style={{
           opacity: showButtons[2] ? 1 : 0,
@@ -132,4 +137,13 @@ function App() {
   );
 }
 
-export default App;
+const AppWithRouter = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/recruiter" element={<RecruiterPage />} />
+    </Routes>
+  </BrowserRouter>
+);
+
+export default AppWithRouter;

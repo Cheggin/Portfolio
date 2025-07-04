@@ -46,7 +46,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ animateTo, onFinish, visi
   const childSpacing = 180;
   const children = [
     { label: 'Recruiter', id: 'recruiter', x: centerX - childSpacing, y: childY },
-    { label: 'Friends/Family', id: 'friends/family', x: centerX, y: childY },
+    { label: 'Friends & Family', id: 'friends/family', x: centerX, y: childY },
     { label: 'Secret Admirer', id: 'secret admirer', x: centerX + childSpacing, y: childY },
   ];
 
