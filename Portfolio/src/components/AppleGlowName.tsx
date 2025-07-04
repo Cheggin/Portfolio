@@ -39,6 +39,7 @@ const AppleGlowName = () => {
           color: "transparent",
           lineHeight: 1.1,
           fontFamily: "'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif",
+          userSelect: "none",
         }}
       >
         Reagan Hsu
@@ -57,6 +58,7 @@ const AppleGlowName = () => {
           lineHeight: 1.1,
           fontFamily: "'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif",
           color: "#fff",
+          userSelect: "none",
         }}
       >
         Portfolio

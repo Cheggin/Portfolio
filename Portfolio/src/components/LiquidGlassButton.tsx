@@ -68,26 +68,11 @@ const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
   };
 
   const getVariantStyles = () => {
-    switch (variant) {
-      case 'secondary':
-        return {
-          background: 'rgba(255, 255, 255, 0.05)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          color: 'rgba(255, 255, 255, 0.9)',
-        };
-      case 'ghost':
-        return {
-          background: 'transparent',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          color: 'rgba(255, 255, 255, 0.8)',
-        };
-      default:
-        return {
-          background: 'rgba(255, 255, 255, 0.1)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          color: 'rgba(255, 255, 255, 0.95)',
-        };
-    }
+    return {
+      background: 'rgba(30, 30, 40, 0.18)',
+      border: '1px solid rgba(255, 255, 255, 0.15)',
+      color: 'rgba(255, 255, 255, 0.95)',
+    };
   };
 
   const getSizeStyles = () => {
@@ -109,8 +94,8 @@ const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
     fontFamily: 'inherit',
     fontWeight: 500,
     letterSpacing: '0.5px',
-    backdropFilter: 'blur(40px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+    backdropFilter: 'blur(60px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(60px) saturate(180%)',
     boxShadow: `
       0 4px 20px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.08) inset,
@@ -131,19 +116,7 @@ const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
     left: 0,
     right: 0,
     bottom: 0,
-    background: `
-      radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, 
-        rgba(255, 255, 255, 0.2) 0%, 
-        rgba(255, 255, 255, 0.08) 40%, 
-        transparent 70%
-      ),
-      linear-gradient(
-        135deg, 
-        rgba(255, 255, 255, 0.12) 0%, 
-        rgba(255, 255, 255, 0.06) 50%, 
-        rgba(255, 255, 255, 0.02) 100%
-      )
-    `,
+    background: 'transparent',
     pointerEvents: 'none',
     opacity: disabled ? 0 : 0.6,
     mixBlendMode: 'overlay',

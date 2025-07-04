@@ -37,9 +37,9 @@ const LiquidGlassNav: React.FC<LiquidGlassNavProps> = ({
 
   const containerStyle: React.CSSProperties = {
     position: 'relative',
-    background: 'rgba(255, 255, 255, 0.08)',
-    backdropFilter: 'blur(40px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+    background: 'rgba(30, 30, 40, 0.18)',
+    backdropFilter: 'blur(60px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(60px) saturate(180%)',
     border: '1px solid rgba(255, 255, 255, 0.15)',
     borderRadius: variant === 'horizontal' ? '20px' : '16px',
     padding: variant === 'horizontal' ? '8px' : '12px',

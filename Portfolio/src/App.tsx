@@ -31,6 +31,30 @@ function App() {
 
   return (
     <div className="App">
+      {/* Minimal Glassy Navbar */}
+      <div style={{
+        position: 'fixed',
+        top: '24px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 3000,
+        width: 'auto',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <LiquidGlassNav
+          items={[
+            { id: 'home', label: 'Home' },
+            { id: 'about', label: 'About' },
+            { id: 'projects', label: 'Projects' },
+            { id: 'contact', label: 'Contact' },
+          ]}
+          variant="horizontal"
+          style={{ minWidth: 0 }}
+        />
+      </div>
+
       <div className="content">
         {/* Apple Glow Name Hero (no glass) */}
         <div style={{ marginTop: '120px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
