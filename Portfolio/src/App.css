@@ -227,3 +227,12 @@
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
+.liquid-glass-nav .nav-item:focus {
+  outline: none;
+  box-shadow: none;
+}
+.liquid-glass-nav .nav-item:focus-visible {
+  outline: 2px solid #99c7ff;
+  box-shadow: 0 0 0 2px #222, 0 0 0 4px #99c7ff;
+}

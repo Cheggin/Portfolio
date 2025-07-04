@@ -44,14 +44,11 @@ function App() {
         alignItems: 'center',
       }}>
         <LiquidGlassNav
-          items={[
-            { id: 'home', label: 'Home' },
-            { id: 'about', label: 'About' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'contact', label: 'Contact' },
-          ]}
+          items={navItems}
           variant="horizontal"
           style={{ minWidth: 0 }}
+          activeItem={activeNavItem}
+          onItemClick={setActiveNavItem}
         />
       </div>
 
@@ -106,21 +103,21 @@ function App() {
           transform: showButtons[0] ? 'translateY(0)' : 'translateY(30px)',
           transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
         }}>
-          <LiquidGlassButton size="large" variant="primary">Hire Me</LiquidGlassButton>
+          <LiquidGlassButton size="large" variant="primary">Recruiters</LiquidGlassButton>
         </div>
         <div style={{
           opacity: showButtons[1] ? 1 : 0,
           transform: showButtons[1] ? 'translateY(0)' : 'translateY(30px)',
           transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
         }}>
-          <LiquidGlassButton size="large" variant="secondary">About Me</LiquidGlassButton>
+          <LiquidGlassButton size="large" variant="secondary">Friends/Family</LiquidGlassButton>
         </div>
         <div style={{
           opacity: showButtons[2] ? 1 : 0,
           transform: showButtons[2] ? 'translateY(0)' : 'translateY(30px)',
           transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
         }}>
-          <LiquidGlassButton size="large" variant="ghost">Projects</LiquidGlassButton>
+          <LiquidGlassButton size="large" variant="ghost">Secret Admirer...?</LiquidGlassButton>
         </div>
       </div>
     </div>

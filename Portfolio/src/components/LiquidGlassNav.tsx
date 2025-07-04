@@ -143,10 +143,26 @@ const LiquidGlassNav: React.FC<LiquidGlassNavProps> = ({
           onMouseEnter={() => handleItemHover(item.id)}
           onMouseLeave={handleItemLeave}
         >
-          {activeItem === item.id && <div style={activeIndicatorStyle} />}
           <div style={hoverEffectStyle(item.id)} />
           {item.icon && <span className="nav-icon">{item.icon}</span>}
-          <span className="nav-label">{item.label}</span>
+          <span className="nav-label" style={{ position: 'relative', display: 'inline-block' }}>
+            {item.label}
+            <span
+              style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: -5,
+                height: 1,
+                borderRadius: 1,
+                background: activeItem === item.id ? 'rgba(255,255,255,0.85)' : 'transparent',
+                transition: 'background 0.3s, width 0.3s',
+                width: activeItem === item.id ? '100%' : '0%',
+                margin: '0 auto',
+                zIndex: 2,
+              }}
+            />
+          </span>
         </button>
       ))}
     </nav>
