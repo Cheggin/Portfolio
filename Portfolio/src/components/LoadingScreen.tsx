@@ -24,6 +24,7 @@ const nodeStyle: React.CSSProperties = {
   overflow: 'hidden',
   wordBreak: 'break-word',
   whiteSpace: 'pre-line',
+  transition: 'all 0.3s cubic-bezier(.4,0,.2,1)',
 };
 
 interface LoadingScreenProps {
@@ -53,6 +54,32 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ animateTo, onFinish, visi
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [isFadingIn, setIsFadingIn] = useState(false);
   const animRef = useRef<number | null>(null);
+
+  // Helper function to get glowing node style
+  const getGlowingNodeStyle = (isActive: boolean): React.CSSProperties => {
+    if (!isActive) return nodeStyle;
+    
+    return {
+      ...nodeStyle,
+      boxShadow: `
+        0 6px 24px rgba(0,0,0,0.20), 
+        0 1.5px 9px rgba(255,255,255,0.15) inset,
+        0 0 16px rgba(10, 132, 255, 0.55),
+        0 0 28px rgba(191, 90, 242, 0.36),
+        0 0 40px rgba(255, 55, 95, 0.35),
+        0 0 54px rgba(255, 0, 80, 0.18)
+      `,
+      border: '2.5px solid rgba(255,255,255,0.25)',
+      background: `
+        linear-gradient(135deg, 
+          rgba(10, 132, 255, 0.19) 0%, 
+          rgba(191, 90, 242, 0.14) 50%, 
+          rgba(255, 55, 95, 0.22) 80%,
+          rgba(255, 0, 80, 0.18) 100%
+        )
+      `,
+    };
+  };
 
   // Animate the highlight
   useEffect(() => {
@@ -120,7 +147,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ animateTo, onFinish, visi
           <defs>
             {children.map(child => {
               if (animateTo === child.id) {
-                // Animate the gradient highlight
+                // Gradient for radiant glow, matching node colors
                 const gradId = `highlight-gradient-${child.id.replace(/\s+/g, '-')}`;
                 return (
                   <linearGradient
@@ -133,10 +160,8 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ animateTo, onFinish, visi
                     y2={child.y - nodeRadius}
                   >
                     <stop offset="0%" stopColor="#0a84ff" />
-                    <stop offset={Math.max(0, animProgress * 100 - 10) + '%'} stopColor="#0a84ff" />
-                    <stop offset={Math.max(0, animProgress * 100) + '%'} stopColor="#bf5af2" />
-                    <stop offset={Math.min(100, animProgress * 100 + 30) + '%'} stopColor="#ff375f" stopOpacity={0.7} />
-                    <stop offset="100%" stopColor="#ff375f" stopOpacity={0.2} />
+                    <stop offset="50%" stopColor="#bf5af2" />
+                    <stop offset="100%" stopColor="#ff375f" />
                   </linearGradient>
                 );
               }
@@ -147,33 +172,85 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ animateTo, onFinish, visi
             const isActive = animateTo === child.id;
             const gradId = `highlight-gradient-${child.id.replace(/\s+/g, '-')}`;
             return (
-              <line
-                key={child.id}
-                x1={centerX}
-                y1={homeY + nodeRadius}
-                x2={child.x}
-                y2={child.y - nodeRadius}
-                stroke={isActive ? `url(#${gradId})` : 'rgba(255,255,255,0.18)'}
-                strokeWidth={isActive ? 5 : 3}
-                style={{ filter: isActive ? 'drop-shadow(0 0 8px #bf5af2)' : undefined, transition: 'stroke-width 0.2s' }}
-              />
+              <g key={child.id}>
+                {/* Glow line underneath for active branch */}
+                {isActive && (
+                  <line
+                    x1={centerX}
+                    y1={homeY + nodeRadius}
+                    x2={child.x}
+                    y2={child.y - nodeRadius}
+                    stroke={`url(#${gradId})`}
+                    strokeWidth={16}
+                    opacity={0.7}
+                    style={{
+                      filter: 'blur(8px)',
+                      pointerEvents: 'none',
+                      transition: 'stroke-width 0.2s, filter 0.2s',
+                    }}
+                  />
+                )}
+                {/* Main line on top */}
+                <line
+                  x1={centerX}
+                  y1={homeY + nodeRadius}
+                  x2={child.x}
+                  y2={child.y - nodeRadius}
+                  stroke={isActive ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.18)'}
+                  strokeWidth={2.5}
+                  style={{
+                    transition: 'stroke-width 0.2s, filter 0.2s',
+                  }}
+                />
+              </g>
             );
           })}
         </svg>
         {/* Home node */}
-        <div style={{ position: 'absolute', left: centerX - nodeRadius, top: homeY, zIndex: 2 }}>
-          <LiquidGlassButton size="large" style={nodeStyle}>Home</LiquidGlassButton>
+        <div style={{ position: 'absolute', left: centerX - nodeRadius, top: homeY, zIndex: 2, width: nodeRadius * 2, height: nodeRadius * 2 }}>
+          {/* Opaque background to block SVG lines */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            background: 'rgba(16,16,32,1)', // fully opaque dark background
+            zIndex: 0,
+          }} />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <LiquidGlassButton 
+              size="large" 
+              style={getGlowingNodeStyle(!!animateTo)}
+            >
+              Home
+            </LiquidGlassButton>
+          </div>
         </div>
         {/* Child nodes */}
         {children.map(child => (
-          <div key={child.id} style={{ position: 'absolute', left: child.x - nodeRadius, top: child.y - nodeRadius, zIndex: 2 }}>
-            <LiquidGlassButton
-              size="large"
-              style={nodeStyle}
-              // No onClick, not interactive
-            >
-              <span style={{whiteSpace:'pre-line'}}>{child.label}</span>
-            </LiquidGlassButton>
+          <div key={child.id} style={{ position: 'absolute', left: child.x - nodeRadius, top: child.y - nodeRadius, zIndex: 2, width: nodeRadius * 2, height: nodeRadius * 2 }}>
+            {/* Opaque background to block SVG lines */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              background: 'rgba(16,16,32,1)', // fully opaque dark background
+              zIndex: 0,
+            }} />
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <LiquidGlassButton
+                size="large"
+                style={getGlowingNodeStyle(animateTo === child.id)}
+                // No onClick, not interactive
+              >
+                <span style={{whiteSpace:'pre-line'}}>{child.label}</span>
+              </LiquidGlassButton>
+            </div>
           </div>
         ))}
       </div>

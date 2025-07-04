@@ -105,6 +105,7 @@ const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
     overflow: 'hidden',
     opacity: disabled ? 0.5 : 1,
     transform: isPressed ? 'scale(0.96)' : 'scale(1)',
+    outline: 'none',
     ...getVariantStyles(),
     ...getSizeStyles(),
     ...style,
@@ -144,6 +145,14 @@ const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
               transform: scale(2);
               opacity: 0;
             }
+          }
+          .liquid-glass-button:focus {
+            outline: none;
+            box-shadow: none;
+          }
+          .liquid-glass-button:focus-visible {
+            outline: 2px solid #99c7ff;
+            box-shadow: 0 0 0 2px #222, 0 0 0 4px #99c7ff;
           }
         `}
       </style>
