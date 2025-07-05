@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FluidCursor from "./FluidCursor";
 import UniversalNavbar from "./UniversalNavbar";
 
@@ -10,17 +10,35 @@ const ResumePage: React.FC = () => {
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
   ];
+
+  useEffect(() => {
+    const originalHtmlOverflowX = document.documentElement.style.overflowX;
+    const originalBodyOverflowX = document.body.style.overflowX;
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    return () => {
+      document.documentElement.style.overflowX = originalHtmlOverflowX;
+      document.body.style.overflowX = originalBodyOverflowX;
+    };
+  }, []);
+
   return (
     <div
       style={{
         minHeight: "100vh",
         width: "100vw",
-        position: "relative",
-        overflow: "hidden",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 1,
+        marginTop: 100,
+        overflowX: "hidden",
+        overflowY: "auto",
         fontFamily: "Roboto, system-ui, sans-serif",
         margin: 0,
         padding: 0,
-        background: "rgba(0,0,0,0.85)",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <UniversalNavbar
@@ -31,13 +49,11 @@ const ResumePage: React.FC = () => {
       <FluidCursor />
       <div
         style={{
-          width: "100vw",
-          minHeight: "100vh",
+          flex: 1,
           display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start",
+          alignItems: "center",
           justifyContent: "center",
-          paddingTop: 120,
+          width: "100vw",
         }}
       >
         <div
@@ -48,7 +64,6 @@ const ResumePage: React.FC = () => {
             borderRadius: 32,
             boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
             padding: "48px 48px 48px 48px",
-            margin: "0 auto",
             color: "#fff",
             fontFamily: "Roboto, system-ui, sans-serif",
             fontSize: 20,
