@@ -8,6 +8,7 @@ import AppleGlowName from './components/AppleGlowName';
 import LoadingScreen from './components/LoadingScreen';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import RecruiterPage from './components/RecruiterPage';
+import ResumePage from './components/ResumePage';
 
 function App() {
   const [activeNavItem, setActiveNavItem] = useState('home');
@@ -142,6 +143,7 @@ const AppWithRouter = () => (
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/recruiter" element={<RecruiterPage />} />
+      <Route path="/resume" element={<ResumePage />} />
     </Routes>
   </BrowserRouter>
 );
