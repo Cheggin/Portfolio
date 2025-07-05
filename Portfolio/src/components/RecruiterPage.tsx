@@ -82,7 +82,10 @@ const RecruiterPage: React.FC = () => {
             Why You Should Hire Me
           </h1>
           <p style={{ fontSize: 20, color: "#e6e6f0", marginBottom: 40, textAlign: "left", width: "100%", fontFamily: "Roboto, system-ui, sans-serif" }}>
-            I am a passionate, results-driven developer with a proven track record in AI/ML, full-stack development, and leadership. My experience spans research, startups, and award-winning hackathons. I thrive in fast-paced, collaborative environments and am eager to bring my skills to your team.
+            I am a hard working, communicative, and thorough developer that is always looking for new things to learn and new challenges to take on. My experience spans cancer, bioinformatics, and computational biology research, full stack engineering @ startups, and participating in award-winning hackathon projects. I thrive in fast-paced, collaborative environments and am eager to bring my skills to your team. 
+            <br></br>
+            <br></br>
+            I am always interested in projects in the space of model resource efficiency and training speedup, sleek and fun web design, app development for social media, and website/app development in the space of education and medical care. My goal is to use my programming skills to create a platform that is dedicated towards propelling others and myself towards making waves of change in the world.
           </p>
         </div>
         {/* Right half: large TiltedCard with border, rounded corners, and persistent overlay caption */}
