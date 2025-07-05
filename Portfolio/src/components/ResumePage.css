@@ -1,0 +1,111 @@
+/* ResumePage.css */
+
+.resume-root {
+  min-height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  margin-top: 100px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Roboto', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-center-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.resume-card {
+  width: 60vw;
+  min-height: 80vh;
+  max-height: 80vh;
+  background: rgba(20,20,30,0.55);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 48px 48px 48px 48px;
+  color: #fff;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.resume-left {
+  align-self: flex-start;
+  text-align: left;
+  width: 100%;
+}
+
+.resume-title {
+  font-size: 44px;
+  font-weight: 900;
+  margin-bottom: 32px;
+  color: #fff;
+  text-shadow: 0 0 16px #0a84ff22;
+  text-align: center;
+}
+
+.resume-header {
+  margin-bottom: 32px;
+}
+.resume-header-name {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.resume-header-contact {
+  font-size: 16px;
+  color: #e6e6f0;
+  margin-bottom: 4px;
+}
+
+.resume-section {
+  margin-bottom: 32px;
+}
+.resume-section-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #fff;
+  text-shadow: 0 0 8px #0a84ff22;
+  text-align: center;
+}
+
+.resume-section-inner {
+  margin-bottom: 12px;
+}
+.resume-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+.resume-role {
+  font-weight: 600;
+  color: #fff;
+}
+.resume-date, .resume-location {
+  color: #e6e6f0;
+}
+.resume-detail {
+  color: #e6e6f0;
+  margin-bottom: 4px;
+}
+.resume-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #e6e6f0;
+} 
