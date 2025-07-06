@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import FluidCursor from "./FluidCursor";
 import UniversalNavbar from "./UniversalNavbar";
 import "./ResumePage.css";
+import Henry from "./images/HENRYYY.png";
+import Eddie from "./images/Eddie.jpeg";
+import Oscar from "./images/Oscar.jpeg";
 
 const ResumePage: React.FC = () => {
   const [activeNavItem, setActiveNavItem] = useState('home');
@@ -147,6 +150,21 @@ const ResumePage: React.FC = () => {
               <ul className="resume-list">
                 <li>Led a team of 6 programmers in predicting the winners of the NCAA men's volleyball season</li>
               </ul>
+            </div>
+          </div>
+          {/* Polaroid Cat Photos */}
+          <div className="polaroid-cats-row">
+            <div className="polaroid-cat polaroid-rotate-left">
+              <img src={Henry} alt="Henry the cat" className="polaroid-cat-img" />
+              <div className="polaroid-caption">Henry: The Fluffy King</div>
+            </div>
+            <div className="polaroid-cat polaroid-rotate-center">
+              <img src={Oscar} alt="Oscar the cat" className="polaroid-cat-img" />
+              <div className="polaroid-caption">Oscar: The Mischief Maker</div>
+            </div>
+            <div className="polaroid-cat polaroid-rotate-right">
+              <img src={Eddie} alt="Eddie the cat" className="polaroid-cat-img" />
+              <div className="polaroid-caption">Eddie: The Sleepy Prince</div>
             </div>
           </div>
         </div>

@@ -74,14 +74,64 @@
 
 .resume-section {
   margin-bottom: 32px;
+  width: 100%;
 }
+
+.resume-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.resume-section-header:hover {
+  background: rgba(10, 132, 255, 0.1);
+  padding: 8px 12px;
+  margin: 0 -12px;
+}
+
 .resume-section-title {
   font-size: 22px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   color: #fff;
   text-shadow: 0 0 8px #0a84ff22;
-  text-align: center;
+  text-align: left;
+}
+
+.resume-toggle-icon {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0a84ff;
+  transition: transform 0.3s ease;
+  margin-left: 16px;
+}
+
+.resume-section-header:hover .resume-toggle-icon {
+  transform: scale(1.2);
+}
+
+.resume-section-content {
+  margin-top: 16px;
+  animation: slideDown 0.3s ease-out;
+  overflow: hidden;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+    transform: translateY(0);
+  }
 }
 
 .resume-section-inner {

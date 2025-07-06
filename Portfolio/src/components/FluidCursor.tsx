@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+import type { FluidCursorConfig } from '../hooks/use-FluidCursor';
 
-const FluidCursor: React.FC = () => {
+interface FluidCursorProps {
+  config?: FluidCursorConfig;
+}
+
+const FluidCursor: React.FC<FluidCursorProps> = ({ config }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -15,10 +20,10 @@ const FluidCursor: React.FC = () => {
           canvasRef.current.id = 'fluid';
           
           // Call the hook and get cleanup function
-          const cleanup = useFluidCursor();
+          useFluidCursor(config);
           
           // Return cleanup function
-          return cleanup;
+          return;
         }
       } catch (error) {
         console.error('Failed to initialize fluid cursor:', error);
@@ -33,7 +38,7 @@ const FluidCursor: React.FC = () => {
         cleanup();
       }
     };
-  }, []);
+  }, [config]);
 
   return (
     <canvas

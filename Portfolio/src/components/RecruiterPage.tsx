@@ -1,12 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import FluidCursor from "./FluidCursor";
+import type { FluidCursorConfig } from "../hooks/use-FluidCursor";
 import pfp from "./images/pfp.png";
-import Henry from "./images/HENRYYY.png";
 import TiltedCard from "./TiltedCard";
 import UniversalNavbar from "./UniversalNavbar";
 import LiquidGlassButton from "./LiquidGlassButton";
 import "./RecruiterPage.css";
+import acmLogo from "./images/acmlogo.png";
+import MetaBalls from "./MetaBalls";
+
+const mutedCursorConfig: FluidCursorConfig = {
+  DENSITY_DISSIPATION: 0.85,
+  VELOCITY_DISSIPATION: 12,
+  CURL: 1.2,
+  SPLAT_RADIUS: 0.08,
+  SPLAT_FORCE: 1800,
+};
+
+const funWords = [
+  "Funny 😹",
+  "Awesome 🚀",
+  "Cat Whisperer 🐾",
+  "Meme Lord 🤡",
+  "Hackathon Addict 🏆",
+  "Coffee Enthusiast ☕️",
+];
 
 const RecruiterPage: React.FC = () => {
   // Prevent horizontal scrolling globally
@@ -30,6 +49,107 @@ const RecruiterPage: React.FC = () => {
   ];
   const navigate = useNavigate();
 
+  // Dropdown state for tech stack groups
+  const [openTechGroups, setOpenTechGroups] = useState<{ [key: string]: boolean }>({});
+  const techGroups = [
+    {
+      key: 'frontend',
+      title: 'Front End',
+      items: [
+        'React Native, React Native Web, Expo, Tauri',
+        'Typescript, Javascript, Tailwind CSS',
+      ],
+    },
+    {
+      key: 'backend',
+      title: 'Back End / DevOps',
+      items: [
+        'Python, Flask, Docker, Render, GCP Authentication',
+      ],
+    },
+    {
+      key: 'ai',
+      title: 'AI / ML',
+      items: [
+        'TensorFlow, SciKit Learn, pandas',
+        'Hugging Face Transformers, Gemini, RAG, LLMs, ToolLLM, GAIA framework',
+      ],
+    },
+    {
+      key: 'languages',
+      title: 'Programming Languages',
+      items: [
+        'Java, Python, Typescript, Javascript, C, MATLAB',
+      ],
+    },
+    {
+      key: 'databases',
+      title: 'Databases / Data',
+      items: [
+        'Supabase, Prisma, Weaviate, Pinecone, vector DBs',
+      ],
+    },
+    {
+      key: 'other',
+      title: 'Other Tools',
+      items: [
+        'Linear, Auth0, d3-force, OpenFDA, Drugs.com API',
+      ],
+    },
+  ];
+
+  const toggleTechGroup = (key: string) => {
+    setOpenTechGroups((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const [showFunWords, setShowFunWords] = useState(false);
+  const [showFluidCursor, setShowFluidCursor] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Pixel-perfect scroll snap correction
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    let timeout: NodeJS.Timeout | null = null;
+    const handleScroll = () => {
+      // Show FluidCursor only on first section
+      if (container.scrollTop < window.innerHeight / 2) {
+        setShowFluidCursor(true);
+      } else {
+        setShowFluidCursor(false);
+      }
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        // Find all sections
+        const sections = Array.from(container.querySelectorAll<HTMLElement>(".recruiter-section"));
+        const scrollTop = container.scrollTop;
+        const containerHeight = container.clientHeight;
+        // Find the section closest to the current scroll position
+        let minDist = Infinity;
+        let snapTo = 0;
+        sections.forEach((section) => {
+          const offset = section.offsetTop;
+          const dist = Math.abs(scrollTop - offset);
+          if (dist < minDist) {
+            minDist = dist;
+            snapTo = offset;
+          }
+        });
+        // Only snap if not already perfectly aligned
+        if (Math.abs(scrollTop - snapTo) > 2) {
+          container.scrollTo({ top: snapTo, behavior: "smooth" });
+        }
+      }, 80); // 80ms after scroll stops
+    };
+    container.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      if (timeout) clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <div className="recruiter-root">
       <UniversalNavbar
@@ -37,28 +157,75 @@ const RecruiterPage: React.FC = () => {
         activeNavItem={activeNavItem}
         onItemClick={setActiveNavItem}
       />
-      <FluidCursor />
-      <div className="recruiter-scroll-container">
-        {/* Section 1: Intro */}
+      {showFluidCursor && <FluidCursor config={mutedCursorConfig} />}
+      <div className="recruiter-scroll-container" ref={scrollContainerRef}>
+        {/* Section 1: My Application */}
         <section className="recruiter-section">
-          {/* Left half: content */}
+          {/* Left: Liquid glass card with all text */}
           <div className="recruiter-left">
-            <h1 className="recruiter-heading">Why You Should Hire Me</h1>
-            <p className="recruiter-paragraph">
-              I am a hard working, communicative, and thorough developer that is always looking for new things to learn and new challenges to take on. My experience spans LLM, cancer imaging, bioinformatics, and computational biology research, full stack engineering @ startups, and participating in award-winning hackathon projects. I thrive in fast-paced, collaborative environments and am eager to bring my skills to your team.
-            </p>
-            <h1 className="recruiter-heading">My Interests</h1>
-            <p className="recruiter-paragraph">
-              I am always interested in projects in the space of model resource efficiency and training speedup, sleek and fun web design, app development for social media, and website/app development in the space of education and medical care. My goal is to use my programming skills to create a platform that is dedicated towards propelling others and myself towards making waves of change in the world.
-            </p>
+            <div className="liquid-glass-card recruiter-application-card">
+              <div className="application-header">
+                <div className="application-header-left">
+                  <h1 className="application-title">Reagan Hsu</h1>
+                </div>
+                <div className="application-header-right">
+                  <div className="application-subtitle">Internship Application</div>
+                  <span className="application-status-live">● Live</span>
+                </div>
+              </div>
+              <div className="application-details-row">
+                <div className="application-detail">
+                  <span className="application-detail-icon" role="img" aria-label="calendar">📅</span>
+                  <div>
+                    <div className="application-detail-title">Duration</div>
+                    <div className="application-detail-desc">3 months – starting Summer 2026 (June)</div>
+                  </div>
+                </div>
+                <div className="application-detail">
+                  <span className="application-detail-icon" role="img" aria-label="location">🌐</span>
+                  <div>
+                    <div className="application-detail-title">Location</div>
+                    <div className="application-detail-desc">San Francisco, New York, San Jose, San Diego, Texas, LA, Seattle, Chicago, Boston, Remote</div>
+                  </div>
+                </div>
+              </div>
+              <div className="application-tech-stack">
+                <div className="application-tech-title">
+                  <span className="application-detail-icon" role="img" aria-label="tech">💻</span> Tech stack
+                </div>
+                <ul className="application-tech-list">
+                  <li>React Native, Expo, Tauri, Vite </li>
+                  <li>Vercel, Render, Flask, Supabase</li>
+                  <li>Docker, Git</li>
+                  <li>TensorFlow, SciKit Learn, pandas</li>
+                  <li>Hugging Face Transformers, Gemini, Claude, RAG</li>
+                  <li>Java, Python, Typescript, Javascript, C, MATLAB</li>
+                </ul>
+              </div>
+              <div className="application-section">
+                <h2 className="application-section-title">What I bring</h2>
+                <div className="application-section-desc">
+                  I'm a hardworking, communicative, and thorough developer with experience in LLMs, cancer imaging, bioinformatics, computational biology, full stack engineering at startups, and award-winning hackathon projects. I thrive in fast-paced, collaborative environments and am eager to bring my skills to your team.
+                </div>
+              </div>
+              <div className="application-section">
+                <h2 className="application-section-title">Goal</h2>
+                <div className="application-section-desc">
+                  I'm passionate about model efficiency, fast training, sleek web/app design, and building tools for education and healthcare. My goal is to use my programming skills to propel others and myself in our goals of making change.
+                </div>
+              </div>
+              <div className="application-contact-btn-row">
+                <button className="application-contact-btn">Contact me</button>
+              </div>
+            </div>
           </div>
-          {/* Right half: large TiltedCard with border, rounded corners, and persistent overlay caption */}
-          <div className="recruiter-right">
+          {/* Right: 2x2 grid of profile images */}
+          <div className="recruiter-right recruiter-right-single" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <TiltedCard
               imageSrc={pfp}
               altText="Reagan Hsu photo"
-              containerHeight="min(80vh, 540px)"
-              containerWidth="min(80vw, 380px)"
+              containerHeight="min(90vh, 600px)"
+              containerWidth="min(45vw, 420px)"
               imageHeight="100%"
               imageWidth="100%"
               rotateAmplitude={14}
@@ -75,8 +242,6 @@ const RecruiterPage: React.FC = () => {
               }}
             />
           </div>
-          {/* Scroll prompt at bottom of first section */}
-          <span className="recruiter-scroll-prompt">scroll :D</span>
         </section>
         {/* Section 2: Experiences */}
         <section className="recruiter-section">
@@ -84,10 +249,10 @@ const RecruiterPage: React.FC = () => {
           <div className="recruiter-left">
             <h1 className="recruiter-heading">A Few of My Experiences</h1>
             <ul className="recruiter-list">
-              <li><b>AI/ML Researcher</b> @ Algoverse (2025–Present)</li>
-              <li><b>Front End Lead</b> @ NetSerpent (Startup) (2025–Present) </li>
-              <li><b>Cancer Researcher</b> @ UCSD Ongkeko Lab (2024–Present)</li>
-              <li><b>Projects Director</b> @ ACM UCSD (2025–Present):</li>
+              <li><span style={{ whiteSpace: 'nowrap' }}><b>AI/ML Researcher</b> @ Algoverse (2025–Present)</span></li>
+              <li><span style={{ whiteSpace: 'nowrap' }}><b>Front End Lead</b> @ NetSerpent (Startup) (2025–Present)</span></li>
+              <li><span style={{ whiteSpace: 'nowrap' }}><b>Cancer Researcher</b> @ UCSD Ongkeko Lab (2024–Present)</span></li>
+              <li><span style={{ whiteSpace: 'nowrap' }}><b>Projects Director</b> @ ACM UCSD (2025–Present):</span></li>
             </ul>
             <LiquidGlassButton
               size="large"
@@ -97,27 +262,18 @@ const RecruiterPage: React.FC = () => {
               View my full resume here
             </LiquidGlassButton>
           </div>
-          {/* Right half: large TiltedCard with border, rounded corners, and persistent overlay caption */}
-          <div className="recruiter-right">
-            <TiltedCard
-              imageSrc={Henry}
-              altText="Reagan Hsu photo"
-              containerHeight="min(80vh, 540px)"
-              containerWidth="min(80vw, 380px)"
-              imageHeight="100%"
-              imageWidth="100%"
-              rotateAmplitude={14}
-              scaleOnHover={1.08}
-              showMobileWarning={false}
-              showTooltip={false}
-              displayOverlayContent={true}
-              overlayContent={
-                <div className="recruiter-overlay-lower">This is Henry!</div>
-              }
-              imageStyle={{
-                border: "2.5px solid rgba(255,255,255,0.18)",
-                borderRadius: "32px",
-              }}
+          {/* Right half: MetaBalls interactive blob simulation */}
+          <div className="recruiter-right recruiter-coin-3d" style={{ minHeight: 400, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginLeft: -80 }}>
+            <MetaBalls
+              color="#ffffff"
+              cursorBallColor="#ffffff"
+              speed={0.25}
+              ballCount={12}
+              animationSize={32}
+              clumpFactor={1.1}
+              cursorBallSize={4}
+              enableMouseInteraction={true}
+              enableTransparency={true}
             />
           </div>
         </section>

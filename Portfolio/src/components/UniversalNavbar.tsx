@@ -19,12 +19,11 @@ const UniversalNavbar: React.FC<UniversalNavbarProps> = ({ navItems, activeNavIt
       style={{
         position: 'fixed',
         top: '24px',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        right: '36px',
         zIndex: 3000,
         width: 'auto',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         ...style,
       }}
