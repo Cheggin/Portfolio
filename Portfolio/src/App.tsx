@@ -6,6 +6,7 @@ import LiquidGlassNav from './components/LiquidGlassNav';
 import LiquidGlassModal from './components/LiquidGlassModal';
 import AppleGlowName from './components/AppleGlowName';
 import LoadingScreen from './components/LoadingScreen';
+import VisitorCounter from './components/VisitorCounter';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import RecruiterPage from './components/RecruiterPage';
 import ResumePage from './components/ResumePage';
@@ -44,6 +45,9 @@ function App() {
           setShowLoading(null);
         }}
       />
+
+      {/* Visitor Counter */}
+      <VisitorCounter />
 
       {/* Minimal Glassy Navbar */}
       <div style={{
