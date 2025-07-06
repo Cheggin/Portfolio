@@ -4,6 +4,7 @@ import { FaRegStar, FaEye } from 'react-icons/fa';
 
 const VisitorCounter: React.FC = () => {
   const [visitorCount, setVisitorCount] = useState(0);
+  const [githubStars, setGithubStars] = useState(0);
 
   useEffect(() => {
     // Check if we've already counted this session
@@ -28,6 +29,27 @@ const VisitorCounter: React.FC = () => {
       const currentCount = storedCount ? parseInt(storedCount, 10) : 0;
       setVisitorCount(currentCount);
     }
+  }, []);
+
+  // Fetch GitHub star count
+  useEffect(() => {
+    const fetchGithubStars = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/Cheggin/Portfolio');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        setGithubStars(data.stargazers_count || 0);
+      } catch (error) {
+        console.error('Failed to fetch GitHub stars:', error);
+        setGithubStars(0);
+      }
+    };
+
+    fetchGithubStars();
   }, []);
 
   const containerStyle: React.CSSProperties = {
@@ -106,7 +128,7 @@ const VisitorCounter: React.FC = () => {
         </span>
       </div>
 
-      {/* GitHub Star Link */}
+      {/* GitHub Star Link with Count */}
       <div style={{ position: 'relative' }}>
         <a
           href="https://github.com/Cheggin/Portfolio"
@@ -124,7 +146,12 @@ const VisitorCounter: React.FC = () => {
         >
           <div className="hover-effect" style={hoverEffectStyle} />
           <FaRegStar style={{ fontSize: '16px', position: 'relative', zIndex: 1 }} />
-          <span style={{ position: 'relative', zIndex: 1 }}>Github</span>
+          <span style={{ position: 'relative', zIndex: 1 }}>
+            Github
+            <span style={{ marginLeft: '4px', opacity: 0.8 }}>
+              (<CountUp to={githubStars} duration={1} separator="," />)
+            </span>
+          </span>
         </a>
       </div>
     </div>
