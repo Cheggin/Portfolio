@@ -125,6 +125,7 @@ const VisitorCounter: React.FC = () => {
             duration={1.5}
             separator=","
           />
+          <span style={{ marginLeft: '4px', opacity: 0.8 }}>Views</span>
         </span>
       </div>
 
