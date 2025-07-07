@@ -55,7 +55,7 @@ const VisitorCounter: React.FC = () => {
   const containerStyle: React.CSSProperties = {
     position: 'fixed',
     top: '24px',
-    right: '24px',
+    left: '24px',
     zIndex: 3001,
     display: 'flex',
     alignItems: 'center',

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import FluidCursor from './components/FluidCursor';
 import LiquidGlassButton from './components/LiquidGlassButton';
-import LiquidGlassNav from './components/LiquidGlassNav';
 import LiquidGlassModal from './components/LiquidGlassModal';
 import AppleGlowName from './components/AppleGlowName';
 import LoadingScreen from './components/LoadingScreen';
 import VisitorCounter from './components/VisitorCounter';
+import UniversalNavbar from './components/UniversalNavbar';
+import { navItems, handleNavItemClick } from './components/navConfig';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import RecruiterPage from './components/RecruiterPage';
 import ResumePage from './components/ResumePage';
@@ -20,13 +21,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Me' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-  ];
-
   useEffect(() => {
     setShowButtons([false, false, false]);
     const timers = [
@@ -37,7 +31,6 @@ function App() {
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  // Update active nav item based on current route
   useEffect(() => {
     const path = location.pathname;
     if (path === '/') {
@@ -51,25 +44,6 @@ function App() {
     }
   }, [location.pathname]);
 
-  // Handle navbar item clicks
-  const handleNavItemClick = (itemId: string) => {
-    setActiveNavItem(itemId);
-    switch (itemId) {
-      case 'home':
-        navigate('/');
-        break;
-      case 'about':
-        navigate('/about');
-        break;
-      case 'projects':
-        navigate('/projects');
-        break;
-      case 'contact':
-        navigate('/contact');
-        break;
-    }
-  };
-
   return (
     <div className="App">
       <LoadingScreen
@@ -81,28 +55,16 @@ function App() {
         }}
       />
 
-      {/* Visitor Counter */}
-      <VisitorCounter />
+      {/* Universal Navbar at top right */}
+      <UniversalNavbar
+        navItems={navItems}
+        activeNavItem={activeNavItem}
+        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
+      />
 
-      {/* Minimal Glassy Navbar */}
-      <div style={{
-        position: 'fixed',
-        top: '24px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 3000,
-        width: 'auto',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-        <LiquidGlassNav
-          items={navItems}
-          variant="horizontal"
-          style={{ minWidth: 0 }}
-          activeItem={activeNavItem}
-          onItemClick={handleNavItemClick}
-        />
+      {/* Visitor Counter and GitHub Star at top left */}
+      <div style={{ position: 'fixed', top: 24, left: 36, zIndex: 2000 }}>
+        <VisitorCounter />
       </div>
 
       <div className="content" style={{ opacity: showLoading ? 0 : 1, pointerEvents: showLoading ? 'none' : 'auto', transition: 'opacity 0.6s cubic-bezier(.4,0,.2,1)' }}>
@@ -117,9 +79,6 @@ function App() {
             {/* About Section removed as requested */}
           </div>
         </main>
-
-        {/* Footer */}
-        {/* Footer removed as requested */}
       </div>
 
       {/* Modal */}
