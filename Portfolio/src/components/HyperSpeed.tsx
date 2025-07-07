@@ -10,7 +10,7 @@ import {
   SMAAPreset,
 } from "postprocessing";
 
-import "./Hyperspeed.css";
+import "./HyperSpeed.css";
 
 interface Distortion {
   uniforms: Record<string, { value: unknown }>;
