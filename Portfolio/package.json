@@ -20,7 +20,7 @@
     "react-native": "^0.80.1",
     "react-router": "^7.6.3",
     "react-router-dom": "^7.6.3",
-    "three": "^0.155.0"
+    "three": "^0.178.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
