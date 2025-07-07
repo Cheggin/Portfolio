@@ -20,21 +20,25 @@ const FluidCursor: React.FC<FluidCursorProps> = ({ config }) => {
           canvasRef.current.id = 'fluid';
           
           // Call the hook and get cleanup function
-          useFluidCursor(config);
+          const cleanup = useFluidCursor(config);
           
           // Return cleanup function
-          return;
+          return cleanup;
         }
       } catch (error) {
         console.error('Failed to initialize fluid cursor:', error);
       }
     };
 
-    const cleanup = initFluidCursor();
+    let cleanup: (() => void) | undefined;
+    
+    initFluidCursor().then((cleanupFn) => {
+      cleanup = cleanupFn;
+    });
     
     // Return cleanup function
     return () => {
-      if (cleanup && typeof cleanup === 'function') {
+      if (cleanup) {
         cleanup();
       }
     };

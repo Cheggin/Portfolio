@@ -7,9 +7,10 @@ import LiquidGlassModal from './components/LiquidGlassModal';
 import AppleGlowName from './components/AppleGlowName';
 import LoadingScreen from './components/LoadingScreen';
 import VisitorCounter from './components/VisitorCounter';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import RecruiterPage from './components/RecruiterPage';
 import ResumePage from './components/ResumePage';
+import AboutPage from './components/AboutPage';
 
 function App() {
   const [activeNavItem, setActiveNavItem] = useState('home');
@@ -17,6 +18,7 @@ function App() {
   const [showButtons, setShowButtons] = useState([false, false, false]);
   const [showLoading, setShowLoading] = useState<null | string>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -34,6 +36,39 @@ function App() {
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
+
+  // Update active nav item based on current route
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/') {
+      setActiveNavItem('home');
+    } else if (path === '/about') {
+      setActiveNavItem('about');
+    } else if (path === '/projects') {
+      setActiveNavItem('projects');
+    } else if (path === '/contact') {
+      setActiveNavItem('contact');
+    }
+  }, [location.pathname]);
+
+  // Handle navbar item clicks
+  const handleNavItemClick = (itemId: string) => {
+    setActiveNavItem(itemId);
+    switch (itemId) {
+      case 'home':
+        navigate('/');
+        break;
+      case 'about':
+        navigate('/about');
+        break;
+      case 'projects':
+        navigate('/projects');
+        break;
+      case 'contact':
+        navigate('/contact');
+        break;
+    }
+  };
 
   return (
     <div className="App">
@@ -66,7 +101,7 @@ function App() {
           variant="horizontal"
           style={{ minWidth: 0 }}
           activeItem={activeNavItem}
-          onItemClick={setActiveNavItem}
+          onItemClick={handleNavItemClick}
         />
       </div>
 
@@ -146,6 +181,7 @@ const AppWithRouter = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
+      <Route path="/about" element={<AboutPage />} />
       <Route path="/recruiter" element={<RecruiterPage />} />
       <Route path="/resume" element={<ResumePage />} />
     </Routes>
