@@ -36,7 +36,7 @@ function fract(x: number): number {
 }
 
 function hash31(p: number): number[] {
-  let r = [p * 0.1031, p * 0.103, p * 0.0973].map(fract);
+  const r = [p * 0.1031, p * 0.103, p * 0.0973].map(fract);
   const r_yzx = [r[1], r[2], r[0]];
   const dotVal =
     r[0] * (r_yzx[0] + 33.33) +
@@ -49,7 +49,7 @@ function hash31(p: number): number[] {
 }
 
 function hash33(v: number[]): number[] {
-  let p = [v[0] * 0.1031, v[1] * 0.103, v[2] * 0.0973].map(fract);
+  const p = [v[0] * 0.1031, v[1] * 0.103, v[2] * 0.0973].map(fract);
   const p_yxz = [p[1], p[0], p[2]];
   const dotVal =
     p[0] * (p_yxz[0] + 33.33) +

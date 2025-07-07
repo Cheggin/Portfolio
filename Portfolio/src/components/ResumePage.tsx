@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from "react";
 import FluidCursor from "./FluidCursor";
 import UniversalNavbar from "./UniversalNavbar";
+import { useNavigate, useLocation } from "react-router-dom";
+import { navItems, handleNavItemClick } from "./navConfig";
 import "./ResumePage.css";
 import Henry from "./images/HENRYYY.png";
 import Eddie from "./images/Eddie.jpeg";
 import Oscar from "./images/Oscar.jpeg";
 
 const ResumePage: React.FC = () => {
-  const [activeNavItem, setActiveNavItem] = useState('home');
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Me' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-  ];
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [activeNavItem, setActiveNavItem] = useState("resume");
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/") {
+      setActiveNavItem("home");
+    } else if (path === "/about") {
+      setActiveNavItem("about");
+    } else if (path === "/projects") {
+      setActiveNavItem("projects");
+    } else if (path === "/contact") {
+      setActiveNavItem("contact");
+    } else if (path === "/resume") {
+      setActiveNavItem("resume");
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const originalHtmlOverflowX = document.documentElement.style.overflowX;
@@ -31,7 +44,7 @@ const ResumePage: React.FC = () => {
       <UniversalNavbar
         navItems={navItems}
         activeNavItem={activeNavItem}
-        onItemClick={setActiveNavItem}
+        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
       />
       <FluidCursor />
       <div className="resume-center-row">

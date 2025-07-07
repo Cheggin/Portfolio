@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import pfp from "./images/pfp.png";
 import TiltedCard from "./TiltedCard";
 import UniversalNavbar from "./UniversalNavbar";
@@ -8,6 +8,7 @@ import "./RecruiterPage.css";
 import acmLogo from "./images/acmlogo.png";
 import MetaBalls from "./MetaBalls";
 import { MdComputer, MdCalendarToday, MdLocationOn } from "react-icons/md";
+import { navItems, handleNavItemClick } from "./navConfig";
 
 const funWords = [
   "Funny 😹",
@@ -19,6 +20,25 @@ const funWords = [
 ];
 
 const RecruiterPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [activeNavItem, setActiveNavItem] = useState("recruiter");
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/") {
+      setActiveNavItem("home");
+    } else if (path === "/about") {
+      setActiveNavItem("about");
+    } else if (path === "/projects") {
+      setActiveNavItem("projects");
+    } else if (path === "/contact") {
+      setActiveNavItem("contact");
+    } else if (path === "/recruiter") {
+      setActiveNavItem("recruiter");
+    }
+  }, [location.pathname]);
+
   // Prevent horizontal scrolling globally
   useEffect(() => {
     const originalHtmlOverflowX = document.documentElement.style.overflowX;
@@ -30,15 +50,6 @@ const RecruiterPage: React.FC = () => {
       document.body.style.overflowX = originalBodyOverflowX;
     };
   }, []);
-
-  const [activeNavItem, setActiveNavItem] = useState('home');
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Me' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-  ];
-  const navigate = useNavigate();
 
   // Dropdown state for tech stack groups
   const [openTechGroups, setOpenTechGroups] = useState<{ [key: string]: boolean }>({});
@@ -140,7 +151,7 @@ const RecruiterPage: React.FC = () => {
       <UniversalNavbar
         navItems={navItems}
         activeNavItem={activeNavItem}
-        onItemClick={setActiveNavItem}
+        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
       />
       <div className="recruiter-scroll-container" ref={scrollContainerRef}>
         {/* Section 1: My Application */}

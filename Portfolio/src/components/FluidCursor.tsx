@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import type { FluidCursorConfig } from '../hooks/use-FluidCursor';
+import useFluidCursor from '../hooks/use-FluidCursor';
 
 interface FluidCursorProps {
   config?: FluidCursorConfig;

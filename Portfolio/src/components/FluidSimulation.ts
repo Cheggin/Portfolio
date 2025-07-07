@@ -4,16 +4,16 @@
 export class Material {
   vertexShader: WebGLShader;
   fragmentShaderSource: string;
-  programs: any[];
-  activeProgram: any;
-  uniforms: any[];
+  programs: Record<number, WebGLProgram>;
+  activeProgram: WebGLProgram | null;
+  uniforms: Record<string, WebGLUniformLocation | null>;
 
   constructor(vertexShader: WebGLShader, fragmentShaderSource: string) {
     this.vertexShader = vertexShader;
     this.fragmentShaderSource = fragmentShaderSource;
-    this.programs = [];
+    this.programs = {};
     this.activeProgram = null;
-    this.uniforms = [];
+    this.uniforms = {};
   }
 
   setKeywords(keywords: string[]) {
@@ -22,7 +22,7 @@ export class Material {
 
     let program = this.programs[hash];
     if (program == null) {
-      let fragmentShader = compileShader(
+      const fragmentShader = compileShader(
         gl.FRAGMENT_SHADER,
         this.fragmentShaderSource,
         keywords
@@ -43,7 +43,7 @@ export class Material {
 }
 
 export class Program {
-  uniforms: any;
+  uniforms: Record<string, WebGLUniformLocation | null>;
   program: WebGLProgram;
 
   constructor(vertexShader: WebGLShader, fragmentShader: WebGLShader) {
@@ -58,7 +58,7 @@ export class Program {
 }
 
 function createProgram(vertexShader: WebGLShader, fragmentShader: WebGLShader) {
-  let program = gl.createProgram();
+  const program = gl.createProgram();
   gl.attachShader(program, vertexShader);
   gl.attachShader(program, fragmentShader);
   gl.linkProgram(program);
@@ -70,10 +70,12 @@ function createProgram(vertexShader: WebGLShader, fragmentShader: WebGLShader) {
 }
 
 function getUniforms(program: WebGLProgram) {
-  let uniforms: any = [];
-  let uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+  const uniforms: Record<string, WebGLUniformLocation | null> = {};
+  const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
   for (let i = 0; i < uniformCount; i++) {
-    let uniformName = gl.getActiveUniform(program, i).name;
+    const uniformInfo = gl.getActiveUniform(program, i);
+    if (!uniformInfo) continue;
+    const uniformName = uniformInfo.name;
     uniforms[uniformName] = gl.getUniformLocation(program, uniformName);
   }
   return uniforms;
@@ -83,6 +85,7 @@ function compileShader(type: number, source: string, keywords?: string[]) {
   source = addKeywords(source, keywords);
 
   const shader = gl.createShader(type);
+  if (!shader) throw new Error("Unable to create shader");
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
 
@@ -238,7 +241,10 @@ export const advectionShader = `
 
 // Utility functions
 export function generateColor() {
-  let c = HSVtoRGB(Math.random(), 1.0, 1.0);
+  const c = HSVtoRGB(Math.random(), 1.0, 1.0);
+  if (typeof c.r !== 'number') c.r = 0;
+  if (typeof c.g !== 'number') c.g = 0;
+  if (typeof c.b !== 'number') c.b = 0;
   c.r *= 0.15;
   c.g *= 0.15;
   c.b *= 0.15;
@@ -246,39 +252,35 @@ export function generateColor() {
 }
 
 export function HSVtoRGB(h: number, s: number, v: number) {
-  let r, g, b, i, f, p, q, t;
-  i = Math.floor(h * 6);
-  f = h * 6 - i;
-  p = v * (1 - s);
-  q = v * (1 - f * s);
-  t = v * (1 - (1 - f) * s);
+  let r = 0, g = 0, b = 0;
+  const i = Math.floor(h * 6);
+  const f = h * 6 - i;
+  const p = v * (1 - s);
+  const q = v * (1 - f * s);
+  const t = v * (1 - (1 - f) * s);
 
   switch (i % 6) {
     case 0:
-      (r = v), (g = t), (b = p);
+      r = v; g = t; b = p;
       break;
     case 1:
-      (r = q), (g = v), (b = p);
+      r = q; g = v; b = p;
       break;
     case 2:
-      (r = p), (g = v), (b = t);
+      r = p; g = v; b = t;
       break;
     case 3:
-      (r = p), (g = q), (b = v);
+      r = p; g = q; b = v;
       break;
     case 4:
-      (r = t), (g = p), (b = v);
+      r = t; g = p; b = v;
       break;
     case 5:
-      (r = v), (g = p), (b = q);
+      r = v; g = p; b = q;
       break;
   }
 
-  return {
-    r,
-    g,
-    b,
-  };
+  return { r, g, b };
 }
 
 export function wrap(value: number, min: number, max: number) {

@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hyperspeed from "./HyperSpeed";
+import UniversalNavbar from "./UniversalNavbar";
+import { useNavigate, useLocation } from "react-router-dom";
+import { navItems, handleNavItemClick } from "./navConfig";
 import "./AboutPage.css";
 
 const AboutPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [activeNavItem, setActiveNavItem] = useState("about");
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/") {
+      setActiveNavItem("home");
+    } else if (path === "/about") {
+      setActiveNavItem("about");
+    } else if (path === "/projects") {
+      setActiveNavItem("projects");
+    } else if (path === "/contact") {
+      setActiveNavItem("contact");
+    }
+  }, [location.pathname]);
+
   return (
     <div className="about-page-container">
+      <UniversalNavbar
+        navItems={navItems}
+        activeNavItem={activeNavItem}
+        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
+      />
       <div className="about-content">
         <h1 className="about-title">Click &amp; Hold</h1>
         {/* Add any about text or content here if needed */}

@@ -13,7 +13,7 @@ import {
 import "./Hyperspeed.css";
 
 interface Distortion {
-  uniforms: Record<string, { value: any }>;
+  uniforms: Record<string, { value: unknown }>;
   getDistortion: string;
   getJS?: (progress: number, time: number) => THREE.Vector3;
 }
@@ -813,7 +813,7 @@ class Road {
       segments
     );
 
-    let uniforms: Record<string, { value: any }> = {
+    let uniforms: Record<string, { value: unknown }> = {
       uTravelLength: { value: options.length },
       uColor: {
         value: new THREE.Color(
@@ -985,13 +985,13 @@ class App {
   renderPass!: RenderPass;
   bloomPass!: EffectPass;
   clock: THREE.Clock;
-  assets: Record<string, any>;
+  assets: Record<string, unknown>;
   disposed: boolean;
   road: Road;
   leftCarLights: CarLights;
   rightCarLights: CarLights;
   leftSticks: LightsSticks;
-  fogUniforms: Record<string, { value: any }>;
+  fogUniforms: Record<string, { value: unknown }>;
   fovTarget: number;
   speedUpTarget: number;
   speedUp: number;
@@ -1046,6 +1046,7 @@ class App {
     this.clock = new THREE.Clock();
     this.assets = {};
     this.disposed = false;
+    this.assets.smaa = {} as Record<string, unknown>;
 
     this.road = new Road(this, options);
     this.leftCarLights = new CarLights(
@@ -1124,12 +1125,12 @@ class App {
       assets.smaa = {};
 
       searchImage.addEventListener("load", function () {
-        assets.smaa.search = this;
+        (assets.smaa as Record<string, unknown>).search = this;
         manager.itemEnd("smaa-search");
       });
 
       areaImage.addEventListener("load", function () {
-        assets.smaa.area = this;
+        (assets.smaa as Record<string, unknown>).area = this;
         manager.itemEnd("smaa-area");
       });
 
