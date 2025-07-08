@@ -4,7 +4,7 @@ import UniversalNavbar from "./UniversalNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
 import "./AboutPage.css";
-import aboutMePfp from "./images/aboutmepfp.jpg";
+import aboutMePfp from "./images/pfp.png";
 import Eddie from "./images/Eddie.jpeg";
 import HENRYYY from "./images/HENRYYY.png";
 import Oscar from "./images/Oscar.jpeg";
