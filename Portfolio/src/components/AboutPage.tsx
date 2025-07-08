@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Hyperspeed from "./HyperSpeed";
 import UniversalNavbar from "./UniversalNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
 import "./AboutPage.css";
 
+const aboutCards = [
+  '👋 Welcome to my interactive resume! Click & Hold to continue.',
+  '🏆 Here are some of my achievements...',
+  '💡 My passions and interests...',
+  '📫 Contact me for collaboration!'
+];
+
 const AboutPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeNavItem, setActiveNavItem] = useState("about");
+  const [progress, setProgress] = useState(0);
+  const [isHolding, setIsHolding] = useState(false);
+  const [cardIndex, setCardIndex] = useState(0);
+  const holdStartRef = useRef<number | null>(null);
 
   useEffect(() => {
     const path = location.pathname;
@@ -23,6 +34,28 @@ const AboutPage: React.FC = () => {
     }
   }, [location.pathname]);
 
+  // Advance card while holding
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (isHolding) {
+      interval = setInterval(() => {
+        setCardIndex(idx => (idx + 1) % aboutCards.length);
+      }, 1200); // Advance every 1.2s while holding
+    }
+    return () => { if (interval) clearInterval(interval); };
+  }, [isHolding]);
+
+  // Mouse/touch handlers
+  const handleHoldStart = () => setIsHolding(true);
+  const handleHoldEnd = () => setIsHolding(false);
+
+  const exampleInfoCards = [
+    { position: 50 },
+    { position: 150 },
+    { position: 250 },
+    { position: 350 },
+  ];
+
   return (
     <div className="about-page-container">
       <UniversalNavbar
@@ -31,10 +64,17 @@ const AboutPage: React.FC = () => {
         onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
       />
       <div className="about-content">
-        <h1 className="about-title">Click &amp; Hold</h1>
+        <h1 className="about-title">Click &amp; Hold!</h1>
         {/* Add any about text or content here if needed */}
       </div>
-      <div className="hyperspeed-bottom-container">
+      <div
+        className="hyperspeed-bottom-container"
+        onMouseDown={handleHoldStart}
+        onMouseUp={handleHoldEnd}
+        onMouseLeave={handleHoldEnd}
+        onTouchStart={handleHoldStart}
+        onTouchEnd={handleHoldEnd}
+      >
         <Hyperspeed
           effectOptions={{
             distortion: "turbulentDistortion",
@@ -71,7 +111,9 @@ const AboutPage: React.FC = () => {
               sticks: 0x03b3c3,
             },
           }}
+          onProgressChange={setProgress}
         />
+        <div className="about-overlay-card">{aboutCards[cardIndex]}</div>
       </div>
     </div>
   );

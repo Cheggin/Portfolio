@@ -63,8 +63,14 @@ interface HyperspeedOptions {
   isHyper?: boolean;
 }
 
+interface InfoCard {
+  position: number; // Distance along the road
+}
+
 interface HyperspeedProps {
   effectOptions?: Partial<HyperspeedOptions>;
+  infoCards?: InfoCard[];
+  onProgressChange?: (progress: number) => void;
 }
 
 const defaultOptions: HyperspeedOptions = {
@@ -1249,23 +1255,38 @@ class App {
   }
 }
 
-const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = {} }) => {
+const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = {}, onProgressChange }) => {
   const mergedOptions: HyperspeedOptions = {
     ...defaultOptions,
     ...effectOptions,
   };
   const hyperspeed = useRef<HTMLDivElement>(null);
+  const appRef = useRef<App | null>(null);
 
   useEffect(() => {
     const container = hyperspeed.current;
     if (!container) return;
 
     if (typeof mergedOptions.distortion === "string") {
-      mergedOptions.distortion = distortions[mergedOptions.distortion];
+      mergedOptions.distortion = distortions[mergedOptions.distortion] || distortions['turbulentDistortion'];
     }
 
     const myApp = new App(container, mergedOptions);
-    myApp.loadAssets().then(myApp.init);
+    appRef.current = myApp;
+    myApp.loadAssets().then(() => {
+      myApp.init();
+
+      // Animation loop to report progress
+      const reportProgress = () => {
+        if (onProgressChange && myApp.camera) {
+          const cameraZ = myApp.camera.position.z;
+          const progress = Math.max(0, Math.min(1, -cameraZ / mergedOptions.length));
+          onProgressChange(progress);
+        }
+        requestAnimationFrame(reportProgress);
+      };
+      reportProgress();
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
