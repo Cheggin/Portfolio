@@ -64,7 +64,7 @@ function App() {
 
       {/* Visitor Counter and GitHub Star at top left */}
       <div style={{ position: 'fixed', top: 24, left: 36, zIndex: 2000 }}>
-        <VisitorCounter />
+      <VisitorCounter />
       </div>
 
       <div className="content" style={{ opacity: showLoading ? 0 : 1, pointerEvents: showLoading ? 'none' : 'auto', transition: 'opacity 0.6s cubic-bezier(.4,0,.2,1)' }}>

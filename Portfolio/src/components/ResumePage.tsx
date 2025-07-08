@@ -165,21 +165,6 @@ const ResumePage: React.FC = () => {
               </ul>
             </div>
           </div>
-          {/* Polaroid Cat Photos */}
-          <div className="polaroid-cats-row">
-            <div className="polaroid-cat polaroid-rotate-left">
-              <img src={Henry} alt="Henry the cat" className="polaroid-cat-img" />
-              <div className="polaroid-caption">Henry: The Fluffy King</div>
-            </div>
-            <div className="polaroid-cat polaroid-rotate-center">
-              <img src={Oscar} alt="Oscar the cat" className="polaroid-cat-img" />
-              <div className="polaroid-caption">Oscar: The Mischief Maker</div>
-            </div>
-            <div className="polaroid-cat polaroid-rotate-right">
-              <img src={Eddie} alt="Eddie the cat" className="polaroid-cat-img" />
-              <div className="polaroid-caption">Eddie: The Sleepy Prince</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
