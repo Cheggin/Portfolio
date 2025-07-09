@@ -131,6 +131,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  height: 100%;
+  justify-content: flex-start;
 }
 
 .about-panel-top {
@@ -174,22 +176,81 @@ body {
   box-shadow: 0 2px 12px rgba(0,0,0,0.10);
 }
 
-.about-cat-photo {
-  max-width: 100px;
-  max-height: 100px;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  display: inline-block;
-}
-
 .about-cats-row {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 24px auto;
+  height: 240px;
+  position: relative;
+}
+
+.about-polaroid-hang {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 12px;
+  position: relative;
+  height: 220px;
+}
+
+.about-polaroid-string {
+  width: 2px;
+  height: 38px;
+  background: linear-gradient(to bottom, #fff 60%, #ccc 100%);
+  margin-bottom: 0px;
+  position: relative;
+  z-index: 2;
+}
+
+.about-polaroid-clip {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+}
+
+.about-cat-photo {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 0;
+  background: white;
+  padding: 10px 10px 28px 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+  display: block;
+  margin-top: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-polaroid-hang:nth-child(1) .about-cat-photo {
+  transform: rotate(-7deg);
+  margin-top: 18px;
+}
+
+.about-polaroid-hang:nth-child(2) .about-cat-photo {
+  transform: rotate(4deg);
+  margin-top: 0px;
+}
+
+.about-polaroid-hang:nth-child(3) .about-cat-photo {
+  transform: rotate(-3deg);
+  margin-top: 28px;
+}
+
+.about-cat-photo:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .about-image-caption {

@@ -4,14 +4,31 @@ import UniversalNavbar from "./UniversalNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
 import "./AboutPage.css";
-import aboutMePfp from "./images/pfp.png";
+import aboutMePfp from "./images/aboutmepfp.jpg";
 import Eddie from "./images/Eddie.jpeg";
 import HENRYYY from "./images/HENRYYY.png";
 import Oscar from "./images/Oscar.jpeg";
 
+// Immediate preloading - starts as soon as this module is imported
+const preloadImages = () => {
+  const images = [aboutMePfp, Eddie, HENRYYY, Oscar];
+  images.forEach(src => {
+    const img = new Image();
+    img.loading = 'eager';
+    img.decoding = 'sync';
+    if ('fetchPriority' in img) {
+      (img as any).fetchPriority = 'high';
+    }
+    img.src = src;
+  });
+};
+
+// Start preloading immediately
+preloadImages();
+
 const aboutCards = [
   { type: 'text', content: "Welcome to my About Me Page! Please Click & Hold to continue!" },
-  { type: 'image', content: { src: aboutMePfp, alt: "This is me!", caption: "This is me! I'm an avid reader, chronic baker, cat lover, and a side quest enthusiast. I'm also always listening to music." } },
+  { type: 'image', content: { src: aboutMePfp, alt: "This is me!", caption: "This is me! I'm an avid reader, chronic baker, and acat lover. I'm also always listening to music. I also love recording videos, though I am constantly terribly behind on editing. You can check out my social media below!" } },
   { type: 'cats', content: [
       { src: Eddie, alt: "Eddie" },
       { src: HENRYYY, alt: "HENRYYY" },
@@ -28,6 +45,46 @@ const AboutPage: React.FC = () => {
   const [isHolding, setIsHolding] = useState(false);
   const [cardIndex, setCardIndex] = useState(0);
   const holdStartRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    // Additional preloading for component mount (backup to module-level preloading)
+    const imagesToPreload = [
+      { src: aboutMePfp, priority: 'high' },
+      { src: Eddie, priority: 'medium' },
+      { src: HENRYYY, priority: 'medium' },
+      { src: Oscar, priority: 'medium' }
+    ];
+
+    // Create all image elements immediately with maximum priority
+    const imagePromises = imagesToPreload.map(({ src, priority }) => {
+      return new Promise<void>((resolve, reject) => {
+        const img = new window.Image();
+        
+        // Maximum priority settings
+        if ('fetchPriority' in img) {
+          (img as any).fetchPriority = priority;
+        }
+        
+        // Force immediate loading
+        img.loading = 'eager';
+        img.decoding = 'sync';
+        
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+        
+        // Set src immediately
+        img.src = src;
+      });
+    });
+
+    // Execute immediately without waiting
+    Promise.allSettled(imagePromises).then((results) => {
+      const failed = results.filter(result => result.status === 'rejected');
+      if (failed.length > 0) {
+        console.warn('Some images failed to preload:', failed);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const path = location.pathname;
@@ -138,7 +195,11 @@ const AboutPage: React.FC = () => {
                   <div className="about-cats-content about-panel-top">
                     <div className="about-cats-row">
                       {cats.map((cat: { src: string; alt: string }, idx: number) => (
-                        <img key={cat.alt} src={cat.src} alt={cat.alt} className="about-cat-photo" style={{ marginRight: idx < 2 ? 16 : 0 }} />
+                        <div className="about-polaroid-hang" key={cat.alt}>
+                          <div className="about-polaroid-string" />
+                          <div className="about-polaroid-clip" />
+                          <img src={cat.src} alt={cat.alt} className="about-cat-photo" />
+                        </div>
                       ))}
                     </div>
                     <div className="about-image-caption">{caption}</div>
