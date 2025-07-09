@@ -4,10 +4,10 @@ import UniversalNavbar from "./UniversalNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
 import "./AboutPage.css";
-import aboutMePfp from "./images/aboutmepfp.jpg";
-import Eddie from "./images/Eddie.jpeg";
-import HENRYYY from "./images/HENRYYY.png";
-import Oscar from "./images/Oscar.jpeg";
+import aboutMePfp from "./images/aboutmepfp.webp";
+import Eddie from "./images/Eddie.webp";
+import HENRYYY from "./images/HENRYYY.webp";
+import Oscar from "./images/Oscar.webp";
 
 // Immediate preloading - starts as soon as this module is imported
 const preloadImages = () => {
@@ -28,12 +28,12 @@ preloadImages();
 
 const aboutCards = [
   { type: 'text', content: "Welcome to my About Me Page! Please Click & Hold to continue!" },
-  { type: 'image', content: { src: aboutMePfp, alt: "This is me!", caption: "This is me! I'm an avid reader, chronic baker, and acat lover. I'm also always listening to music. I also love recording videos, though I am constantly terribly behind on editing. You can check out my social media below!" } },
+  { type: 'image', content: { src: aboutMePfp, alt: "This is me!", caption: "This is me! I'm an avid reader, chronic baker, and cat lover. I'm also always listening to music. I also love recording videos, though I am constantly terribly behind on editing. You can check out my social media below!" } },
   { type: 'cats', content: [
       { src: Eddie, alt: "Eddie" },
       { src: HENRYYY, alt: "HENRYYY" },
       { src: Oscar, alt: "Oscar" }
-    ], caption: "My cats: Eddie, HENRYYY, and Oscar" },
+    ], caption: "My cats: Eddie, Henry, and Oscar." },
   { type: 'code', content: '{\n  // Your code snippet JSON here\n}' }
 ];
 
