@@ -170,7 +170,7 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: 0.5cm -2cm;
-  transform: scale(2);
+  transform: scale(1.75);
   transition: all 0.3s ease;
   border-radius: 0;
   border: none;
