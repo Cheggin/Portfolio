@@ -4,9 +4,6 @@ import UniversalNavbar from "./UniversalNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
 import "./ResumePage.css";
-import Henry from "./images/HENRYYY.png";
-import Eddie from "./images/Eddie.jpeg";
-import Oscar from "./images/Oscar.jpeg";
 
 const ResumePage: React.FC = () => {
   const navigate = useNavigate();

@@ -5,19 +5,9 @@ import TiltedCard from "./TiltedCard";
 import UniversalNavbar from "./UniversalNavbar";
 import LiquidGlassButton from "./LiquidGlassButton";
 import "./RecruiterPage.css";
-import acmLogo from "./images/acmlogo.png";
 import MetaBalls from "./MetaBalls";
 import { MdComputer, MdCalendarToday, MdLocationOn } from "react-icons/md";
 import { navItems, handleNavItemClick } from "./navConfig";
-
-const funWords = [
-  "Funny 😹",
-  "Awesome 🚀",
-  "Cat Whisperer 🐾",
-  "Meme Lord 🤡",
-  "Hackathon Addict 🏆",
-  "Coffee Enthusiast ☕️",
-];
 
 const RecruiterPage: React.FC = () => {
   const navigate = useNavigate();
