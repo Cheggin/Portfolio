@@ -44,7 +44,7 @@ const sections = [
   },
   {
     id: 'cats',
-    title: 'Meet My Cats',
+    title: 'My Cats!!!',
     type: 'gallery',
     content: {
       images: [
@@ -52,12 +52,12 @@ const sections = [
         { src: HENRYYY, alt: "Henry", name: "Henry" },
         { src: Oscar, alt: "Oscar", name: "Oscar" }
       ],
-      description: "My three furry companions who keep me company during late-night coding sessions."
+      description: "I would die for my cats I love them so much. "
     }
   },
   {
     id: 'hobbies',
-    title: 'What I Love',
+    title: 'Hobbies',
     type: 'hobbies',
     content: {
       hobbies: [
