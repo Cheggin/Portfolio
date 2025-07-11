@@ -269,13 +269,15 @@ const ResumePage: React.FC = () => {
                           <div>
                             <h3 className="card-title">{edu.degree}</h3>
                             <div className="card-company">{edu.school}</div>
-                            <div className="card-duration-pill">{edu.duration}</div>
+                            <div className="card-pills-row">
+                              <div className="card-gpa-pill">{edu.gpa}</div>
+                              <div className="card-duration-pill">{edu.duration}</div>
+                            </div>
                           </div>
                           {edu.duration.includes('Present') || edu.duration.includes('Expected') ? (
                             <div className="card-badge">Active</div>
                           ) : null}
                         </div>
-                        <div className="card-gpa">{edu.gpa}</div>
                         <div className="card-highlights">
                           {edu.highlights.map((highlight, index) => (
                             <div key={index} className="highlight-item">
@@ -306,7 +308,9 @@ const ResumePage: React.FC = () => {
                           <div>
                             <h3 className="card-title">{exp.role}</h3>
                             <div className="card-company">{exp.company}</div>
-                            <div className="card-duration-pill">{exp.duration}</div>
+                            <div className="card-pills-row">
+                              <div className="card-duration-pill">{exp.duration}</div>
+                            </div>
                           </div>
                           {exp.duration.includes('Present') ? (
                             <div className="card-badge">Active</div>
@@ -378,7 +382,9 @@ const ResumePage: React.FC = () => {
                           <div>
                             <h3 className="card-title">{role.role}</h3>
                             <div className="card-company">{role.organization}</div>
-                            <div className="card-duration-pill">{role.duration}</div>
+                            <div className="card-pills-row">
+                              <div className="card-duration-pill">{role.duration}</div>
+                            </div>
                           </div>
                           {role.duration.includes('Present') ? (
                             <div className="card-badge">Active</div>

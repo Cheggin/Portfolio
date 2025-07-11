@@ -188,7 +188,7 @@ html, body {
   font-size: 2.2rem;
   font-weight: 700;
   color: #222;
-  margin: 0;
+  margin: 0 0 32px 0;
   letter-spacing: 0.8px;
   font-family: 'Roboto Slab', serif;
 }
@@ -372,6 +372,27 @@ html, body {
   flex-direction: column;
 }
 
+.card-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.card-gpa-badge {
+  background: #232323;
+  color: #fff;
+  border: 1.5px solid #bbb;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
+  text-align: right;
+  opacity: 0.85;
+}
+
 .card-title {
   font-size: 2rem;
   font-weight: 700;
@@ -457,19 +478,39 @@ html, body {
   flex-shrink: 0;
 }
 
-.card-duration-pill {
-  display: inline-block;
+.card-pills-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   margin-top: 16px;
   margin-bottom: 8px;
+}
+
+.card-duration-pill {
+  display: inline-block;
+  padding: 5px 14px;
+  font-size: 0.98rem;
+  color: #fff;
+  border: 2px solid #888;
+  border-radius: 10px;
+  background: #191919;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  text-align: left;
+}
+
+.card-gpa-pill {
+  display: inline-block;
   padding: 5px 14px;
   font-size: 0.98rem;
   color: #fff;
   border: 2px solid #bbb;
   border-radius: 10px;
   background: transparent;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.2px;
   text-align: left;
+  opacity: 0.92;
 }
 
 /* Remove unused meta row/location styles */
