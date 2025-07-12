@@ -262,7 +262,8 @@ const RecruiterPage: React.FC = () => {
               </div>
 
               <div className="application-contact-btn-row">
-                <button className="application-contact-btn">Contact me</button>
+                <button className="application-contact-btn" onClick = {() => navigate('/recruiter-contact')}>Contact me</button>
+                
               </div>
             </div>
           </div>

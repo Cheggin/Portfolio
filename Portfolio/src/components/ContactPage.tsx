@@ -83,7 +83,7 @@ const ContactPage: React.FC = () => {
               className="recruiter-link-button"
               onClick={() => navigate('/recruiter-contact')}
             >
-              Recruiter? Click here
+              Wanna Hire Me? Click here (Please)
             </button>
           </div>
 

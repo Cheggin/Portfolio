@@ -35,7 +35,6 @@ const RecruiterContactPage: React.FC = () => {
       label: "Email",
       value: "reaganhsu123@gmail.com",
       link: "mailto:reaganhsu123@gmail.com",
-      description: "Primary contact for opportunities"
     },
     {
       icon: <FaCalendarAlt />,
