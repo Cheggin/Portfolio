@@ -7,7 +7,7 @@ import UniversalNavbar from "./UniversalNavbar";
 import LiquidGlassButton from "./LiquidGlassButton";
 import "./RecruiterPage.css";
 import MetaBalls from "./MetaBalls";
-import { MdComputer, MdCalendarToday, MdLocationOn, MdCode } from "react-icons/md";
+import { MdComputer, MdCalendarToday, MdLocationOn, MdCode, MdWork } from "react-icons/md";
 import { navItems, handleNavItemClick } from "./navConfig";
 
 const RecruiterPage: React.FC = () => {
@@ -217,7 +217,7 @@ const RecruiterPage: React.FC = () => {
                   <span className="application-detail-icon" role="img" aria-label="calendar"><MdCalendarToday color="#3fa7ff" /></span>
                   <div>
                     <div className="application-detail-title">Duration</div>
-                    <div className="application-detail-desc">3 months – starting Summer 2026 (June)</div>
+                    <div className="application-detail-desc">June 2026 - August 2026</div>
                   </div>
                 </div>
                 <div className="application-detail">
@@ -227,6 +227,17 @@ const RecruiterPage: React.FC = () => {
                     <div className="application-detail-desc">San Francisco, New York, San Jose, San Diego, Texas, LA, Seattle, Chicago, Boston, Remote</div>
                   </div>
                 </div>
+              </div>
+              <div className="application-tech-stack">
+                <div className="application-tech-title">
+                  <span className="application-detail-icon" role="img" aria-label="roles"><MdWork color="#ff6b35" /></span> Preferred Roles
+                </div>
+                <ul className="application-tech-list">
+                  <li>Software Engineering</li>
+                  <li>AI/ML Engineering</li>
+                  <li>Full Stack Development</li>
+                  <li>Research & Development</li>
+                </ul>
               </div>
               <div className="application-tech-stack">
                 <div className="application-tech-title">
@@ -248,11 +259,8 @@ const RecruiterPage: React.FC = () => {
                 </div>
               </div>
               <div className="application-section">
-                <h2 className="application-section-title">Goal</h2>
-                <div className="application-section-desc">
-                  I'm passionate about model efficiency, fast training, sleek web/app design, and building tools for education and healthcare. My goal is to use my programming skills to propel others and myself in our goals of making change.
-                </div>
               </div>
+
               <div className="application-contact-btn-row">
                 <button className="application-contact-btn">Contact me</button>
               </div>

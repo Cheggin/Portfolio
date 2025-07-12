@@ -12,6 +12,8 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-ro
 import RecruiterPage from './components/RecruiterPage';
 import ResumePage from './components/ResumePage';
 import AboutPage from './components/AboutPage';
+import ContactPage from './components/ContactPage';
+import RecruiterContactPage from './components/RecruiterContactPage';
 
 function App() {
   const [activeNavItem, setActiveNavItem] = useState('home');
@@ -41,6 +43,8 @@ function App() {
       setActiveNavItem('projects');
     } else if (path === '/contact') {
       setActiveNavItem('contact');
+    } else if (path === '/recruiter-contact') {
+      setActiveNavItem('recruiter-contact');
     }
   }, [location.pathname]);
 
@@ -143,6 +147,8 @@ const AppWithRouter = () => (
       <Route path="/about" element={<AboutPage />} />
       <Route path="/recruiter" element={<RecruiterPage />} />
       <Route path="/resume" element={<ResumePage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/recruiter-contact" element={<RecruiterContactPage />} />
     </Routes>
   </BrowserRouter>
 );
