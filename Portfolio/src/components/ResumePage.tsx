@@ -93,9 +93,8 @@ const ResumePage: React.FC = () => {
       gpa: "GPA: 4.00/4.00",
       coursework: "Data Structures and OO Design, Systems Programming, Data Science in Practice",
       highlights: [
-        "Perfect GPA maintained throughout program",
-        "Relevant coursework in data structures and systems programming",
-        "Active in ACM and research projects"
+        "Relevant coursework in DSA, AI/ML, Web Dev, and Systems Programming",
+        "Provost Honors"
       ]
     }
   ];
@@ -107,11 +106,9 @@ const ResumePage: React.FC = () => {
       company: "Algoverse",
       location: "La Jolla, CA",
       duration: "Mar. 2025 - Present",
-      description: "Developing LLM benchmarking techniques based on the GAIA framework with stepwise evaluations. Test tool-use reasoning via ToolLLM.",
       highlights: [
-        "LLM benchmarking with GAIA framework",
-        "Tool-use reasoning evaluation",
-        "Stepwise evaluation techniques"
+        "Improving GAIA framework for LLM benchmarking",
+        "Letta stateful agent reasoning pipeline for stepwise task evaluation"
       ]
     },
     {
@@ -120,7 +117,6 @@ const ResumePage: React.FC = () => {
       company: "NetSerpent (Startup)",
       location: "La Jolla, CA",
       duration: "Mar. 2025 - Present",
-      description: "Lead front-end web and desktop app development using React Native Web with Expo and Tauri. Mentor junior devs and use Linear to track code-quality KPIs and feature delivery timelines.",
       highlights: [
         "React Native Web with Expo and Tauri",
         "Mentoring junior developers",
@@ -133,11 +129,9 @@ const ResumePage: React.FC = () => {
       company: "UC San Diego Ongkeko Lab",
       location: "La Jolla, CA",
       duration: "Oct. 2024 - Present",
-      description: "Training a multi-modality imaging deep learning model for HNSCC prognosis using Python Tensorflow. Developed an automated data processing pipeline in Python for patient-matching using SciKit Learn.",
       highlights: [
-        "Multi-modality imaging deep learning",
-        "HNSCC prognosis modeling",
-        "Automated data processing pipeline"
+        "Creating multi-modality imaging model for HNSCC diagnosis",
+        "Analyzing population-level Alzheimer's risk factors"
       ]
     },
     {
@@ -146,11 +140,9 @@ const ResumePage: React.FC = () => {
       company: "The Lundquist Institute",
       location: "Torrance, CA",
       duration: "Jun. 2022 - Sep. 2022",
-      description: "Developed automated data processing pipelines in Python for qRT-PCR output using pandas and Smirnov-Grubbs libraries. Performed dissection, RNA extraction, RT-PCR, NanoDrop, and Western Blot.",
       highlights: [
-        "Automated data processing pipelines",
-        "qRT-PCR output analysis",
-        "Laboratory techniques and procedures"
+        "automated qRT-PCR data processing : 2 hour speedup for analysis",
+        "NanoDrop, Western Blot, RNA Extraction, Dissection"
       ]
     },
     {
@@ -159,10 +151,9 @@ const ResumePage: React.FC = () => {
       company: "UC Irvine Enciso Lab",
       location: "Irvine, CA",
       duration: "Jun. 2023 - Nov. 2023",
-      description: "Wrote MATLAB algorithm that analyzed Ferrell's Inequality; Best Poster Presenter: PMBMC 2023",
       highlights: [
-        "MATLAB algorithm development",
-        "Ferrell's Inequality analysis",
+        "Wrote MATLAB algorithm that analyzed Ferrell's Inequality",
+        "Wrote research paper and poster in LaTeX",
         "Best Poster Presenter: PMBMC 2023"
       ]
     },
@@ -174,9 +165,8 @@ const ResumePage: React.FC = () => {
       duration: "May. 2022 - Jun. 2022",
       description: "Built a data-visualization dashboard that utilized JPMC's real-time stock-price feed",
       highlights: [
-        "Data visualization dashboard",
-        "Real-time stock price feed",
-        "Financial technology exposure"
+        "Built a data-visualization dashboard with real-time stock price feed",
+        "Interfaced with JPMC tools"
       ]
     }
   ];
@@ -194,11 +184,10 @@ const ResumePage: React.FC = () => {
       organization: "Association for Computing Machinery",
       location: "La Jolla, CA",
       duration: "Jun. 2025 - Present",
-      description: "Manage Hack, Design, and AI project teams, produce tech tutorials, and orchestrate showcases of student projects for companies.",
       highlights: [
-        "Managing multiple project teams",
-        "Tech tutorial production",
-        "Student project showcases"
+        "Manage Hack, Design, and AI project teams",
+        "AI/Hack tutorial production",
+        "Orchestrate student projects showcases for companies"
       ]
     },
     {
@@ -207,11 +196,10 @@ const ResumePage: React.FC = () => {
       organization: "Association for Computing Machinery",
       location: "La Jolla, CA",
       duration: "Jan. 2025 - May 2025",
-      description: "Led a team of 6 programmers in predicting the winners of the NCAA men's volleyball season.",
       highlights: [
-        "Team leadership of 6 programmers",
-        "Sports prediction modeling",
-        "NCAA volleyball analysis"
+        "Led a team of 6 programmers",
+        "Predicted the winners of the NCAA men's volleyball season",
+        "Presented at ACM Winter Projects Showcase 2025"
       ]
     }
   ];
