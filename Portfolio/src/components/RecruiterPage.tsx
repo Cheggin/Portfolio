@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import pfp from "./images/pfp.png";
+import aboutmepfp from "./images/aboutmepfp.webp";
 import TiltedCard from "./TiltedCard";
 import UniversalNavbar from "./UniversalNavbar";
 import LiquidGlassButton from "./LiquidGlassButton";
 import "./RecruiterPage.css";
 import MetaBalls from "./MetaBalls";
-import { MdComputer, MdCalendarToday, MdLocationOn } from "react-icons/md";
+import { MdComputer, MdCalendarToday, MdLocationOn, MdCode } from "react-icons/md";
 import { navItems, handleNavItemClick } from "./navConfig";
 
 const RecruiterPage: React.FC = () => {
@@ -43,6 +44,9 @@ const RecruiterPage: React.FC = () => {
 
   // Dropdown state for tech stack groups
   const [openTechGroups, setOpenTechGroups] = useState<{ [key: string]: boolean }>({});
+  
+  // Animation state for projects
+  const [projectsAnimated, setProjectsAnimated] = useState(false);
   const techGroups = [
     {
       key: 'frontend',
@@ -90,13 +94,63 @@ const RecruiterPage: React.FC = () => {
     },
   ];
 
-  const toggleTechGroup = (key: string) => {
-    setOpenTechGroups((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const [showFunWords, setShowFunWords] = useState(false);
-
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const projectsSectionRef = useRef<HTMLElement>(null);
+
+  // Intersection Observer for projects animation
+  useEffect(() => {
+    const projectsSection = projectsSectionRef.current;
+    if (!projectsSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !projectsAnimated) {
+            setProjectsAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    observer.observe(projectsSection);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [projectsAnimated]);
+
+  // Sample project data
+  const projectsData = [
+    {
+      id: "pillsnap",
+      title: "PillSnap : Best Use of Auth0 @ ACM DiamondHacks 2025",
+      description: "Snap a photo to identify any pill, save its details, and get drug interaction warnings, including with food, so you never misuse your medication or forget what it was!",
+      tech: ["auth0", "flask", "gemini", "python", "react-native", "selenium", "vertex.ai"],
+      status: "Active",
+      image: aboutmepfp,
+      highlights: []
+    },
+    {
+      id: "citetrace",
+      title: "CiteTrace : First Place @ SCU ACM x Intel Hackathon 2025",
+      description: "Intuitively visualize, interpret, and connect hundreds of pages of research in minutes.",
+      tech: ["google-cloud", "huggingface", "intel-tiber", "python", "RAG", "react-native", "supabase", "expo","typescript"],
+      status: "Active",
+      highlights: []
+    },
+    {
+      id: "thankmyteacher",
+      title: "ThankMyTeacher",
+      description: "Encouraging students to reach out to teachers throughout the United States with custom email sending and map integration.",
+      tech: ["vercel", "supabase", "google maps API", "resend", "react-native", "expo", "typescript"],
+      status: "Active",
+      highlights: []
+    }
+  ];
 
   // Pixel-perfect scroll snap correction
   useEffect(() => {
@@ -204,7 +258,7 @@ const RecruiterPage: React.FC = () => {
               </div>
             </div>
           </div>
-          {/* Right: 2x2 grid of profile images */}
+          {/* Right: Profile image */}
           <div className="recruiter-right recruiter-right-single" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <TiltedCard
               imageSrc={pfp}
@@ -244,23 +298,65 @@ const RecruiterPage: React.FC = () => {
               className="recruiter-glass-btn"
               onClick={() => navigate('/resume')}
             >
-              View my full resume here
+              View My Full Resume Here
             </LiquidGlassButton>
           </div>
           {/* Right half: MetaBalls interactive blob simulation */}
-          <div className="recruiter-right recruiter-coin-3d" style={{ minHeight: 400, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginLeft: -80 }}>
+          <div className="recruiter-right recruiter-coin-3d" style={{ minHeight: 400, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <MetaBalls
-            color="#ffffff"
-            cursorBallColor="#ffffff"
-            cursorBallSize={2}
-            ballCount={15}
-            animationSize={30}
-            enableMouseInteraction={true}
-            enableTransparency={true}
-            hoverSmoothness={0.05}
-            clumpFactor={1}
-            speed={0.3}
+              color="#ffffff"
+              cursorBallColor="#ffffff"
+              cursorBallSize={2}
+              ballCount={15}
+              animationSize={30}
+              enableMouseInteraction={true}
+              enableTransparency={true}
+              hoverSmoothness={0.05}
+              clumpFactor={1}
+              speed={0.3}
             />
+          </div>
+        </section>
+                {/* Section 3: Projects */}
+        <section className="recruiter-section" ref={projectsSectionRef}>
+          {/* Left half: projects content */}
+          <div className="recruiter-left">
+            <h1 className="recruiter-heading">Key Projects</h1>
+            <div className="recruiter-paragraph">
+              Here are some of my  projects showcasing my work in  full-stack development and AI/ML!
+            </div>
+            <LiquidGlassButton
+              size="large"
+              className="recruiter-glass-btn"
+              onClick={() => navigate('/projects')}
+            >
+              View All My Projects Here
+            </LiquidGlassButton>
+          </div>
+          {/* Right half: project cards */}
+          <div className="recruiter-right">
+            <div className="projects-grid">
+              {projectsData.map((project) => (
+                <div 
+                  key={project.id} 
+                  className={`resume-card education-card ${projectsAnimated ? 'animate-in' : ''}`}
+                >
+                  <div className="card-content">
+                    <div className="card-header card-header-flex">
+                      <div>
+                        <h3 className="card-title">{project.title}</h3>
+                        <div className="card-company">{project.description}</div>
+                        <div className="card-pills-row">
+                          {project.tech.map((tech, index) => (
+                            <div key={index} className="card-duration-pill">{tech}</div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </div>
