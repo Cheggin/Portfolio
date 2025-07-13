@@ -1,0 +1,677 @@
+/* AboutPage.css - Complete Rewrite */
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.about-root {
+  width: 100vw;
+  height: 100vh;
+  min-height: unset;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #0a0a0a;
+}
+
+/* Smooth Scroll Container */
+.about-scroll-container {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  background: #0a0a0a;
+}
+
+/* Section Styles */
+.about-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+  will-change: transform;
+  transform: translateZ(0);
+  align-items: stretch;
+  padding-left: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.section-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 40px 60px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-content .reading-layout {
+  margin-left: 0;
+}
+
+/* Remove left padding for reading section only */
+.section-content:has(.reading-layout) {
+  padding-left: 0 !important;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 60px;
+}
+
+.hero-image-container {
+  flex: 0 0 400px;
+  position: relative;
+}
+
+.hero-image-zoom-container {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  scale: 1.75;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.hero-image-zoom-container:hover .hero-image {
+  transform: scale(1.05);
+}
+
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin: 0;
+  font-family: 'Roboto Slab', serif;
+  letter-spacing: 1px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #d0d0d0;
+  margin: 0;
+  font-weight: 400;
+}
+
+.hero-intro {
+  font-size: 1.1rem;
+  color: #d0d0d0;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
+}
+
+/* Gallery Section */
+.gallery-section {
+  width: 100%;
+  text-align: center;
+}
+
+.gallery-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin: 0 0 24px 0;
+  font-family: 'Roboto Slab', serif;
+  letter-spacing: 0.5px;
+}
+
+.gallery-description {
+  font-size: 1.3rem;
+  color: #d0d0d0;
+  margin-bottom: 40px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+.gallery-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.gallery-caption {
+  padding: 20px;
+  text-align: left;
+}
+
+.gallery-caption h3 {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.gallery-caption p {
+  font-size: 1rem;
+  color: #d0d0d0;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.cat-story {
+  font-size: 0.9rem;
+  color: #b0b0b0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Hobby Section */
+.hobby-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hobby-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.hobby-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin: 0;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+}
+
+.hobby-description {
+  font-size: 1.2rem;
+  color: #d0d0d0;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0;
+}
+
+.hobby-skills {
+  text-align: center;
+}
+
+.hobby-skills h3 {
+  font-size: 1.3rem;
+  color: #f0f0f0;
+  margin: 0 0 20px 0;
+  font-weight: 600;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.skill-tag {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f0f0f0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.hobby-stories {
+  text-align: left;
+}
+
+.hobby-stories h3 {
+  font-size: 1.3rem;
+  color: #f0f0f0;
+  margin: 0 0 20px 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.stories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-item {
+  font-size: 1rem;
+  color: #d0d0d0;
+  line-height: 1.6;
+  margin: 0;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border-left: 4px solid #666;
+}
+
+.hobby-photos {
+  text-align: center;
+}
+
+.hobby-photos h3 {
+  font-size: 1.3rem;
+  color: #f0f0f0;
+  margin: 0 0 20px 0;
+  font-weight: 600;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Book covers vertical layout */
+.hobby-photos .photo-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 25px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hobby-photos .photo-item {
+  height: 280px;
+  aspect-ratio: 2/3;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.hobby-photos .hobby-photo {
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.photo-placeholder {
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px dashed #666;
+  border-radius: 12px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.photo-placeholder:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #888;
+}
+
+.placeholder-text {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Photo Items */
+.photo-item {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.photo-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.hobby-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.photo-item:hover .hobby-photo {
+  transform: scale(1.05);
+}
+
+.section-diagonal-separator {
+  pointer-events: none;
+}
+
+/* Improved Reading Section Layout */
+.reading-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 100px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-left: 0;
+}
+
+.reading-description {
+  flex: 2;
+  text-align: left;
+  max-width: 800px;
+  min-width: 350px;
+  width: 100%;
+  padding-top: 8px;
+  margin-left: 0;
+}
+
+.reading-description .hobby-description {
+  text-align: left;
+  font-size: 1.25rem;
+  color: #d0d0d0;
+  line-height: 1.7;
+  margin: 0;
+  word-break: normal;
+}
+
+.reading-books {
+  flex: 1.3;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.reading-books h3 {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  margin: 0 0 28px 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.reading-books .photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 32px;
+  max-width: 600px;
+  margin: 0;
+}
+
+.reading-books .photo-item {
+  height: 320px;
+  aspect-ratio: 2/3;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.reading-books .hobby-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.reading-books .photo-item:hover .hobby-photo {
+  transform: scale(1.04);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  .hero-image-container {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .section-content {
+    padding: 100px 30px 50px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  
+  .hobby-title {
+    font-size: 2rem;
+  }
+  
+  .gallery-title {
+    font-size: 2rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  /* Book covers responsive */
+  .hobby-photos .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+  }
+  
+  .hobby-photos .photo-item {
+    height: 240px;
+  }
+  
+  .section-content {
+    padding: 80px 20px 40px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .hobby-title {
+    font-size: 1.8rem;
+  }
+  
+  .gallery-title {
+    font-size: 1.8rem;
+  }
+  
+  .gallery-caption {
+    padding: 16px;
+  }
+  
+  .gallery-caption h3 {
+    font-size: 1.3rem;
+  }
+  
+  /* Book covers mobile */
+  .hobby-photos .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+  }
+  
+  .hobby-photos .photo-item {
+    height: 200px;
+  }
+  
+  .section-content {
+    padding: 60px 16px 30px 16px;
+  }
+} 
+
+/* Responsive design for reading layout */
+@media (max-width: 1200px) {
+  .reading-layout {
+    gap: 48px;
+    max-width: 1000px;
+  }
+  .reading-books .photo-grid {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    max-width: 400px;
+    gap: 20px;
+  }
+  .reading-books .photo-item {
+    height: 220px;
+  }
+}
+
+@media (max-width: 900px) {
+  .reading-layout {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+    max-width: 98vw;
+  }
+  .reading-description {
+    max-width: 100%;
+    text-align: center;
+  }
+  .reading-description .hobby-description {
+    text-align: center;
+  }
+  .reading-books {
+    align-items: center;
+    text-align: center;
+  }
+  .reading-books h3 {
+    margin-left: 0;
+  }
+  .reading-books .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    max-width: 100%;
+    gap: 16px;
+  }
+  .reading-books .photo-item {
+    height: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reading-books .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+  .reading-books .photo-item {
+    height: 100px;
+  }
+} 
+
+.hobby-section:has(.reading-layout) {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100%;
+}
+
+/* Spotify Section Wrapper */
+.spotify-section-wrapper {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+} 
+
+.section-content .spotify-section-wrapper {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100vw;
+  max-width: none;
+} 
