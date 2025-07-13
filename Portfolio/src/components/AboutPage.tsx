@@ -99,8 +99,7 @@ const sections = [
     type: 'hobby',
     color: '#1c2227',
     content: {
-      description: "I am currently extremely behind on reading, but I am currently reading Crime and Punishment by Fyodor Dostoyevsky and I also really want to finish reading King of Scars and Rule of Wolves by Leigh Bardugo. It's criminal that I haven't finished the latter of the two.",
-      genres: ["Sci-Fi", "Fantasy", "Technical", "Philosophy", "AI/ML"],
+      description: "I am currently extremely behind on reading, but I am currently reading Crime and Punishment by Fyodor Dostoyevsky and I also really want to finish reading King of Scars and Rule of Wolves by Leigh Bardugo. It's criminal that I haven't finished the latter two.",
       photos: ["books1.jpg", "books2.jpg"], 
     }
   },

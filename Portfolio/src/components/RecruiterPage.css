@@ -74,7 +74,7 @@ html, body {
   width: 87%;
   flex: 1;
   min-height: 0;
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.2s cubic-bezier(0.4,0,0.2,1) 0.3s;
 }
 
 /* Project card animation - when in view */
