@@ -67,6 +67,15 @@ html, body {
   width: 100%;
 }
 
+.section-content .reading-layout {
+  margin-left: 0;
+}
+
+/* Remove left padding for reading section only */
+.section-content:has(.reading-layout) {
+  padding-left: 0 !important;
+}
+
 /* Hero Section */
 .hero-section {
   display: flex;
@@ -340,6 +349,26 @@ html, body {
   gap: 20px;
 }
 
+/* Book covers vertical layout */
+.hobby-photos .photo-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 25px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hobby-photos .photo-item {
+  height: 280px;
+  aspect-ratio: 2/3;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.hobby-photos .hobby-photo {
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .photo-placeholder {
   background: rgba(255, 255, 255, 0.03);
   border: 2px dashed #666;
@@ -362,8 +391,108 @@ html, body {
   font-weight: 500;
 }
 
+/* Photo Items */
+.photo-item {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.photo-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.hobby-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.photo-item:hover .hobby-photo {
+  transform: scale(1.05);
+}
+
 .section-diagonal-separator {
   pointer-events: none;
+}
+
+/* Improved Reading Section Layout */
+.reading-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 100px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-left: 0;
+}
+
+.reading-description {
+  flex: 2;
+  text-align: left;
+  max-width: 800px;
+  min-width: 350px;
+  width: 100%;
+  padding-top: 8px;
+  margin-left: 0;
+}
+
+.reading-description .hobby-description {
+  text-align: left;
+  font-size: 1.25rem;
+  color: #d0d0d0;
+  line-height: 1.7;
+  margin: 0;
+  word-break: normal;
+}
+
+.reading-books {
+  flex: 1.3;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.reading-books h3 {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  margin: 0 0 28px 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.reading-books .photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 32px;
+  max-width: 600px;
+  margin: 0;
+}
+
+.reading-books .photo-item {
+  height: 320px;
+  aspect-ratio: 2/3;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.reading-books .hobby-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.reading-books .photo-item:hover .hobby-photo {
+  transform: scale(1.04);
 }
 
 /* Responsive Design */
@@ -402,6 +531,16 @@ html, body {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
   
+  /* Book covers responsive */
+  .hobby-photos .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+  }
+  
+  .hobby-photos .photo-item {
+    height: 240px;
+  }
+  
   .section-content {
     padding: 80px 20px 40px 20px;
   }
@@ -424,7 +563,96 @@ html, body {
     font-size: 1.3rem;
   }
   
+  /* Book covers mobile */
+  .hobby-photos .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+  }
+  
+  .hobby-photos .photo-item {
+    height: 200px;
+  }
+  
   .section-content {
     padding: 60px 16px 30px 16px;
   }
+} 
+
+/* Responsive design for reading layout */
+@media (max-width: 1200px) {
+  .reading-layout {
+    gap: 48px;
+    max-width: 1000px;
+  }
+  .reading-books .photo-grid {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    max-width: 400px;
+    gap: 20px;
+  }
+  .reading-books .photo-item {
+    height: 220px;
+  }
+}
+
+@media (max-width: 900px) {
+  .reading-layout {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+    max-width: 98vw;
+  }
+  .reading-description {
+    max-width: 100%;
+    text-align: center;
+  }
+  .reading-description .hobby-description {
+    text-align: center;
+  }
+  .reading-books {
+    align-items: center;
+    text-align: center;
+  }
+  .reading-books h3 {
+    margin-left: 0;
+  }
+  .reading-books .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    max-width: 100%;
+    gap: 16px;
+  }
+  .reading-books .photo-item {
+    height: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reading-books .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+  .reading-books .photo-item {
+    height: 100px;
+  }
+} 
+
+.hobby-section:has(.reading-layout) {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100%;
+}
+
+/* Spotify Section Wrapper */
+.spotify-section-wrapper {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+} 
+
+.section-content .spotify-section-wrapper {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100vw;
+  max-width: none;
 } 

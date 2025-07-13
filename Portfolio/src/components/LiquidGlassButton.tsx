@@ -88,7 +88,6 @@ const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
 
   const buttonStyle: React.CSSProperties = {
     position: 'relative',
-    border: 'none',
     borderRadius: '16px',
     cursor: disabled ? 'not-allowed' : 'pointer',
     fontFamily: 'inherit',

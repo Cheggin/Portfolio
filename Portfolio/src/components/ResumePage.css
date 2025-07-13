@@ -304,8 +304,8 @@ html, body {
   border-radius: 0;
   box-shadow: 0 0 0 #bbbbbb;
   transition: box-shadow 0.2s cubic-bezier(0.4,0,0.2,1) 0.3s, transform 0.2s 0.3s;
-  margin-bottom: 30px;
-  padding: 30px 35px 45px 35px;
+  margin-bottom: 2em;
+  padding: 2em 2.2em 2.8em 2.2em;
   overflow: hidden;
 }
 
@@ -333,10 +333,10 @@ html, body {
 
 .resume-card:hover {
   box-shadow:
-    3px 0 0 0 #bbbbbb,   /* left */
-    -3px 0 0 0 #bbbbbb,  /* right */
-    20px 20px 0px #bbbbbb; /* shadow */
-  transform: translateY(-10px) translateX(-10px);
+    0.2em 0 0 0 #bbbbbb,
+    -0.2em 0 0 0 #bbbbbb,
+    1.2em 1.2em 0 #bbbbbb;
+  transform: translateY(-0.6em) translateX(-0.6em);
 }
 .resume-card:hover::before,
 .resume-card:hover::after {

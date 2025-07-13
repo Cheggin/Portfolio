@@ -7,10 +7,27 @@ import aboutMePfp from "./images/aboutmepfp.webp";
 import Eddie from "./images/Eddie.webp";
 import HENRYYY from "./images/HENRYYY.webp";
 import Oscar from "./images/Oscar.webp";
+// Import actual photos
+import baking1 from "./images/baking1.jpeg";
+import baking2 from "./images/baking2.jpeg";
+import cooking1 from "./images/cooking1.jpeg";
+import cooking2 from "./images/cooking2.jpeg";
+import friends1 from "./images/friends1.jpg";
+import friends2 from "./images/friends2.JPG";
+import friends3 from "./images/friends3.jpeg";
+// Import book images
+import cinder from "./images/cinder.jpg";
+import harrypotter from "./images/harrypotter.jpg";
+import percyjackson from "./images/percyjackson.jpg";
+import renegades from "./images/renegades.jpg";
+import crookedkingdom from "./images/crookedkingdom.jpg";
+import scythe from "./images/scythe.jpg";
+// Import Spotify component
+import SpotifySection from "./SpotifySection";
 
 // Immediate preloading - starts as soon as this module is imported
 const preloadImages = () => {
-  const images = [aboutMePfp, Eddie, HENRYYY, Oscar];
+  const images = [aboutMePfp, Eddie, HENRYYY, Oscar, baking1, baking2, cooking1, cooking2, friends1, friends2, friends3, cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe];
   images.forEach(src => {
     const img = new Image();
     img.loading = 'eager';
@@ -90,7 +107,7 @@ const sections = [
     color: '#22201e',
     content: {
       description: "Ever since I started baking with my sisters in elementary school, I have always loved cooking and baking, and I would consider it one of my top love languages. Nobody can ever make a better chocolate chip cookie than me, and if you disagree, I'm afraid I can't be friends with you. ",
-      photos: ["baking1.jpg", "baking2.jpg", "baking3.jpg"], // Placeholders
+      photos: [baking1, baking2, cooking1, cooking2],
     }
   },
   {
@@ -99,19 +116,93 @@ const sections = [
     type: 'hobby',
     color: '#1c2227',
     content: {
-      description: "I am currently extremely behind on reading, but I am currently reading Crime and Punishment by Fyodor Dostoyevsky and I also really want to finish reading King of Scars and Rule of Wolves by Leigh Bardugo. It's criminal that I haven't finished the latter two.",
-      photos: ["books1.jpg", "books2.jpg"], 
+      description: "I am currently extremely behind on reading, but I am currently reading Crime and Punishment by Fyodor Dostoyevsky and I also really want to finish reading King of Scars and Rule of Wolves by Leigh Bardugo. It's criminal that I haven't finished the latter two. Some of my all-time favorites include Six of Crows, Harry Potter, Percy Jackson, and many more!",
+      photos: [cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe], 
     }
   },
   {
     id: 'music',
     title: 'Music Taste',
-    type: 'hobby',
+    type: 'spotify',
     color: '#211e22',
     content: {
-      description: "I had like 200,000 minutes on Spotify one year. I am always listening to music, and most of my taste is centered around Indie music and some EDM that I inherited from my sisters.",
-      currentFavorites: ["Classical Piano", "Electronic", "Lo-Fi Beats"],
-      photos: ["music1.jpg"], // Placeholder
+      description: "I am always listening to music, no matter what I'm doing. One year, I even neared 200k minutes on Spotify wrapped, which translates to about 9 hours of music each day! I also love going to concerts. ",
+      favoriteSongs: [
+        {
+          id: '1aEsTgCsv8nOjEgyEoRCpS',
+          embedUrl: 'https://open.spotify.com/embed/track/1aEsTgCsv8nOjEgyEoRCpS?utm_source=generator'
+        },
+        {
+          id: '5meVa5klVlJalupZTvv5XX',
+          embedUrl: 'https://open.spotify.com/embed/track/5meVa5klVlJalupZTvv5XX?utm_source=generator'
+        },
+        {
+          id: '1TQXIltqoZ5XXyfCbAeSQQ',
+          embedUrl: 'https://open.spotify.com/embed/track/1TQXIltqoZ5XXyfCbAeSQQ?utm_source=generator'
+        },
+        {
+          id: '68SSN8C0cJmUEXJkGyNYqe',
+          embedUrl: 'https://open.spotify.com/embed/track/68SSN8C0cJmUEXJkGyNYqe?utm_source=generator'
+        },
+        {
+          id: '0QZLSImbxep9NyhhlCGOWh',
+          embedUrl: 'https://open.spotify.com/embed/track/0QZLSImbxep9NyhhlCGOWh?utm_source=generator'
+        }
+      ],
+      favoriteArtists: [
+        {
+          name: "Jeremy Zucker",
+          spotifyUrl: "https://open.spotify.com/artist/3gIRvgZmiIbD6K6aWL5X2E",
+          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+        },
+        {
+          name: "Chelsea Cutler",
+          spotifyUrl: "https://open.spotify.com/artist/5JMLG56F1X5mFmWNmS0iAp",
+          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+        },
+        {
+          name: "Gracie Abrams",
+          spotifyUrl: "https://open.spotify.com/artist/4tuJ0bMpJh08umKkEXKUI5",
+          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+        },
+        {
+          name: "NIKI",
+          spotifyUrl: "https://open.spotify.com/artist/2kxP07DLgs4xlWz8YHlvfh",
+          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+        },
+        {
+          name: "Sasha Alex Sloan",
+          spotifyUrl: "https://open.spotify.com/artist/4xnihxcoXWK3Uq6yQ0M2Y0",
+          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+        },
+        {
+          name: "Beabadoobee",
+          spotifyUrl: "https://open.spotify.com/artist/35l9BRT7MXmM8bv2WDQiyB",
+          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+        }
+      ],
+      playlists: [
+        {
+          id: '0faxJ7RWxmsoVF3ywkdEkf',
+          spotifyUrl: 'https://open.spotify.com/playlist/0faxJ7RWxmsoVF3ywkdEkf',
+          embedUrl: 'https://open.spotify.com/embed/playlist/0faxJ7RWxmsoVF3ywkdEkf?utm_source=generator'
+        },
+        {
+          id: '5IvJTEYS06QBI0AIjLupNd',
+          spotifyUrl: 'https://open.spotify.com/playlist/5IvJTEYS06QBI0AIjLupNd',
+          embedUrl: 'https://open.spotify.com/embed/playlist/5IvJTEYS06QBI0AIjLupNd?utm_source=generator'
+        },
+        {
+          id: '4dIszxQ6yzSf9gCOeFZ123',
+          spotifyUrl: 'https://open.spotify.com/playlist/4dIszxQ6yzSf9gCOeFZ123',
+          embedUrl: 'https://open.spotify.com/embed/playlist/4dIszxQ6yzSf9gCOeFZ123?utm_source=generator'
+        },
+        {
+          id: '6T7kjWBXlGkBSfkCeudNNR',
+          spotifyUrl: 'https://open.spotify.com/playlist/6T7kjWBXlGkBSfkCeudNNR',
+          embedUrl: 'https://open.spotify.com/embed/playlist/6T7kjWBXlGkBSfkCeudNNR?utm_source=generator'
+        }
+      ]
     }
   },
   {
@@ -120,7 +211,7 @@ const sections = [
     type: 'hobby',
     color: '#232021',
     content: {
-      description: "Though I'm always behind on editing, I love creating content and vlogging. I would consider my video hard drive one of, if not my most valuable possession.",
+      description: "Though I'm always behind on editing, I love creating content and vlogging. I would consider my video hard drive one of, if not my most valuable possessions.",
       photos: ["video1.jpg"], 
     }
   },
@@ -131,7 +222,7 @@ const sections = [
     color: '#1b2320',
     content: {
       description: "These are the people who make me me. They're the reason I'm where I'm at today, and I appreciate and care for them more than anything.",
-      photos: ["friends1.jpg", "family1.jpg"], 
+      photos: [friends1, friends2, friends3], 
     }
   }
 ];
@@ -147,7 +238,20 @@ const AboutPage: React.FC = () => {
       { src: aboutMePfp, priority: 'high' },
       { src: Eddie, priority: 'medium' },
       { src: HENRYYY, priority: 'medium' },
-      { src: Oscar, priority: 'medium' }
+      { src: Oscar, priority: 'medium' },
+      { src: baking1, priority: 'medium' },
+      { src: baking2, priority: 'medium' },
+      { src: cooking1, priority: 'medium' },
+      { src: cooking2, priority: 'medium' },
+      { src: friends1, priority: 'medium' },
+      { src: friends2, priority: 'medium' },
+      { src: friends3, priority: 'medium' },
+      { src: cinder, priority: 'medium' },
+      { src: harrypotter, priority: 'medium' },
+      { src: percyjackson, priority: 'medium' },
+      { src: renegades, priority: 'medium' },
+      { src: crookedkingdom, priority: 'medium' },
+      { src: scythe, priority: 'medium' }
     ];
 
     const imagePromises = imagesToPreload.map(({ src, priority }) => {
@@ -246,14 +350,12 @@ const AboutPage: React.FC = () => {
             </div>
           ))
         ) : section.content.photos ? (
-          section.content.photos.map((photo: string, index: number) => (
+          section.content.photos.map((photo: any, index: number) => (
             <div key={index} className="gallery-item">
-              <div className="photo-placeholder">
-                <div className="placeholder-text">{photo}</div>
-              </div>
+              <img src={photo} alt={`Photo ${index + 1}`} className="gallery-image" />
               <div className="gallery-caption">
                 <h3>Photo {index + 1}</h3>
-                <p>Placeholder for {photo}</p>
+                <p>Memory captured</p>
               </div>
             </div>
           ))
@@ -272,46 +374,81 @@ const AboutPage: React.FC = () => {
     <div className="hobby-section">
       <div className="hobby-content">
         <h2 className="hobby-title">{section.title}</h2>
-        <p className="hobby-description">{section.content.description}</p>
         
-        {/* Skills/Tags */}
-        {section.content.skills && section.content.skills.length > 0 && (
-          <div className="hobby-skills">
-            <h3>Skills & Interests</h3>
-            <div className="skills-tags">
-              {section.content.skills.map((skill: string, index: number) => (
-                <span key={index} className="skill-tag">{skill}</span>
-              ))}
+        {/* Special layout for reading section */}
+        {section.id === 'reading' ? (
+          <div className="reading-layout">
+            <div className="reading-description">
+            <h1>Description!</h1>
+              <p className="hobby-description">{section.content.description}</p>
+            </div>
+            <div className="reading-books">
+              <h3>My Favorite Books</h3>
+              <div className="photo-grid">
+                {section.content.photos.map((photo: any, index: number) => (
+                  <div key={index} className="photo-item">
+                    <img src={photo} alt={`Book ${index + 1}`} className="hobby-photo" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        )}
-
-        {/* Stories */}
-        {section.content.stories && section.content.stories.length > 0 && (
-          <div className="hobby-stories">
-            <h3>Personal Stories</h3>
-            <div className="stories-list">
-              {section.content.stories.map((story: string, index: number) => (
-                <p key={index} className="story-item">{story}</p>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Photo Placeholders */}
-        {section.content.photos && section.content.photos.length > 0 && (
-          <div className="hobby-photos">
-            <h3>Photos</h3>
-            <div className="photo-grid">
-              {section.content.photos.map((photo: string, index: number) => (
-                <div key={index} className="photo-placeholder">
-                  <div className="placeholder-text">{photo}</div>
+        ) : (
+          <>
+            <p className="hobby-description">{section.content.description}</p>
+            
+            {/* Skills/Tags */}
+            {section.content.skills && section.content.skills.length > 0 && (
+              <div className="hobby-skills">
+                <h3>Skills & Interests</h3>
+                <div className="skills-tags">
+                  {section.content.skills.map((skill: string, index: number) => (
+                    <span key={index} className="skill-tag">{skill}</span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            )}
+
+            {/* Stories */}
+            {section.content.stories && section.content.stories.length > 0 && (
+              <div className="hobby-stories">
+                <h3>Personal Stories</h3>
+                <div className="stories-list">
+                  {section.content.stories.map((story: string, index: number) => (
+                    <p key={index} className="story-item">{story}</p>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Photo Gallery */}
+            {section.content.photos && section.content.photos.length > 0 && (
+              <div className="hobby-photos">
+                <h3>Photos</h3>
+                <div className="photo-grid">
+                  {section.content.photos.map((photo: any, index: number) => (
+                    <div key={index} className="photo-item">
+                      <img src={photo} alt={`Photo ${index + 1}`} className="hobby-photo" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
+    </div>
+  );
+
+  const renderSpotifySection = (section: any) => (
+    <div className="spotify-section-wrapper">
+      <SpotifySection
+        playlists={section.content.playlists}
+        currentFavorites={section.content.currentFavorites}
+        favoriteSongs={section.content.favoriteSongs}
+        favoriteArtists={section.content.favoriteArtists}
+        description={section.content.description}
+      />
     </div>
   );
 
@@ -323,6 +460,8 @@ const AboutPage: React.FC = () => {
         return renderGallerySection(section);
       case 'hobby':
         return renderHobbySection(section);
+      case 'spotify':
+        return renderSpotifySection(section);
       default:
         return <div>Unknown section type</div>;
     }

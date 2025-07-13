@@ -1,0 +1,413 @@
+/* SpotifySection.css - Full width design with edge-to-edge content */
+
+.spotify-section {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.spotify-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.spotify-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin: 0;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+  letter-spacing: 0.5px;
+  padding: 0 16px;
+}
+
+.spotify-description {
+  font-size: 1.2rem;
+  color: #d0d0d0;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 16px;
+}
+
+.spotify-section-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.spotify-section-title {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.3px;
+  padding: 0 16px;
+}
+
+/* Music Layout - Full Width */
+.spotify-music-layout {
+  display: flex;
+  width: 100%;
+  gap: 40px;
+  padding: 0 16px;
+}
+
+.spotify-left-section {
+  flex: 0.3;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.spotify-right-section {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-right: 16px;
+  overflow-x: hidden;
+}
+
+/* Favorite Songs List */
+.favorite-songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.favorite-song-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.spotify-embed-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  background: #000;
+}
+
+.spotify-embed-container iframe {
+  border-radius: 12px;
+  background: #000;
+}
+
+/* Playlists Grid */
+.playlists-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 0.48fr));
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-right: 16px;
+}
+
+.playlist-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+  width: 100%;
+  min-width: 0;
+  margin-left: 8px;
+  margin-right: 16px;
+}
+
+.playlist-item:nth-child(2n) {
+  margin-right: 0;
+}
+
+.playlist-item:hover {
+  transform: translateY(-2px);
+}
+
+.playlist-embed-container {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  width: 100%;
+  min-width: 0;
+}
+
+.playlist-embed-container iframe {
+  border-radius: 12px;
+  background: #000;
+  width: 100% !important;
+  min-width: 0;
+  display: block;
+  height: 352px;
+}
+
+/* Favorite Artists Section */
+.favorite-artists-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 16px;
+  margin-bottom: 40px;
+}
+
+.favorite-artists-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.artist-card-wrapper {
+  padding: 16px !important;
+  background: rgba(30, 30, 40, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 1px 0 rgba(255, 255, 255, 0.15) inset !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(60px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(60px) saturate(180%) !important;
+}
+
+.artist-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.95);
+  min-height: 40px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.artist-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f0f0f0;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Current Favorites */
+.spotify-favorites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.favorite-tag {
+  background: rgba(29, 185, 84, 0.1);
+  color: #1DB954;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  transition: all 0.3s ease;
+}
+
+.favorite-tag:hover {
+  background: rgba(29, 185, 84, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.2);
+}
+
+/* Loading State */
+.spotify-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 60px 20px;
+}
+
+.spotify-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(29, 185, 84, 0.3);
+  border-top: 3px solid #1DB954;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spotify-loading p {
+  color: #d0d0d0;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Error State */
+.spotify-error {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 59, 48, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  margin: 0 16px;
+}
+
+.spotify-error p {
+  color: #d0d0d0;
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+}
+
+.spotify-error p:last-child {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .spotify-music-layout {
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .playlists-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .spotify-title {
+    font-size: 2rem;
+  }
+  
+  .spotify-description {
+    font-size: 1.1rem;
+  }
+  
+  .favorite-artists-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .artist-card {
+    padding: 0;
+    min-height: 40px;
+  }
+  
+  .artist-card-wrapper {
+    padding: 12px !important;
+  }
+  
+  .artist-name {
+    font-size: 0.8rem;
+  }
+  
+  .spotify-music-layout {
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  .spotify-left-section,
+  .spotify-right-section {
+    gap: 20px;
+  }
+  
+  .favorite-songs-list {
+    gap: 16px;
+  }
+  
+  .playlists-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .playlist-item {
+    width: 100%;
+  }
+  
+  .spotify-favorites {
+    gap: 10px;
+  }
+  
+  .favorite-tag {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spotify-section {
+    padding: 20px 0;
+  }
+  
+  .spotify-content {
+    gap: 32px;
+  }
+  
+  .spotify-title {
+    font-size: 1.8rem;
+  }
+  
+  .spotify-description {
+    font-size: 1rem;
+  }
+  
+  .favorite-artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .artist-card {
+    padding: 0;
+    min-height: 30px;
+  }
+  
+  .artist-card-wrapper {
+    padding: 8px !important;
+  }
+  
+  .artist-name {
+    font-size: 0.7rem;
+  }
+  
+  .spotify-music-layout {
+    gap: 24px;
+    padding: 0 16px;
+  }
+  
+  .spotify-left-section,
+  .spotify-right-section {
+    gap: 16px;
+  }
+  
+  .favorite-songs-list {
+    gap: 16px;
+  }
+  
+  .playlists-list {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .playlist-item {
+    width: 100%;
+  }
+}
