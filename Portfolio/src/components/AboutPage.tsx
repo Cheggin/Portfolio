@@ -365,7 +365,13 @@ const AboutPage: React.FC = () => {
   const renderGallerySection = (section: any) => (
     <div className="gallery-section">
       <h2 className={`gallery-title${section.id === 'friends' ? ' gabrwffr-title' : ''}`}>{section.title}</h2>
-      <p className="gallery-description">{section.content.description}</p>
+      {section.id === 'friends' ? (
+        <p className="hobby-description reading-desc-spaced friends-description" style={{ textAlign: 'left' }}>{section.content.description}</p>
+      ) : section.id === 'cats' ? (
+        <p className="hobby-description reading-desc-spaced cats-description">{section.content.description}</p>
+      ) : (
+        <p className="gallery-description">{section.content.description}</p>
+      )}
       <div className="gallery-grid">
         {section.content.cats ? (
           section.content.cats.map((cat: any, index: number) => (

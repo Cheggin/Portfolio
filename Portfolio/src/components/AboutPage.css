@@ -200,6 +200,7 @@ html, body {
   margin-bottom: 40px;
   font-weight: 500;
   line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
 }
 
 .gallery-grid {
@@ -677,7 +678,7 @@ html, body {
 }
 
 .food-blog-story {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   color: #e0d7c6;
   line-height: 1.7;
   margin-bottom: 8px;
@@ -925,4 +926,13 @@ html, body {
     max-width: 100vw;
     padding: 0 2vw;
   }
+} 
+
+.friends-description {
+  margin-bottom: 36px;
+} 
+
+.cats-description {
+  text-align: center;
+  margin-bottom: 36px;
 } 

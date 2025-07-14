@@ -524,11 +524,17 @@ html, body {
   font-weight: 700;
   margin-top: 0;
   margin-left: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .application-status-dot {
   animation: liveBlink 2s infinite alternate;
   display: inline-block;
+  font-size: 0.6rem;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 @keyframes liveBlink {
