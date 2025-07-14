@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import UniversalNavbar from "./UniversalNavbar";
 import { navItems, handleNavItemClick } from "./navConfig";
 import { MdEmail, MdWork, MdSchool, MdCode } from "react-icons/md";
 import { FaLinkedin, FaGithub, FaCalendarAlt } from "react-icons/fa";
@@ -82,11 +81,6 @@ const RecruiterContactPage: React.FC = () => {
 
   return (
     <div className="recruiter-contact-root">
-      <UniversalNavbar
-        navItems={navItems}
-        activeNavItem={activeNavItem}
-        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
-      />
       
       <div className="recruiter-contact-container">
         <div className="recruiter-contact-content">

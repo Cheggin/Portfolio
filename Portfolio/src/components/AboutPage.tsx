@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import UniversalNavbar from "./UniversalNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
 import "./AboutPage.css";
@@ -557,11 +556,6 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="about-root">
-      <UniversalNavbar
-        navItems={navItems}
-        activeNavItem={activeNavItem}
-        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
-      />
       
       {/* Smooth Scroll Container */}
       <div className="about-scroll-container">

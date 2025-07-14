@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import UniversalNavbar from "./UniversalNavbar";
 import { navItems, handleNavItemClick } from "./navConfig";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
@@ -64,11 +63,6 @@ const ContactPage: React.FC = () => {
 
   return (
     <div className="contact-root">
-      <UniversalNavbar
-        navItems={navItems}
-        activeNavItem={activeNavItem}
-        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
-      />
       
       <div className="contact-container">
         <div className="contact-content">

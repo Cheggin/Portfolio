@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import pfp from "./images/pfp.webp";
 import aboutmepfp from "./images/aboutmepfp.webp";
 import TiltedCard from "./TiltedCard";
-import UniversalNavbar from "./UniversalNavbar";
 import LiquidGlassButton from "./LiquidGlassButton";
 import "./RecruiterPage.css";
 import MetaBalls from "./MetaBalls";
@@ -192,11 +191,6 @@ const RecruiterPage: React.FC = () => {
 
   return (
     <div className="recruiter-root">
-      <UniversalNavbar
-        navItems={navItems}
-        activeNavItem={activeNavItem}
-        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
-      />
       <div className="recruiter-scroll-container" ref={scrollContainerRef}>
         {/* Section 1: My Application */}
         <section className="recruiter-section">

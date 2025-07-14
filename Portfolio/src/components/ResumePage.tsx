@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import UniversalNavbar from "./UniversalNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
 import { MdSchool, MdWork, MdCode, MdLeaderboard, MdEmail, MdLink, MdLocationOn, MdCalendarToday } from "react-icons/md";
@@ -213,11 +212,6 @@ const ResumePage: React.FC = () => {
 
   return (
     <div className="resume-root">
-      <UniversalNavbar
-        navItems={navItems}
-        activeNavItem={activeNavItem}
-        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
-      />
       
       <div className="resume-layout">
         {/* Left Sidebar - Section Labels */}
