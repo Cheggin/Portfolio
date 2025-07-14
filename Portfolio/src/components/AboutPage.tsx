@@ -8,26 +8,27 @@ import Eddie from "./images/Eddie.webp";
 import HENRYYY from "./images/HENRYYY.webp";
 import Oscar from "./images/Oscar.webp";
 // Import actual photos
-import baking1 from "./images/baking1.jpeg";
-import baking2 from "./images/baking2.jpeg";
-import cooking1 from "./images/cooking1.jpeg";
-import cooking2 from "./images/cooking2.jpeg";
-import friends1 from "./images/friends1.jpg";
-import friends2 from "./images/friends2.JPG";
-import erica from "./images/erica.jpeg";
+import baking2 from "./images/baking2.webp";
+import cooking1 from "./images/cooking1.webp";
+import cooking2 from "./images/cooking2.webp";
+import friends1 from "./images/friends1.webp";
+import friends2 from "./images/friends2.webp";
+import erica from "./images/erica.webp";
 // Import book images
-import cinder from "./images/cinder.jpg";
-import harrypotter from "./images/harrypotter.jpg";
-import percyjackson from "./images/percyjackson.jpg";
-import renegades from "./images/renegades.jpg";
-import crookedkingdom from "./images/crookedkingdom.jpg";
-import scythe from "./images/scythe.jpg";
+import cinder from "./images/cinder.webp";
+import harrypotter from "./images/harrypotter.webp";
+import percyjackson from "./images/percyjackson.webp";
+import renegades from "./images/renegades.webp";
+import crookedkingdom from "./images/crookedkingdom.webp";
+import scythe from "./images/scythe.webp";
+import kotlc from "./images/kotlc.webp";
+import mbs from "./images/mysteriousbenedictsociety.webp";
 // Import Spotify component
 import SpotifySection from "./SpotifySection";
 
 // Immediate preloading - starts as soon as this module is imported
 const preloadImages = () => {
-  const images = [aboutMePfp, Eddie, HENRYYY, Oscar, baking1, baking2, cooking1, cooking2, friends1, friends2, erica, cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe];
+  const images = [aboutMePfp, Eddie, HENRYYY, Oscar, baking2, cooking1, cooking2, friends1, friends2, erica, cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe, kotlc, mbs];
   images.forEach(src => {
     const img = new Image();
     img.loading = 'eager';
@@ -83,19 +84,22 @@ const sections = [
           name: "Eddie",
           image: Eddie,
           story: "We got Eddie when I was like 10 years old, and I love him so much and I would jump in front of a bus for him.",
-          personality: "Absolutely massive and shy chonker"
+          personality: "Absolutely massive and shy chonker",
+          objectPosition: "center 30%"
         },
         {
           name: "Henry",
           image: HENRYYY,
           story: "Eddie's little brother. He is so extroverted and has lighter fur than Eddie. Would also jump in front of a bus for him.",
-          personality: "Less chonky and extroverted but still fluffy asf"
+          personality: "Less chonky and extroverted but still fluffy asf",
+          objectPosition: "top"
         },
         {
           name: "Oscar",
           image: Oscar,
           story: "Oscar is literally the nicest and most chill cat ever. Unfortunately bro is in Ohio, so I haven't seen him in years. I would also jump in front of a bus for him, as you might expect. ",
-          personality: "Becoming a chonker, and also extroverted"
+          personality: "Becoming a chonker, and also extroverted",
+          objectPosition: "center 25%"
         }
       ]
     }
@@ -107,7 +111,7 @@ const sections = [
     color: '#22201e',
     content: {
       description: "Ever since I started baking with my sisters in elementary school, I have always loved cooking and baking, and I would consider it one of my top love languages. Nobody can ever make a better chocolate chip cookie than me, and if you disagree, I'm afraid I can't be friends with you. ",
-      photos: [baking1, baking2, cooking1, cooking2],
+      photos: [baking2, cooking1, cooking2],
     }
   },
   {
@@ -116,8 +120,8 @@ const sections = [
     type: 'hobby',
     color: '#1c2227',
     content: {
-      description: "I am currently extremely behind on reading, but I am currently reading Crime and Punishment by Fyodor Dostoyevsky and I also really want to finish reading King of Scars and Rule of Wolves by Leigh Bardugo. It's criminal that I haven't finished the latter two. Some of my all-time favorites include Six of Crows, Harry Potter, Percy Jackson, and many more!",
-      photos: [cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe], 
+      description: "I am currently extremely behind on reading, but I am currently reading Crime and Punishment by Fyodor Dostoyevsky and I also really want to finish reading King of Scars and Rule of Wolves by Leigh Bardugo. It's criminal that I haven't finished the latter two. Some of my all-time favorites include Six of Crows, Keeper of the Lost Cities, Harry Potter, and many more!\n\n If I were to become any book character, I would want to be Sophie Foster or Inej Ghafa.",
+      photos: [cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe, kotlc, mbs], 
     }
   },
   {
@@ -261,7 +265,6 @@ const AboutPage: React.FC = () => {
       { src: Eddie, priority: 'medium' },
       { src: HENRYYY, priority: 'medium' },
       { src: Oscar, priority: 'medium' },
-      { src: baking1, priority: 'medium' },
       { src: baking2, priority: 'medium' },
       { src: cooking1, priority: 'medium' },
       { src: cooking2, priority: 'medium' },
@@ -358,13 +361,13 @@ const AboutPage: React.FC = () => {
 
   const renderGallerySection = (section: any) => (
     <div className="gallery-section">
-      <h2 className="gallery-title">{section.title}</h2>
+      <h2 className={`gallery-title${section.id === 'friends' ? ' gabrwffr-title' : ''}`}>{section.title}</h2>
       <p className="gallery-description">{section.content.description}</p>
       <div className="gallery-grid">
         {section.content.cats ? (
           section.content.cats.map((cat: any, index: number) => (
             <div key={cat.name} className="gallery-item">
-              <img src={cat.image} alt={cat.name} className="gallery-image" />
+              <img src={cat.image} alt={cat.name} className="gallery-image" style={{ objectPosition: cat.objectPosition || 'center' }} />
               <div className="gallery-caption">
                 <h3>{cat.name}</h3>
                 <p>{cat.personality}</p>
@@ -397,75 +400,102 @@ const AboutPage: React.FC = () => {
     </div>
   );
 
-  const renderHobbySection = (section: any) => (
-    <div className="hobby-section">
-      <div className="hobby-content">
-        <h2 className="hobby-title">{section.title}</h2>
-        
-        {/* Special layout for reading section */}
-        {section.id === 'reading' ? (
-          <div className="reading-layout">
-            <div className="reading-description">
-            <h1>Blurb!</h1>
-              <p className="hobby-description">{section.content.description}</p>
+  const renderBakingCookingSection = (section: any) => (
+    <div className="baking-cooking-section food-blog-layout">
+      <div className="food-blog-left">
+        <h2 className="food-blog-title">{section.title}</h2>
+        <p className="food-blog-story">
+          {section.content.description}
+        </p>
+      </div>
+      <div className="food-blog-right">
+        <div className="food-blog-photo-grid">
+          {section.content.photos.map((photo: any, index: number) => (
+            <div key={index} className="polaroid-photo-item">
+              <img src={photo} alt={`Baking or cooking ${index + 1}`} className="polaroid-photo" />
+              <div className="polaroid-caption">Baking Memory #{index + 1}</div>
             </div>
-            <div className="reading-books">
-              <h3>Favorite Books</h3>
-              <div className="photo-grid">
-                {section.content.photos.map((photo: any, index: number) => (
-                  <div key={index} className="photo-item">
-                    <img src={photo} alt={`Book ${index + 1}`} className="hobby-photo" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : (
-          <>
-            <p className="hobby-description">{section.content.description}</p>
-            
-            {/* Skills/Tags */}
-            {section.content.skills && section.content.skills.length > 0 && (
-              <div className="hobby-skills">
-                <h3>Skills & Interests</h3>
-                <div className="skills-tags">
-                  {section.content.skills.map((skill: string, index: number) => (
-                    <span key={index} className="skill-tag">{skill}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Stories */}
-            {section.content.stories && section.content.stories.length > 0 && (
-              <div className="hobby-stories">
-                <h3>Personal Stories</h3>
-                <div className="stories-list">
-                  {section.content.stories.map((story: string, index: number) => (
-                    <p key={index} className="story-item">{story}</p>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Photo Gallery */}
-            {section.content.photos && section.content.photos.length > 0 && (
-              <div className="hobby-photos">
-                <h3>Photos</h3>
-                <div className="photo-grid">
-                  {section.content.photos.map((photo: any, index: number) => (
-                    <div key={index} className="photo-item">
-                      <img src={photo} alt={`Photo ${index + 1}`} className="hobby-photo" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </>
-        )}
+          ))}
+        </div>
       </div>
     </div>
   );
+
+  const renderHobbySection = (section: any) => {
+    if (section.id === 'baking') {
+      return renderBakingCookingSection(section);
+    }
+    // Special layout for reading section
+    if (section.id === 'reading') {
+      // Custom rendering to allow links in the description
+      const descriptionWithLinks = section.content.description
+        .replace(/Inej Ghafa/g, '<a href="https://thegrishaverse.fandom.com/wiki/Inej_Ghafa" target="_blank" rel="noopener noreferrer">Inej Ghafa</a>')
+        .replace(/Sophie Foster/g, '<a href="https://lost-cities-keeper.fandom.com/wiki/Sophie_Elizabeth_Foster" target="_blank" rel="noopener noreferrer">Sophie Foster</a>')
+        .replace(/\n/g, '<br />');
+      return (
+        <div className="reading-layout">
+          <div className="reading-description">
+            <h2 className="hobby-title">{section.title}</h2>
+            <p className="hobby-description reading-desc-spaced" dangerouslySetInnerHTML={{ __html: descriptionWithLinks }} />
+          </div>
+          <div className="reading-books">
+            <div className="photo-grid">
+              {section.content.photos.map((photo: any, index: number) => (
+                <div key={index} className="photo-item">
+                  <img src={photo} alt={`Book ${index + 1}`} className="hobby-photo" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+    // Default layout for other hobby sections
+    return (
+      <div className="hobby-section">
+        <h2 className="hobby-title">{section.title}</h2>
+        <p className="hobby-description">{section.content.description}</p>
+        
+        {/* Skills/Tags */}
+        {section.content.skills && section.content.skills.length > 0 && (
+          <div className="hobby-skills">
+            <h3>Skills & Interests</h3>
+            <div className="skills-tags">
+              {section.content.skills.map((skill: string, index: number) => (
+                <span key={index} className="skill-tag">{skill}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Stories */}
+        {section.content.stories && section.content.stories.length > 0 && (
+          <div className="hobby-stories">
+            <h3>Personal Stories</h3>
+            <div className="stories-list">
+              {section.content.stories.map((story: string, index: number) => (
+                <p key={index} className="story-item">{story}</p>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Photo Gallery */}
+        {section.content.photos && section.content.photos.length > 0 && (
+          <div className="hobby-photos">
+            <h3>Photos</h3>
+            <div className="photo-grid">
+              {section.content.photos.map((photo: any, index: number) => (
+                <div key={index} className="photo-item">
+                  <img src={photo} alt={`Photo ${index + 1}`} className="hobby-photo" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const renderSpotifySection = (section: any) => (
     <div className="spotify-section-wrapper">

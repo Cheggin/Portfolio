@@ -278,6 +278,7 @@ html, body {
   line-height: 1.6;
   text-align: center;
   margin: 0;
+  white-space: pre-line;
 }
 
 .hobby-skills {
@@ -481,10 +482,10 @@ html, body {
 
 .reading-books .photo-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
   gap: 32px;
   max-width: 600px;
-  margin: 0;
+  margin-right: 1em;
 }
 
 .reading-books .photo-item {
@@ -674,4 +675,253 @@ html, body {
   padding-right: 0 !important;
   width: 100vw;
   max-width: none;
+} 
+
+/* Food Blog Layout for Baking & Cooking Section */
+.baking-cooking-section.food-blog-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.food-blog-left {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 260px;
+}
+
+.food-blog-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #f0e6d2;
+  margin-bottom: 8px;
+  font-family: 'Roboto Slab', serif;
+}
+
+.food-blog-story {
+  font-size: 1.15rem;
+  color: #e0d7c6;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.food-blog-funfact {
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #f7c873;
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: #ffe6b3;
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.food-blog-right {
+  flex: 1.2 1 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 280px;
+}
+
+.food-blog-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 36px;
+  margin-bottom: 12px;
+  justify-items: center;
+}
+
+.food-blog-photo-item {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  background: #181818;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  aspect-ratio: 1/1;
+  border: 1.5px solid rgba(255,255,255,0.10);
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.food-blog-photo-item:hover {
+  box-shadow: 0 8px 24px rgba(255, 215, 128, 0.18);
+  border: 1.5px solid #f7c873;
+}
+
+.food-blog-photo-caption {
+  margin-top: 6px;
+  font-size: 0.98rem;
+  color: #ffe6b3;
+  text-align: center;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 2px 8px;
+  width: 90%;
+  max-width: 120px;
+  box-sizing: border-box;
+}
+
+.food-blog-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 120px;
+  max-height: 120px;
+  transition: transform 0.2s;
+}
+
+.food-blog-photo-item:hover .food-blog-photo {
+  transform: scale(1.07);
+}
+
+.food-blog-signature-cookie {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: #fffbe6;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.cookie-icon-placeholder {
+  font-size: 2.2rem;
+  margin-right: 6px;
+  user-select: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .baking-cooking-section.food-blog-layout {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+  }
+  .food-blog-left, .food-blog-right {
+    min-width: 0;
+    width: 100%;
+  }
+  .food-blog-photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  }
+  .food-blog-photo {
+    max-width: 90px;
+    max-height: 90px;
+  }
+}
+
+@media (max-width: 600px) {
+  .baking-cooking-section.food-blog-layout {
+    padding: 0 4vw;
+  }
+  .food-blog-title {
+    font-size: 1.4rem;
+  }
+  .food-blog-photo-grid {
+    gap: 8px;
+  }
+  .food-blog-photo {
+    max-width: 70px;
+    max-height: 70px;
+  }
+} 
+
+.polaroid-photo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px 12px 18px 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18), 0 1.5px 0 #eaeaea;
+  margin-bottom: 8px;
+  width: 220px;
+  padding: 18px 18px 38px 18px;
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.polaroid-photo-item:hover {
+  box-shadow: 0 12px 32px rgba(255, 215, 128, 0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.polaroid-photo {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 1.5px 6px rgba(0,0,0,0.10);
+  background: #f5f5f5;
+  margin-bottom: 0;
+}
+
+.polaroid-caption {
+  margin-top: 16px;
+  padding: 8px 4px 4px 4px;
+  background: transparent;
+  border-radius: 0 0 12px 12px;
+  font-size: 1.12rem;
+  color: #444;
+  text-align: center;
+  min-width: 160px;
+  max-width: 200px;
+  font-family: 'Roboto Slab', serif;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  box-shadow: none;
+} 
+
+@media (max-width: 700px) {
+  .food-blog-photo-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .polaroid-photo-item {
+    width: 90vw;
+    max-width: 320px;
+    padding: 12px 8px 32px 8px;
+  }
+  .polaroid-photo {
+    width: 80vw;
+    max-width: 260px;
+    height: auto;
+  }
+  .polaroid-caption {
+    min-width: 120px;
+    max-width: 260px;
+    font-size: 1rem;
+  }
+} 
+
+@font-face {
+  font-family: 'GABRWFFR';
+  src: url('/GABRWFFR.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.gabrwffr-title {
+  font-family: 'GABRWFFR', 'Roboto Slab', serif !important;
+  letter-spacing: 0.04em;
+  font-size: 2.7rem;
+  font-weight: 700;
+  color: #f0e6d2;
+} 
+
+.reading-desc-spaced {
+  margin-top: 24px;
 } 

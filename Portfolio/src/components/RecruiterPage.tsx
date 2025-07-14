@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import pfp from "./images/pfp.png";
+import pfp from "./images/pfp.webp";
 import aboutmepfp from "./images/aboutmepfp.webp";
 import TiltedCard from "./TiltedCard";
 import UniversalNavbar from "./UniversalNavbar";
