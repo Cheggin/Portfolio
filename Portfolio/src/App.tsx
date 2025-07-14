@@ -4,6 +4,7 @@ import FluidCursor from './components/FluidCursor';
 import LiquidGlassButton from './components/LiquidGlassButton';
 import LiquidGlassModal from './components/LiquidGlassModal';
 import AppleGlowName from './components/AppleGlowName';
+import RecruiterButton from './components/RecruiterButton';
 import VisitorCounter from './components/VisitorCounter';
 import UniversalNavbar from './components/UniversalNavbar';
 import { navItems, handleNavItemClick } from './components/navConfig';
@@ -93,12 +94,27 @@ function App() {
       </LiquidGlassModal>
       <FluidCursor />
 
-      {/* Bottom Liquid Glass Button */}
+      {/* Prominent Recruiter Button - Bottom Left */}
       <div style={{
         position: 'fixed',
         bottom: '32px',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: '32px',
+        zIndex: 2000,
+      }}>
+        <div style={{
+          opacity: showButton ? 1 : 0,
+          transform: showButton ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.9)',
+          transition: 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)',
+        }}>
+          <RecruiterButton onClick={() => navigate('/recruiter')} />
+        </div>
+      </div>
+
+      {/* Alternative: Bottom Right Position */}
+      {/* <div style={{
+        position: 'fixed',
+        bottom: '32px',
+        right: '32px',
         zIndex: 2000,
       }}>
         <div style={{
@@ -106,9 +122,9 @@ function App() {
           transform: showButton ? 'translateY(0)' : 'translateY(30px)',
           transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
         }}>
-          <LiquidGlassButton size="large" variant="primary" onClick={() => navigate('/recruiter')}>Recruiters</LiquidGlassButton>
+          <RecruiterButton onClick={() => navigate('/recruiter')} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -127,3 +143,4 @@ const AppWithRouter = () => (
 );
 
 export default AppWithRouter;
+
