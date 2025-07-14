@@ -1068,4 +1068,31 @@ html, body {
     max-width: 480px !important;
     margin: 0 auto 12px auto !important;
   }
+  html, body {
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+  .recruiter-root {
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .recruiter-scroll-container {
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+    padding-bottom: 32px !important;
+  }
+  .recruiter-section {
+    min-height: unset !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
 } 
