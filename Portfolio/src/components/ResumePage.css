@@ -146,16 +146,22 @@ html, body {
 
 .section-separator {
   width: 100%;
-  max-width: 1200px;
   border: none;
   border-top: 1px solid #333;
   margin: 32px 0;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .section-card-inner {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin-top:40px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0;
   min-height: 200px;
   box-sizing: border-box;
@@ -188,7 +194,7 @@ html, body {
   font-size: 2.2rem;
   font-weight: 700;
   color: #222;
-  margin: 0 0 32px 0;
+  margin: 0 0 64 0;
   letter-spacing: 0.8px;
   font-family: 'Roboto Slab', serif;
 }
