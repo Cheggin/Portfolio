@@ -14,7 +14,7 @@ import cooking1 from "./images/cooking1.jpeg";
 import cooking2 from "./images/cooking2.jpeg";
 import friends1 from "./images/friends1.jpg";
 import friends2 from "./images/friends2.JPG";
-import friends3 from "./images/friends3.jpeg";
+import erica from "./images/erica.jpeg";
 // Import book images
 import cinder from "./images/cinder.jpg";
 import harrypotter from "./images/harrypotter.jpg";
@@ -27,7 +27,7 @@ import SpotifySection from "./SpotifySection";
 
 // Immediate preloading - starts as soon as this module is imported
 const preloadImages = () => {
-  const images = [aboutMePfp, Eddie, HENRYYY, Oscar, baking1, baking2, cooking1, cooking2, friends1, friends2, friends3, cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe];
+  const images = [aboutMePfp, Eddie, HENRYYY, Oscar, baking1, baking2, cooking1, cooking2, friends1, friends2, erica, cinder, harrypotter, percyjackson, renegades, crookedkingdom, scythe];
   images.forEach(src => {
     const img = new Image();
     img.loading = 'eager';
@@ -152,33 +152,39 @@ const sections = [
       favoriteArtists: [
         {
           name: "Jeremy Zucker",
-          spotifyUrl: "https://open.spotify.com/artist/3gIRvgZmiIbD6K6aWL5X2E",
-          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+          spotifyUrl: "https://open.spotify.com/artist/3gIRvgZssIb9aiirIg0nI3?si=q_uzkjxmT2-sHLbKABcqmg",
+          embedUrl: "https://open.spotify.com/embed/artist/3gIRvgZssIb9aiirIg0nI3?utm_source=generator",
+          seenInConcert: true
         },
         {
           name: "Chelsea Cutler",
-          spotifyUrl: "https://open.spotify.com/artist/5JMLG56F1X5mFmWNmS0iAp",
-          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+          spotifyUrl: "https://open.spotify.com/artist/5JMLG56F1X5mFmWNmS0iAp?si=0d8aba3deb6d4369",
+          embedUrl: "https://open.spotify.com/embed/artist/5JMLG56F1X5mFmWNmS0iAp?utm_source=generator",
+          seenInConcert: true
         },
         {
           name: "Gracie Abrams",
-          spotifyUrl: "https://open.spotify.com/artist/4tuJ0bMpJh08umKkEXKUI5",
-          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+          spotifyUrl: "https://open.spotify.com/artist/4tuJ0bMpJh08umKkEXKUI5?si=f4dd1b224c834aa5",
+          embedUrl: "https://open.spotify.com/embed/artist/4tuJ0bMpJh08umKkEXKUI5?utm_source=generator",
+          seenInConcert: true
         },
         {
           name: "NIKI",
-          spotifyUrl: "https://open.spotify.com/artist/2kxP07DLgs4xlWz8YHlvfh",
-          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+          spotifyUrl: "https://open.spotify.com/artist/2kxP07DLgs4xlWz8YHlvfh?si=7e9cf3a72a5746c1",
+          embedUrl: "https://open.spotify.com/embed/artist/2kxP07DLgs4xlWz8YHlvfh?utm_source=generator",
+          seenInConcert: true
         },
         {
           name: "Sasha Alex Sloan",
-          spotifyUrl: "https://open.spotify.com/artist/4xnihxcoXWK3Uq6yQ0M2Y0",
-          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+          spotifyUrl: "https://open.spotify.com/artist/4xnihxcoXWK3UqryOSnbw5?si=41e2243f0f354610",
+          embedUrl: "https://open.spotify.com/embed/artist/4xnihxcoXWK3UqryOSnbw5?utm_source=generator",
+          seenInConcert: true
         },
         {
           name: "Beabadoobee",
-          spotifyUrl: "https://open.spotify.com/artist/35l9BRT7MXmM8bv2WDQiyB",
-          imageUrl: "https://i.scdn.co/image/ab6761610000e5eb5a00969a4698c3132a15fbb0"
+          spotifyUrl: "https://open.spotify.com/artist/35l9BRT7MXmM8bv2WDQiyB?si=7623af3829ad451c",
+          embedUrl: "https://open.spotify.com/embed/artist/35l9BRT7MXmM8bv2WDQiyB?utm_source=generator",
+          seenInConcert: true
         }
       ],
       playlists: [
@@ -222,7 +228,23 @@ const sections = [
     color: '#1b2320',
     content: {
       description: "These are the people who make me me. They're the reason I'm where I'm at today, and I appreciate and care for them more than anything.",
-      photos: [friends1, friends2, friends3], 
+      photos: [
+        {
+          image: friends1,
+          title: "Bough Anfw",
+          description: "Jacob, Josh, Rafael, and Dillon are my best friends that I've known since I was like 5 years old. I'm insanely lucky to have them by my side."
+        },
+        {
+          image: friends2,
+          title: "Lindsay and Addison",
+          description: "Two of the only sane CS majors at UCSD that I met after Lindsay and I were equally socially awkward."
+        },
+        {
+          image: erica,
+          title: "Erica (sister)",
+          description: "Erica basically raised me, and I'm so grateful for her even though she stole Eddie and Henry"
+        }
+      ], 
     }
   }
 ];
@@ -245,7 +267,7 @@ const AboutPage: React.FC = () => {
       { src: cooking2, priority: 'medium' },
       { src: friends1, priority: 'medium' },
       { src: friends2, priority: 'medium' },
-      { src: friends3, priority: 'medium' },
+      { src: erica, priority: 'medium' },
       { src: cinder, priority: 'medium' },
       { src: harrypotter, priority: 'medium' },
       { src: percyjackson, priority: 'medium' },
@@ -353,10 +375,14 @@ const AboutPage: React.FC = () => {
         ) : section.content.photos ? (
           section.content.photos.map((photo: any, index: number) => (
             <div key={index} className="gallery-item">
-              <img src={photo} alt={`Photo ${index + 1}`} className="gallery-image" />
+              <img 
+                src={typeof photo === 'string' ? photo : photo.image} 
+                alt={`Photo ${index + 1}`} 
+                className="gallery-image" 
+              />
               <div className="gallery-caption">
-                <h3>Photo {index + 1}</h3>
-                <p>Memory captured</p>
+                <h3>{typeof photo === 'string' ? `Photo ${index + 1}` : photo.title}</h3>
+                <p>{typeof photo === 'string' ? 'Memory captured' : photo.description}</p>
               </div>
             </div>
           ))

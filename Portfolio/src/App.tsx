@@ -4,7 +4,6 @@ import FluidCursor from './components/FluidCursor';
 import LiquidGlassButton from './components/LiquidGlassButton';
 import LiquidGlassModal from './components/LiquidGlassModal';
 import AppleGlowName from './components/AppleGlowName';
-import LoadingScreen from './components/LoadingScreen';
 import VisitorCounter from './components/VisitorCounter';
 import UniversalNavbar from './components/UniversalNavbar';
 import { navItems, handleNavItemClick } from './components/navConfig';
@@ -18,19 +17,14 @@ import RecruiterContactPage from './components/RecruiterContactPage';
 function App() {
   const [activeNavItem, setActiveNavItem] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showButtons, setShowButtons] = useState([false, false, false]);
-  const [showLoading, setShowLoading] = useState<null | string>(null);
+  const [showButton, setShowButton] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    setShowButtons([false, false, false]);
-    const timers = [
-      setTimeout(() => setShowButtons(s => [true, s[1], s[2]]), 800),
-      setTimeout(() => setShowButtons(s => [true, true, s[2]]), 1000),
-      setTimeout(() => setShowButtons([true, true, true]), 1200),
-    ];
-    return () => timers.forEach(clearTimeout);
+    setShowButton(false);
+    const timer = setTimeout(() => setShowButton(true), 800);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -41,6 +35,10 @@ function App() {
       setActiveNavItem('about');
     } else if (path === '/projects') {
       setActiveNavItem('projects');
+    } else if (path === '/resume') {
+      setActiveNavItem('resume');
+    } else if (path === '/recruiter') {
+      setActiveNavItem('recruiter');
     } else if (path === '/contact') {
       setActiveNavItem('contact');
     } else if (path === '/recruiter-contact') {
@@ -50,15 +48,6 @@ function App() {
 
   return (
     <div className="App">
-      <LoadingScreen
-        animateTo={showLoading || undefined}
-        visible={!!showLoading}
-        onFinish={() => {
-          if (showLoading === 'recruiter') navigate('/recruiter');
-          setShowLoading(null);
-        }}
-      />
-
       {/* Universal Navbar at top right */}
       <UniversalNavbar
         navItems={navItems}
@@ -71,7 +60,7 @@ function App() {
       <VisitorCounter />
       </div>
 
-      <div className="content" style={{ opacity: showLoading ? 0 : 1, pointerEvents: showLoading ? 'none' : 'auto', transition: 'opacity 0.6s cubic-bezier(.4,0,.2,1)' }}>
+      <div className="content">
         {/* Apple Glow Name Hero (no glass) */}
         <div style={{ marginTop: '120px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
           <AppleGlowName />
@@ -104,36 +93,20 @@ function App() {
       </LiquidGlassModal>
       <FluidCursor />
 
-      {/* Bottom Liquid Glass Buttons */}
+      {/* Bottom Liquid Glass Button */}
       <div style={{
         position: 'fixed',
         bottom: '32px',
         left: '50%',
         transform: 'translateX(-50%)',
-        display: 'flex',
-        gap: '24px',
         zIndex: 2000,
       }}>
         <div style={{
-          opacity: showButtons[0] ? 1 : 0,
-          transform: showButtons[0] ? 'translateY(0)' : 'translateY(30px)',
+          opacity: showButton ? 1 : 0,
+          transform: showButton ? 'translateY(0)' : 'translateY(30px)',
           transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
         }}>
-          <LiquidGlassButton size="large" variant="primary" onClick={() => setShowLoading('recruiter')}>Recruiters</LiquidGlassButton>
-        </div>
-        <div style={{
-          opacity: showButtons[1] ? 1 : 0,
-          transform: showButtons[1] ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
-        }}>
-          <LiquidGlassButton size="large" variant="secondary" onClick={() => setShowLoading('friends/family')}>Friends & Family</LiquidGlassButton>
-        </div>
-        <div style={{
-          opacity: showButtons[2] ? 1 : 0,
-          transform: showButtons[2] ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)',
-        }}>
-          <LiquidGlassButton size="large" variant="ghost" onClick={() => setShowLoading('secret admirer')}>Secret Admirer...?</LiquidGlassButton>
+          <LiquidGlassButton size="large" variant="primary" onClick={() => navigate('/recruiter')}>Recruiters</LiquidGlassButton>
         </div>
       </div>
     </div>
