@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'Permanent Marker';
+  src: url('/PermanentMarker-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GABRWFFR';
+  src: url('/GABRWFFR.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 /* AboutPage.css - Complete Rewrite */
 
 html, body {
@@ -715,7 +727,7 @@ html, body {
 }
 
 .food-blog-right {
-  flex: 1.2 1 420px;
+  flex: 1.2 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -725,7 +737,7 @@ html, body {
 .food-blog-photo-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px 36px;
+  gap: 60px 36px;
   margin-bottom: 12px;
   justify-items: center;
 }
@@ -836,44 +848,51 @@ html, body {
   flex-direction: column;
   align-items: center;
   background: #fff;
-  border-radius: 12px 12px 18px 18px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.18), 0 1.5px 0 #eaeaea;
+  border-radius: 0;
+  border: 2.5px solid #e0e0e0;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.22), 0 2px 0 #eaeaea;
   margin-bottom: 8px;
   width: 220px;
-  padding: 18px 18px 38px 18px;
+  padding: 14px 14px 44px 14px; /* slightly more bottom padding for frame */
   position: relative;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .polaroid-photo-item:hover {
-  box-shadow: 0 12px 32px rgba(255, 215, 128, 0.18);
+  box-shadow: 0 16px 40px rgba(255, 215, 128, 0.22);
   transform: translateY(-2px) scale(1.03);
 }
 
 .polaroid-photo {
   width: 180px;
-  height: 180px;
+  height: 240px; /* 3:4 aspect ratio */
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 1.5px 6px rgba(0,0,0,0.10);
+  border-radius: 0;
+  box-shadow: none;
   background: #f5f5f5;
   margin-bottom: 0;
+  border: 1.5px solid #d0d0d0;
 }
 
 .polaroid-caption {
-  margin-top: 16px;
-  padding: 8px 4px 4px 4px;
-  background: transparent;
-  border-radius: 0 0 12px 12px;
-  font-size: 1.12rem;
+  margin-top: 0;
+  padding: 18px 8px 10px 8px; /* More space at bottom */
+  background: #fff;
+  border-radius: 0;
+  font-size: 1.08rem;
   color: #444;
   text-align: center;
   min-width: 160px;
   max-width: 200px;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Permanent Marker', serif !important;
   font-style: italic;
   letter-spacing: 0.01em;
   box-shadow: none;
+  border-top: 1.5px solid #eee;
+  /* Make caption look more like polaroid label */
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  background: #fafafa;
 } 
 
 @media (max-width: 700px) {
@@ -895,15 +914,11 @@ html, body {
     min-width: 120px;
     max-width: 260px;
     font-size: 1rem;
+    font-family: 'Permanent Marker', serif !important;
   }
 } 
 
-@font-face {
-  font-family: 'GABRWFFR';
-  src: url('/GABRWFFR.TTF') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+
 
 .gabrwffr-title {
   font-family: 'GABRWFFR', 'Roboto Slab', serif !important;
@@ -915,4 +930,28 @@ html, body {
 
 .reading-desc-spaced {
   margin-top: 24px;
+} 
+
+.polaroid-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 64px;
+  max-width: 800px;
+  margin: 0 auto 32px auto;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .polaroid-photo-grid {
+    gap: 40px;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .polaroid-photo-grid {
+    gap: 32px;
+    max-width: 100vw;
+    padding: 0 2vw;
+  }
 } 

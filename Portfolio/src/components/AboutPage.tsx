@@ -409,7 +409,7 @@ const AboutPage: React.FC = () => {
         </p>
       </div>
       <div className="food-blog-right">
-        <div className="food-blog-photo-grid">
+        <div className="polaroid-photo-grid">
           {section.content.photos.map((photo: any, index: number) => (
             <div key={index} className="polaroid-photo-item">
               <img src={photo} alt={`Baking or cooking ${index + 1}`} className="polaroid-photo" />
