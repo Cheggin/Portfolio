@@ -111,7 +111,11 @@ const sections = [
     color: '#22201e',
     content: {
       description: "Ever since I started baking with my sisters in elementary school, I have always loved cooking and baking, and I would consider it one of my top love languages. Nobody can ever make a better chocolate chip cookie than me, and if you disagree, I'm afraid I can't be friends with you. ",
-      photos: [baking2, cooking1, cooking2],
+      photos: [
+        { image: baking2, description: "Chocolate chip and toffee cookies" },
+        { image: cooking1, description: "Steak + Mushrooms + Asparagus + Brussels Sprouts with Bough Anfw" },
+        { image: cooking2, description: "Eggs + Bacon + Rice + Overnight oats" },
+      ],
     }
   },
   {
@@ -412,8 +416,8 @@ const AboutPage: React.FC = () => {
         <div className="polaroid-photo-grid">
           {section.content.photos.map((photo: any, index: number) => (
             <div key={index} className="polaroid-photo-item">
-              <img src={photo} alt={`Baking or cooking ${index + 1}`} className="polaroid-photo" />
-              <div className="polaroid-caption">Baking Memory #{index + 1}</div>
+              <img src={photo.image} alt={`Baking or cooking ${index + 1}`} className="polaroid-photo" />
+              <div className="polaroid-caption">{photo.description}</div>
             </div>
           ))}
         </div>

@@ -1,3 +1,4 @@
+/* Cleaned up: font-face at top, removed duplicate backgrounds, ensured only used classes remain, and kept all AboutPage-relevant styles. */
 @font-face {
   font-family: 'Permanent Marker';
   src: url('/PermanentMarker-Regular.ttf') format('truetype');
@@ -10,7 +11,8 @@
   font-weight: normal;
   font-style: normal;
 }
-/* AboutPage.css - Complete Rewrite */
+
+/* AboutPage.css - Cleaned Up */
 
 html, body {
   width: 100vw;
@@ -28,7 +30,6 @@ html, body {
 .about-root {
   width: 100vw;
   height: 100vh;
-  min-height: unset;
   position: relative;
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
@@ -38,7 +39,6 @@ html, body {
   background: #0a0a0a;
 }
 
-/* Smooth Scroll Container */
 .about-scroll-container {
   width: 100vw;
   height: 100vh;
@@ -51,7 +51,6 @@ html, body {
   background: #0a0a0a;
 }
 
-/* Section Styles */
 .about-section {
   width: 100%;
   min-height: 100vh;
@@ -62,7 +61,6 @@ html, body {
   will-change: transform;
   transform: translateZ(0);
   align-items: stretch;
-  padding-left: 0;
   margin: 0;
   overflow: visible;
 }
@@ -83,12 +81,10 @@ html, body {
   margin-left: 0;
 }
 
-/* Remove left padding for reading section only */
 .section-content:has(.reading-layout) {
   padding-left: 0 !important;
 }
 
-/* Hero Section */
 .hero-section {
   display: flex;
   flex-direction: row;
@@ -155,7 +151,6 @@ html, body {
   font-weight: 400;
 }
 
-/* Social Icons */
 .social-icons {
   display: flex;
   gap: 16px;
@@ -185,7 +180,6 @@ html, body {
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
 }
 
-/* Gallery Section */
 .gallery-section {
   width: 100%;
   text-align: center;
@@ -262,17 +256,10 @@ html, body {
   font-style: italic;
 }
 
-/* Hobby Section */
 .hobby-section {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-}
-
-.hobby-content {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
 }
 
 .hobby-title {
@@ -373,7 +360,6 @@ html, body {
   gap: 20px;
 }
 
-/* Book covers vertical layout */
 .hobby-photos .photo-grid {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 25px;
@@ -415,7 +401,6 @@ html, body {
   font-weight: 500;
 }
 
-/* Photo Items */
 .photo-item {
   width: 100%;
   height: 200px;
@@ -446,7 +431,6 @@ html, body {
   pointer-events: none;
 }
 
-/* Improved Reading Section Layout */
 .reading-layout {
   display: flex;
   align-items: flex-start;
@@ -517,13 +501,11 @@ html, body {
     text-align: center;
     gap: 40px;
   }
-  
   .hero-image-container {
     flex: none;
     width: 100%;
     max-width: 400px;
   }
-  
   .section-content {
     padding: 100px 30px 50px 30px;
   }
@@ -533,33 +515,25 @@ html, body {
   .hero-title {
     font-size: 2.8rem;
   }
-  
   .hobby-title {
     font-size: 2rem;
   }
-  
   .gallery-title {
     font-size: 2rem;
   }
-  
   .gallery-grid {
     grid-template-columns: 1fr;
   }
-  
   .photo-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
-  
-  /* Book covers responsive */
   .hobby-photos .photo-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 20px;
   }
-  
   .hobby-photos .photo-item {
     height: 240px;
   }
-  
   .section-content {
     padding: 80px 20px 40px 20px;
   }
@@ -569,39 +543,30 @@ html, body {
   .hero-title {
     font-size: 2.2rem;
   }
-  
   .hobby-title {
     font-size: 1.8rem;
   }
-  
   .gallery-title {
     font-size: 1.8rem;
   }
-  
   .gallery-caption {
     padding: 16px;
   }
-  
   .gallery-caption h3 {
     font-size: 1.3rem;
   }
-  
-  /* Book covers mobile */
   .hobby-photos .photo-grid {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 15px;
   }
-  
   .hobby-photos .photo-item {
     height: 200px;
   }
-  
   .section-content {
     padding: 60px 16px 30px 16px;
   }
 } 
 
-/* Responsive design for reading layout */
 @media (max-width: 1200px) {
   .reading-layout {
     gap: 48px;
@@ -665,7 +630,6 @@ html, body {
   width: 100%;
 }
 
-/* Spotify Section Wrapper */
 .spotify-section-wrapper {
   width: 100%;
   max-width: none;
@@ -680,11 +644,10 @@ html, body {
   max-width: none;
 } 
 
-/* Food Blog Layout for Baking & Cooking Section */
 .baking-cooking-section.food-blog-layout {
   display: flex;
   flex-direction: row;
-  gap: 48px;
+  gap: 96px;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
@@ -693,11 +656,15 @@ html, body {
 }
 
 .food-blog-left {
-  flex: 1 1 320px;
+  flex: 0 0 50%;
+  width: 50%;
+  max-width: none;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  min-width: 260px;
+  min-width: 0;
+  align-items: center;
+  text-align: center;
 }
 
 .food-blog-title {
@@ -706,6 +673,7 @@ html, body {
   color: #f0e6d2;
   margin-bottom: 8px;
   font-family: 'Roboto Slab', serif;
+  text-align: center;
 }
 
 .food-blog-story {
@@ -713,6 +681,7 @@ html, body {
   color: #e0d7c6;
   line-height: 1.7;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .food-blog-funfact {
@@ -727,11 +696,15 @@ html, body {
 }
 
 .food-blog-right {
-  flex: 1.2 1;
+  flex: 0 0 50%;
+  width: 50%;
+  max-width: none;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  min-width: 280px;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .food-blog-photo-grid {
@@ -807,7 +780,6 @@ html, body {
   user-select: none;
 }
 
-/* Responsive adjustments */
 @media (max-width: 900px) {
   .baking-cooking-section.food-blog-layout {
     flex-direction: column;
@@ -918,8 +890,6 @@ html, body {
   }
 } 
 
-
-
 .gabrwffr-title {
   font-family: 'GABRWFFR', 'Roboto Slab', serif !important;
   letter-spacing: 0.04em;
@@ -939,6 +909,7 @@ html, body {
   max-width: 800px;
   margin: 0 auto 32px auto;
   width: 100%;
+  justify-items: center;
 }
 
 @media (max-width: 900px) {
