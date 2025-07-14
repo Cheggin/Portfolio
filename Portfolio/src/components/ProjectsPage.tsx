@@ -8,7 +8,10 @@ const ProjectsPage: React.FC = () => {
     <div className="projects-root">
       <div className="projects-scroll-container">
         <div className="projects-layout">
-          <h1 className="projects-title">Projects</h1>
+          <div className="projects-title-block">
+            <h1 className="projects-title">Projects</h1>
+            <div className="projects-subtitle">Below are some of my projects that I've worked on. I first started developing my own projects after participating in hackathons late 2024. </div>
+          </div>
           <div style={{
             marginBottom: '18px',
             display: 'flex',

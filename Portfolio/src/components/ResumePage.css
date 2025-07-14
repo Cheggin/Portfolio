@@ -497,12 +497,13 @@ html, body {
   padding: 5px 14px;
   font-size: 0.98rem;
   color: #fff;
-  border: 2px solid #888;
+  border: 2px solid #bbb;
   border-radius: 10px;
-  background: #191919;
+  background: transparent;
   font-weight: 400;
   letter-spacing: 0.2px;
   text-align: left;
+  opacity: 0.92;
 }
 
 .card-gpa-pill {
@@ -806,4 +807,9 @@ html, body {
     width: 100vw;
     height: calc(100vh - 60px);
   }
+} 
+
+/* Padding for first section to avoid navbar overlap */
+.first-section-padding {
+  padding-top: 80px;
 } 

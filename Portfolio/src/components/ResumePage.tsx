@@ -238,7 +238,7 @@ const ResumePage: React.FC = () => {
           <div className="resume-scroll-container" ref={scrollContainerRef}>
             {/* Education Section */}
             <section 
-              className="resume-section"
+              className="resume-section first-section-padding"
               ref={(el) => { sectionRefs.current["education"] = el; }}
             >
               <div className="section-card-inner">
@@ -253,7 +253,7 @@ const ResumePage: React.FC = () => {
                             <div className="card-company">{edu.school}</div>
                             <div className="card-pills-row">
                               <div className="card-gpa-pill">{edu.gpa}</div>
-                              <div className="card-duration-pill">{edu.duration}</div>
+                              <div className="card-gpa-pill">{edu.duration}</div>
                             </div>
                           </div>
                           {edu.duration.includes('Present') || edu.duration.includes('Expected') ? (
@@ -291,7 +291,7 @@ const ResumePage: React.FC = () => {
                             <h3 className="card-title">{exp.role}</h3>
                             <div className="card-company">{exp.company}</div>
                             <div className="card-pills-row">
-                              <div className="card-duration-pill">{exp.duration}</div>
+                              <div className="card-gpa-pill">{exp.duration}</div>
                             </div>
                           </div>
                           {exp.duration.includes('Present') ? (
@@ -365,7 +365,7 @@ const ResumePage: React.FC = () => {
                             <h3 className="card-title">{role.role}</h3>
                             <div className="card-company">{role.organization}</div>
                             <div className="card-pills-row">
-                              <div className="card-duration-pill">{role.duration}</div>
+                              <div className="card-gpa-pill">{role.duration}</div>
                             </div>
                           </div>
                           {role.duration.includes('Present') ? (

@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+  align-items: center;
 }
 
 .spotify-title {
@@ -23,13 +24,22 @@
 }
 
 .spotify-description {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: #d0d0d0;
-  line-height: 1.6;
+  line-height: 1.7;
   text-align: center;
   margin: 0 auto;
+  margin-top: 16px;
+  word-break: normal;
   max-width: 800px;
   padding: 0 16px;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .spotify-description {
+    text-align: center;
+  }
 }
 
 /* Tabbed Interface */
