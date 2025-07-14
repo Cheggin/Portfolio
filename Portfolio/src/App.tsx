@@ -14,34 +14,11 @@ import ResumePage from './components/ResumePage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import RecruiterContactPage from './components/RecruiterContactPage';
+import ProjectsPage from './components/ProjectsPage';
 
 function Layout({ activeNavItem, setActiveNavItem }: { activeNavItem: string, setActiveNavItem: (id: string) => void }) {
   const navigate = useNavigate();
-  return (
-    <>
-      <UniversalNavbar
-        navItems={navItems}
-        activeNavItem={activeNavItem}
-        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
-      />
-      <Outlet />
-    </>
-  );
-}
-
-function App() {
-  const [activeNavItem, setActiveNavItem] = useState('home');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showButton, setShowButton] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setShowButton(false);
-    const timer = setTimeout(() => setShowButton(true), 800);
-    return () => clearTimeout(timer);
-  }, []);
-
   useEffect(() => {
     const path = location.pathname;
     if (path === '/') {
@@ -59,7 +36,30 @@ function App() {
     } else if (path === '/recruiter-contact') {
       setActiveNavItem('recruiter-contact');
     }
-  }, [location.pathname]);
+  }, [location.pathname, setActiveNavItem]);
+  return (
+    <>
+      <UniversalNavbar
+        navItems={navItems}
+        activeNavItem={activeNavItem}
+        onItemClick={id => handleNavItemClick(id, navigate, setActiveNavItem)}
+      />
+      <Outlet />
+    </>
+  );
+}
+
+function App() {
+  const [activeNavItem, setActiveNavItem] = useState('home');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setShowButton(false);
+    const timer = setTimeout(() => setShowButton(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="App">
@@ -128,6 +128,7 @@ const AppWithRouter = () => {
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/recruiter-contact" element={<RecruiterContactPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
