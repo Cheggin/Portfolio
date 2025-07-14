@@ -1115,8 +1115,15 @@ html, body {
     margin: 0 auto 18px auto !important;
     box-sizing: border-box !important;
     min-width: 0 !important;
+    min-height: unset !important;
+    max-height: none !important;
+    height: auto !important;
     word-break: break-word !important;
     padding: 1.2em 1em 1.5em 1em !important;
+  }
+  .card-title, .card-company {
+    white-space: normal !important;
+    word-break: break-word !important;
   }
   .card-pills-row {
     flex-wrap: wrap !important;
