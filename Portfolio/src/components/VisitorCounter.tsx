@@ -124,47 +124,61 @@ const VisitorCounter: React.FC = () => {
   };
 
   return (
-    <div style={containerStyle}>
-      {/* Visitor Counter */}
-      <div style={counterStyle}>
-        <FaEye style={{ fontSize: '16px' }} />
-        <span>
-          <CountUp 
-            to={visitorCount} 
-            duration={1.5}
-            separator=","
-          />
-          <span style={{ marginLeft: '4px', opacity: 0.8 }}>Views</span>
-        </span>
-      </div>
-
-      {/* GitHub Star Link with Count */}
-      <div style={{ position: 'relative' }}>
-        <a
-          href="https://github.com/Cheggin/Portfolio"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={githubLinkStyle}
-          onMouseEnter={(e) => {
-            const hoverEffect = e.currentTarget.querySelector('.hover-effect') as HTMLElement;
-            if (hoverEffect) hoverEffect.style.background = 'rgba(255, 255, 255, 0.05)';
-          }}
-          onMouseLeave={(e) => {
-            const hoverEffect = e.currentTarget.querySelector('.hover-effect') as HTMLElement;
-            if (hoverEffect) hoverEffect.style.background = 'transparent';
-          }}
-        >
-          <div className="hover-effect" style={hoverEffectStyle} />
-          <FaRegStar style={{ fontSize: '16px', position: 'relative', zIndex: 1 }} />
-          <span style={{ position: 'relative', zIndex: 1 }}>
-            Github
-            <span style={{ marginLeft: '4px', opacity: 0.8 }}>
-              (<CountUp to={githubStars} duration={1} separator="," />)
-            </span>
+    <>
+      <style>
+        {`
+          @media (max-width: 600px) {
+            .visitor-counter-fixed {
+              top: 60px !important;
+              left: 8px !important;
+              padding: 6px 8px !important;
+              z-index: 3001 !important;
+            }
+          }
+        `}
+      </style>
+      <div className="visitor-counter-fixed" style={containerStyle}>
+        {/* Visitor Counter */}
+        <div style={counterStyle}>
+          <FaEye style={{ fontSize: '16px' }} />
+          <span>
+            <CountUp 
+              to={visitorCount} 
+              duration={1.5}
+              separator="," 
+            />
+            <span style={{ marginLeft: '4px', opacity: 0.8 }}>Views</span>
           </span>
-        </a>
+        </div>
+
+        {/* GitHub Star Link with Count */}
+        <div style={{ position: 'relative' }}>
+          <a
+            href="https://github.com/Cheggin/Portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={githubLinkStyle}
+            onMouseEnter={(e) => {
+              const hoverEffect = e.currentTarget.querySelector('.hover-effect') as HTMLElement;
+              if (hoverEffect) hoverEffect.style.background = 'rgba(255, 255, 255, 0.05)';
+            }}
+            onMouseLeave={(e) => {
+              const hoverEffect = e.currentTarget.querySelector('.hover-effect') as HTMLElement;
+              if (hoverEffect) hoverEffect.style.background = 'transparent';
+            }}
+          >
+            <div className="hover-effect" style={hoverEffectStyle} />
+            <FaRegStar style={{ fontSize: '16px', position: 'relative', zIndex: 1 }} />
+            <span style={{ position: 'relative', zIndex: 1 }}>
+              Github
+              <span style={{ marginLeft: '4px', opacity: 0.8 }}>
+                (<CountUp to={githubStars} duration={1} separator="," />)
+              </span>
+            </span>
+          </a>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
