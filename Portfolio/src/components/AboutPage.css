@@ -1129,7 +1129,6 @@ html, body {
     min-height: 30px !important;
   }
 } 
-
 @media (max-width: 700px) {
   /* Baking & Cooking section: center text and images */
   .baking-cooking-section.food-blog-layout {
