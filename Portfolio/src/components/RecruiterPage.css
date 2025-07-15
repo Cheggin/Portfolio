@@ -1103,3 +1103,32 @@ html, body {
     box-sizing: border-box !important;
   }
 } 
+
+@media (max-width: 700px) {
+  .recruiter-heading {
+    font-size: 1.5rem !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+  .recruiter-paragraph {
+    font-size: 1rem !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+  .recruiter-list {
+    font-size: 1rem !important;
+    padding-left: 16px !important;
+    padding-right: 8px !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+  .card-title {
+    font-size: 1.1rem !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+} 
