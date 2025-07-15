@@ -36,6 +36,7 @@ const UniversalNavbar: React.FC<UniversalNavbarProps> = ({ navItems, activeNavIt
               overflow-y: visible !important;
               padding: 4px !important;
               gap: 0 !important;
+              justify-content: space-between !important;
             }
             .nav-item {
               min-width: 0 !important;
@@ -45,7 +46,8 @@ const UniversalNavbar: React.FC<UniversalNavbarProps> = ({ navItems, activeNavIt
               padding: 8px 8px !important;
               line-height: 1.1 !important;
               max-width: 100vw !important;
-              white-space: nowrap !important;
+              /* Remove white-space: nowrap for even spacing */
+              white-space: normal !important;
             }
             .nav-label {
               font-size: 12px !important;
