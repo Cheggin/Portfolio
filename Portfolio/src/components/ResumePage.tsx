@@ -386,6 +386,18 @@ const ResumePage: React.FC = () => {
                 </div>
               </div>
             </section>
+            {/* Navigation button to contact page */}
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '56px 0 32px 0' }}>
+              <button
+                className="nav-next-button"
+                onClick={() => navigate('/contact')}
+              >
+                Want to Connect? Contact Me!
+                <svg className="nav-next-arrow" width="30" height="30" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 11H15M15 11L11.5 7.5M15 11L11.5 14.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>

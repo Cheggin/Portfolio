@@ -406,6 +406,20 @@ const AboutPage: React.FC = () => {
           </div>
         )}
       </div>
+      {/* Navigation button to projects page for friends section */}
+      {section.id === 'friends' && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 48 }}>
+          <button
+            className="nav-next-button"
+            onClick={() => navigate('/projects')}
+          >
+            Want to See What I'm Working On? Click Here!
+            <svg className="nav-next-arrow" width="30" height="30" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 11H15M15 11L11.5 7.5M15 11L11.5 14.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 

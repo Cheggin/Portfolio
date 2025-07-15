@@ -868,3 +868,39 @@ html, body {
     padding-right: 0 !important;
   }
 } 
+
+.nav-next-button {
+  background: #181f1b;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 16px 40px;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background 0.2s, border 0.2s;
+  letter-spacing: 0.5px;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-next-button:hover {
+  background: #22382a;
+}
+.nav-next-arrow {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  display: inline-block;
+}
+@media (max-width: 700px) {
+  .nav-next-arrow {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+} 
