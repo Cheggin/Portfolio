@@ -1,34 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import CountUp from './CountUp';
 import { FaRegStar, FaEye } from 'react-icons/fa';
+import { supabase } from '../supabaseClient';
 
 const VisitorCounter: React.FC = () => {
   const [visitorCount, setVisitorCount] = useState(0);
   const [githubStars, setGithubStars] = useState(0);
 
   useEffect(() => {
-    // Check if we've already counted this session
     const sessionKey = 'portfolioVisitorCounted';
     const hasCounted = sessionStorage.getItem(sessionKey);
-    
-    if (!hasCounted) {
-      // Get visitor count from localStorage
-      const storedCount = localStorage.getItem('portfolioVisitorCount');
-      const currentCount = storedCount ? parseInt(storedCount, 10) : 0;
-      
-      // Increment count for this visit
-      const newCount = currentCount + 1;
-      localStorage.setItem('portfolioVisitorCount', newCount.toString());
-      setVisitorCount(newCount);
-      
-      // Mark this session as counted
-      sessionStorage.setItem(sessionKey, 'true');
-    } else {
-      // Just display the current count without incrementing
-      const storedCount = localStorage.getItem('portfolioVisitorCount');
-      const currentCount = storedCount ? parseInt(storedCount, 10) : 0;
-      setVisitorCount(currentCount);
-    }
+
+    const fetchAndIncrement = async () => {
+      if (!hasCounted) {
+        // Increment the count atomically in Supabase
+        const { data, error } = await supabase.rpc('increment_visitor_count');
+        if (!error && data !== null) {
+          setVisitorCount(data);
+        } else {
+          // fallback: just fetch the count
+          const { data: row, error: fetchError } = await supabase
+            .from('visitor_count')
+            .select('count')
+            .eq('id', 1)
+            .single();
+          setVisitorCount(row?.count || 0);
+        }
+        sessionStorage.setItem(sessionKey, 'true');
+      } else {
+        // Just fetch the count
+        const { data: row, error } = await supabase
+          .from('visitor_count')
+          .select('count')
+          .eq('id', 1)
+          .single();
+        setVisitorCount(row?.count || 0);
+      }
+    };
+    fetchAndIncrement();
   }, []);
 
   // Fetch GitHub star count
