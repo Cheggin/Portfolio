@@ -815,6 +815,12 @@ html, body {
 } 
 
 @media (max-width: 700px) {
+  html, body, .resume-root {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
   .resume-sidebar {
     display: none !important;
   }
