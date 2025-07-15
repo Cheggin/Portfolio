@@ -130,9 +130,12 @@ const VisitorCounter: React.FC = () => {
           @media (max-width: 600px) {
             .visitor-counter-fixed {
               top: 60px !important;
-              left: 8px !important;
+              left: auto !important;
+              right: 8px !important;
               padding: 6px 8px !important;
               z-index: 3001 !important;
+              width: auto !important;
+              max-width: calc(100vw - 24px) !important;
             }
           }
         `}
