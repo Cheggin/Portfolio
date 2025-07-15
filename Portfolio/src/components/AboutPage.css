@@ -1046,4 +1046,12 @@ html, body {
     object-fit: cover !important;
     box-sizing: border-box !important;
   }
+  .about-section,
+  .section-content {
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    box-sizing: border-box !important;
+  }
 } 
