@@ -636,7 +636,7 @@ html, body {
 
 @media (max-width: 600px) {
   .reading-books .photo-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
   }
   .reading-books .photo-item {
@@ -1073,6 +1073,7 @@ html, body {
     max-width: 100% !important;
     box-sizing: border-box !important;
     /* Remove forced text-align: center */
+    padding-bottom: 72px !important;
   }
   .hero-section,
   .gallery-section,
@@ -1085,7 +1086,7 @@ html, body {
   }
   .reading-books .photo-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 10px !important;
     width: 100% !important;
     max-width: 100% !important;
