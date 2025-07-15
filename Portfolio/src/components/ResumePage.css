@@ -823,6 +823,13 @@ html, body {
     width: 100vw !important;
     height: 100vh !important;
   }
+  .resume-scroll-container {
+    position: static !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
   .cards-grid {
     display: flex !important;
     flex-direction: column !important;
