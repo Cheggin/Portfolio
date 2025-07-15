@@ -29,14 +29,27 @@ const UniversalNavbar: React.FC<UniversalNavbarProps> = ({ navItems, activeNavIt
               min-width: 0 !important;
             }
             .liquid-glass-nav {
-              flex-wrap: wrap !important;
+              flex-wrap: nowrap !important;
               min-width: 0 !important;
               max-width: 100vw !important;
+              overflow-x: auto !important;
+              overflow-y: visible !important;
+              padding: 4px !important;
+              gap: 0 !important;
             }
             .nav-item {
               min-width: 0 !important;
-              flex: 1 1 auto !important;
+              flex: 1 1 0 !important;
               word-break: break-word;
+              font-size: 12px !important;
+              padding: 8px 8px !important;
+              line-height: 1.1 !important;
+              max-width: 100vw !important;
+              white-space: nowrap !important;
+            }
+            .nav-label {
+              font-size: 12px !important;
+              padding: 0 !important;
             }
           }
         `}
