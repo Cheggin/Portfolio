@@ -1032,14 +1032,26 @@ html, body {
 } 
 
 @media (max-width: 700px) {
-  .recruiter-section {
-    margin-bottom: 32px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    position: relative !important;
+  .recruiter-section,
+  .recruiter-left,
+  .recruiter-right {
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
     overflow: visible !important;
+  }
+  .projects-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    padding: 16px 0 16px 0 !important;
+  }
+  .resume-card {
+    max-height: unset !important;
+    min-height: unset !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 1.2em 1em 1.5em 1em !important;
   }
   .recruiter-left,
   .recruiter-right,

@@ -302,10 +302,10 @@ const RecruiterPage: React.FC = () => {
           <div className="recruiter-left">
             <h1 className="recruiter-heading">A Few of My Experiences</h1>
             <ul className="recruiter-list">
-              <li><span style={{ whiteSpace: 'nowrap' }}><b>AI/ML Researcher</b> @ Algoverse (2025–Present)</span></li>
-              <li><span style={{ whiteSpace: 'nowrap' }}><b>Front End Lead</b> @ NetSerpent (Startup) (2025–Present)</span></li>
-              <li><span style={{ whiteSpace: 'nowrap' }}><b>Cancer Researcher</b> @ UCSD Ongkeko Lab (2024–Present)</span></li>
-              <li><span style={{ whiteSpace: 'nowrap' }}><b>Projects Director</b> @ ACM UCSD (2025–Present)</span></li>
+              <li><span style={!isMobile ? { whiteSpace: 'nowrap' } : {}}><b>AI/ML Researcher</b> @ Algoverse (2025–Present)</span></li>
+              <li><span style={!isMobile ? { whiteSpace: 'nowrap' } : {}}><b>Front End Lead</b> @ NetSerpent (Startup) (2025–Present)</span></li>
+              <li><span style={!isMobile ? { whiteSpace: 'nowrap' } : {}}><b>Cancer Researcher</b> @ UCSD Ongkeko Lab (2024–Present)</span></li>
+              <li><span style={!isMobile ? { whiteSpace: 'nowrap' } : {}}><b>Projects Director</b> @ ACM UCSD (2025–Present)</span></li>
             </ul>
             <LiquidGlassButton
               size="large"
