@@ -1064,4 +1064,23 @@ html, body {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+  .about-section,
+  .section-content {
+    margin: 0 auto !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+  .hero-section,
+  .gallery-section,
+  .hobby-section,
+  .reading-layout {
+    margin: 0 auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
 } 
