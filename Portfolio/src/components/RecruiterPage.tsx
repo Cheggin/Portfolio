@@ -14,6 +14,15 @@ const RecruiterPage: React.FC = () => {
   const location = useLocation();
   const [activeNavItem, setActiveNavItem] = useState("recruiter");
 
+  // Mobile detection for conditional rendering
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.matchMedia('(max-width: 700px)').matches);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   useEffect(() => {
     const path = location.pathname;
     if (path === "/") {
@@ -262,28 +271,30 @@ const RecruiterPage: React.FC = () => {
             </div>
           </div>
           {/* Right: Profile image */}
-          <div className="recruiter-right recruiter-right-single" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <TiltedCard
-              imageSrc={pfp}
-              altText="Reagan Hsu photo"
-              containerHeight="min(90vh, 600px)"
-              containerWidth="min(45vw, 420px)"
-              imageHeight="100%"
-              imageWidth="100%"
-              rotateAmplitude={14}
-              scaleOnHover={1.08}
-              showMobileWarning={false}
-              showTooltip={false}
-              displayOverlayContent={true}
-              overlayContent={
-                <div className="recruiter-overlay">This is me!</div>
-              }
-              imageStyle={{
-                border: "2.5px solid rgba(255,255,255,0.18)",
-                borderRadius: "32px",
-              }}
-            />
-          </div>
+          {!isMobile && (
+            <div className="recruiter-right recruiter-right-single" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <TiltedCard
+                imageSrc={pfp}
+                altText="Reagan Hsu photo"
+                containerHeight="min(90vh, 600px)"
+                containerWidth="min(45vw, 420px)"
+                imageHeight="100%"
+                imageWidth="100%"
+                rotateAmplitude={14}
+                scaleOnHover={1.08}
+                showMobileWarning={false}
+                showTooltip={false}
+                displayOverlayContent={true}
+                overlayContent={
+                  <div className="recruiter-overlay">This is me!</div>
+                }
+                imageStyle={{
+                  border: "2.5px solid rgba(255,255,255,0.18)",
+                  borderRadius: "32px",
+                }}
+              />
+            </div>
+          )}
         </section>
         {/* Section 2: Experiences */}
         <section className="recruiter-section">
@@ -305,20 +316,22 @@ const RecruiterPage: React.FC = () => {
             </LiquidGlassButton>
           </div>
           {/* Right half: MetaBalls interactive blob simulation */}
-          <div className="recruiter-right recruiter-coin-3d" style={{ minHeight: 400, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <MetaBalls
-              color="#ffffff"
-              cursorBallColor="#ffffff"
-              cursorBallSize={2}
-              ballCount={15}
-              animationSize={30}
-              enableMouseInteraction={true}
-              enableTransparency={true}
-              hoverSmoothness={0.05}
-              clumpFactor={1}
-              speed={0.3}
-            />
-          </div>
+          {!isMobile && (
+            <div className="recruiter-right recruiter-coin-3d" style={{ minHeight: 400, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <MetaBalls
+                color="#ffffff"
+                cursorBallColor="#ffffff"
+                cursorBallSize={2}
+                ballCount={15}
+                animationSize={30}
+                enableMouseInteraction={true}
+                enableTransparency={true}
+                hoverSmoothness={0.05}
+                clumpFactor={1}
+                speed={0.3}
+              />
+            </div>
+          )}
         </section>
                 {/* Section 3: Projects */}
         <section className="recruiter-section" ref={projectsSectionRef}>

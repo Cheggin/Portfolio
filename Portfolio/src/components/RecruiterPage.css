@@ -1099,41 +1099,39 @@ html, body {
 
 @media (max-width: 700px) {
   .projects-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 18px !important;
     width: 100% !important;
     max-width: 100vw !important;
     box-sizing: border-box !important;
-    padding: 0 8px !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    margin: 0 auto !important;
   }
   .resume-card {
     width: 100% !important;
-    max-width: 480px !important;
-    margin: 0 auto 18px auto !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
-    min-width: 0 !important;
-    min-height: unset !important;
-    max-height: none !important;
-    height: auto !important;
-    word-break: break-word !important;
-    padding: 1.2em 1em 1.5em 1em !important;
+    margin: 0 auto 18px auto !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    overflow-x: hidden !important;
   }
-  .card-title, .card-company {
-    white-space: normal !important;
+  .recruiter-heading {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    text-align: left !important;
     word-break: break-word !important;
   }
-  .card-pills-row {
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-  .card-duration-pill {
-    min-width: 0 !important;
-    max-width: 100% !important;
+  .recruiter-paragraph {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    text-align: left !important;
     word-break: break-word !important;
-    font-size: 0.95rem !important;
-    padding: 6px 10px !important;
   }
 } 
