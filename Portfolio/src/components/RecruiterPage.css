@@ -1124,6 +1124,8 @@ html, body {
     padding-right: 8px !important;
     text-align: left !important;
     word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    max-width: none !important;
   }
   .recruiter-paragraph {
     width: 100% !important;
