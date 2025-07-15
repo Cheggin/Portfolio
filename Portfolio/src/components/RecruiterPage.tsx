@@ -162,6 +162,7 @@ const RecruiterPage: React.FC = () => {
 
   // Pixel-perfect scroll snap correction
   useEffect(() => {
+    if (isMobile) return;
     const container = scrollContainerRef.current;
     if (!container) return;
     let timeout: NodeJS.Timeout | null = null;
@@ -196,7 +197,7 @@ const RecruiterPage: React.FC = () => {
       container.removeEventListener("scroll", handleScroll);
       if (timeout) clearTimeout(timeout);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="recruiter-root">

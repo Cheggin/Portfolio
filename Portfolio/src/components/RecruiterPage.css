@@ -1032,6 +1032,13 @@ html, body {
 } 
 
 @media (max-width: 700px) {
+  .recruiter-scroll-container {
+    scroll-snap-type: none !important;
+    scroll-behavior: unset !important;
+  }
+  .recruiter-section {
+    scroll-snap-align: unset !important;
+  }
   .recruiter-section,
   .recruiter-left,
   .recruiter-right {
