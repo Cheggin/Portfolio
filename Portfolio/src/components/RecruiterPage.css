@@ -1086,3 +1086,20 @@ html, body {
     padding-left: 0 !important;
   }
 } 
+
+@media (max-width: 700px) {
+  .recruiter-section,
+  .recruiter-left,
+  .recruiter-right,
+  .recruiter-heading,
+  .recruiter-list,
+  .recruiter-paragraph,
+  .projects-grid,
+  .resume-card {
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+} 
