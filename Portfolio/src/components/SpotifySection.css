@@ -717,4 +717,14 @@
     min-width: 0 !important;
     margin: 0 !important;
   }
+  .favorite-artists-embeds,
+  .favorite-songs-list,
+  .playlists-list,
+  .tab-content {
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
 }
