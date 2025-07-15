@@ -1129,3 +1129,66 @@ html, body {
     min-height: 30px !important;
   }
 } 
+
+@media (max-width: 700px) {
+  /* Baking & Cooking section: center text and images */
+  .baking-cooking-section.food-blog-layout {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .food-blog-left, .food-blog-right {
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  .food-blog-photo-grid {
+    justify-items: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  .polaroid-photo-item, .food-blog-photo-item {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .polaroid-photo, .food-blog-photo {
+    width: 100% !important;
+    max-width: 260px !important;
+    height: auto !important;
+    object-fit: cover !important;
+    margin: 0 auto !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+  /* Books section: ensure images fill frame */
+  .reading-books .photo-item {
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 120px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .reading-books .hobby-photo {
+    width: 100% !important;
+    max-width: 120px !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    margin: 0 auto !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+} 
