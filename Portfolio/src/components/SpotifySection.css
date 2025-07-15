@@ -727,4 +727,10 @@
     margin-right: auto !important;
     box-sizing: border-box !important;
   }
+  .favorite-song-item {
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
 }
