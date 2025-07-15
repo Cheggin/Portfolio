@@ -132,10 +132,23 @@ const VisitorCounter: React.FC = () => {
               top: 60px !important;
               left: auto !important;
               right: 8px !important;
-              padding: 6px 8px !important;
+              padding: 4px 8px !important;
               z-index: 3001 !important;
               width: auto !important;
               max-width: calc(100vw - 24px) !important;
+              border-radius: 12px !important;
+              font-size: 12px !important;
+            }
+            .visitor-counter-fixed .fa-eye,
+            .visitor-counter-fixed .fa-star,
+            .visitor-counter-fixed svg {
+              font-size: 13px !important;
+            }
+            .visitor-counter-fixed span,
+            .visitor-counter-fixed a {
+              font-size: 12px !important;
+              padding: 4px 6px !important;
+              border-radius: 8px !important;
             }
           }
         `}
