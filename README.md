@@ -9,6 +9,7 @@ This project draws inspiration from several amazing open-source projects and cre
 - [Cheryl-Lao/Cheryl-Lao.github.io](https://github.com/Cheryl-Lao/Cheryl-Lao.github.io): Shadow animated hover cards
 - [toukoum/portfolio](https://github.com/toukoum/portfolio): Fluid cursor, blinking dots, internship application format
 - [DavidHDev/react-bits](https://github.com/DavidHDev/react-bits): A variety of useful React elements
+- [Emotion Agency](https://www.awwwards.com/inspiration/interactive-page-loader-emotion-agency-promo): Introduction animation inspo
 
 ## Pages
 
