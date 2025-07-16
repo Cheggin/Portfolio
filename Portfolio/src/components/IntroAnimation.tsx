@@ -20,12 +20,14 @@ const rightText =
 const centerDoneText = '( DONE )';
 const centerFinalText = "HELLO, I'M REAGAN! WELCOME TO MY SITE! ";
 
-const TYPING_SPEED = 25;
-const HIGHLIGHT_DELAY = 700;
-const PERCENTAGE_SPEED = 20;
-const FINAL_FADE_DELAY = 2500;
-
-// Add a simple headphones SVG icon
+// Calculate synchronized animation speeds
+const totalSteps = Math.max(leftMenu.length - 1, rightText.length);
+const TOTAL_ANIMATION_DURATION = 3500; // ms, adjust for desired total duration
+const SYNCED_HIGHLIGHT_DELAY = TOTAL_ANIMATION_DURATION / (leftMenu.length - 1);
+const SYNCED_TYPING_SPEED = TOTAL_ANIMATION_DURATION / rightText.length;
+const PERCENTAGE_TOTAL_DURATION = TOTAL_ANIMATION_DURATION * 1.2;
+const PERCENTAGE_SPEED = PERCENTAGE_TOTAL_DURATION / 100;
+const FINAL_FADE_DELAY = 1700;
 
 
 const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
@@ -43,7 +45,7 @@ const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
   // Highlight scroll effect
   useEffect(() => {
     if (highlightIdx < leftMenu.length - 1) {
-      const timer = setTimeout(() => setHighlightIdx(highlightIdx + 1), HIGHLIGHT_DELAY);
+      const timer = setTimeout(() => setHighlightIdx(highlightIdx + 1), SYNCED_HIGHLIGHT_DELAY);
       return () => clearTimeout(timer);
     }
   }, [highlightIdx]);
@@ -61,7 +63,7 @@ const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
   // Typing effect for right text
   useEffect(() => {
     if (typedRight.length < rightText.length) {
-      const timer = setTimeout(() => setTypedRight(rightText.slice(0, typedRight.length + 1)), TYPING_SPEED);
+      const timer = setTimeout(() => setTypedRight(rightText.slice(0, typedRight.length + 1)), SYNCED_TYPING_SPEED);
       return () => clearTimeout(timer);
     }
   }, [typedRight]);
@@ -76,7 +78,7 @@ const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
   // Animate final center text one character at a time
   useEffect(() => {
     if (showFinalText && finalTextIdx < centerFinalText.length) {
-      const timer = setTimeout(() => setFinalTextIdx(finalTextIdx + 1), TYPING_SPEED);
+      const timer = setTimeout(() => setFinalTextIdx(finalTextIdx + 1), SYNCED_TYPING_SPEED);
       return () => clearTimeout(timer);
     }
     // When the final text is fully shown, start fade out and finish timers
