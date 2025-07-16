@@ -14,6 +14,7 @@ import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import RecruiterContactPage from './components/RecruiterContactPage';
 import ProjectsPage from './components/ProjectsPage';
+import IntroAnimation from './components/IntroAnimation';
 
 function Layout({ activeNavItem, setActiveNavItem }: { activeNavItem: string, setActiveNavItem: (id: string) => void }) {
   const navigate = useNavigate();
@@ -248,20 +249,31 @@ function App() {
 
 const AppWithRouter = () => {
   const [activeNavItem, setActiveNavItem] = React.useState('home');
+  const [showIntro, setShowIntro] = React.useState(true);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout activeNavItem={activeNavItem} setActiveNavItem={setActiveNavItem} />}>
-          <Route path="/" element={<App />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/recruiter" element={<RecruiterPage />} />
-          <Route path="/resume" element={<ResumePage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/recruiter-contact" element={<RecruiterContactPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      {showIntro && (
+        <>
+          <IntroAnimation onFinish={() => setShowIntro(false)} />
+        </>
+      )}
+      {!showIntro && (
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout activeNavItem={activeNavItem} setActiveNavItem={setActiveNavItem} />}>
+              <Route path="/" element={<App />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/recruiter" element={<RecruiterPage />} />
+              <Route path="/resume" element={<ResumePage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/recruiter-contact" element={<RecruiterContactPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      )}
+    </>
   );
 };
 
