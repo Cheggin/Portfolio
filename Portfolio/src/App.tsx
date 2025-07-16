@@ -249,15 +249,19 @@ function App() {
 
 const AppWithRouter = () => {
   const [activeNavItem, setActiveNavItem] = React.useState('home');
-  const [showIntro, setShowIntro] = React.useState(true);
+  // Only show intro if not already shown in this session
+  const [showIntro, setShowIntro] = React.useState(() => {
+    return sessionStorage.getItem('introShown') !== 'true';
+  });
+
+  const handleIntroFinish = () => {
+    sessionStorage.setItem('introShown', 'true');
+    setShowIntro(false);
+  };
 
   return (
     <>
-      {showIntro && (
-        <>
-          <IntroAnimation onFinish={() => setShowIntro(false)} />
-        </>
-      )}
+      {showIntro && <IntroAnimation onFinish={handleIntroFinish} />}
       {!showIntro && (
         <BrowserRouter>
           <Routes>
