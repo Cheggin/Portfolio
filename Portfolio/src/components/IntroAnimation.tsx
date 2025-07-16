@@ -38,50 +38,57 @@ const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
   const [showFinalText, setShowFinalText] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const [finalTextIdx, setFinalTextIdx] = useState(0);
+  const [fadeIn, setFadeIn] = useState(false); // New state for fade-in
 
   // Step 2: Memoize the options object so its reference is stable across re-renders.
   const hyperspeedOptions = useMemo(() => ({ ...HyperSpeedPresets.one }), []);
 
-  // Highlight scroll effect
+  // Fade-in effect on mount
   useEffect(() => {
+    const timer = setTimeout(() => setFadeIn(true), 600); // 800ms delay (was 400ms)
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Only start the rest of the animation after fade-in
+  useEffect(() => {
+    if (!fadeIn) return;
     if (highlightIdx < leftMenu.length - 1) {
       const timer = setTimeout(() => setHighlightIdx(highlightIdx + 1), SYNCED_HIGHLIGHT_DELAY);
       return () => clearTimeout(timer);
     }
-  }, [highlightIdx]);
+  }, [highlightIdx, fadeIn]);
 
-  // Percentage counter
   useEffect(() => {
+    if (!fadeIn) return;
     if (percentage < 100) {
       const timer = setTimeout(() => setPercentage(percentage + 1), PERCENTAGE_SPEED);
       return () => clearTimeout(timer);
     } else if (!showCenterDone) {
       setTimeout(() => setShowCenterDone(true), 400);
     }
-  }, [percentage, showCenterDone]);
+  }, [percentage, showCenterDone, fadeIn]);
 
-  // Typing effect for right text
   useEffect(() => {
+    if (!fadeIn) return;
     if (typedRight.length < rightText.length) {
       const timer = setTimeout(() => setTypedRight(rightText.slice(0, typedRight.length + 1)), SYNCED_TYPING_SPEED);
       return () => clearTimeout(timer);
     }
-  }, [typedRight]);
+  }, [typedRight, fadeIn]);
 
-  // After all animations, show final center text
   useEffect(() => {
+    if (!fadeIn) return;
     if (showCenterDone && highlightIdx === leftMenu.length - 1 && typedRight.length === rightText.length) {
       setTimeout(() => setShowFinalText(true), FINAL_FADE_DELAY);
     }
-  }, [showCenterDone, highlightIdx, typedRight]);
+  }, [showCenterDone, highlightIdx, typedRight, fadeIn]);
 
-  // Animate final center text one character at a time
   useEffect(() => {
+    if (!fadeIn) return;
     if (showFinalText && finalTextIdx < centerFinalText.length) {
       const timer = setTimeout(() => setFinalTextIdx(finalTextIdx + 1), SYNCED_TYPING_SPEED);
       return () => clearTimeout(timer);
     }
-    // When the final text is fully shown, start fade out and finish timers
     if (showFinalText && finalTextIdx === centerFinalText.length) {
       const fadeTimer = setTimeout(() => setFadeOut(true), 1200);
       const finishTimer = setTimeout(() => onFinish(), 1800);
@@ -90,10 +97,10 @@ const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
         clearTimeout(finishTimer);
       };
     }
-  }, [showFinalText, finalTextIdx, onFinish]);
+  }, [showFinalText, finalTextIdx, onFinish, fadeIn]);
 
   return (
-    <div className={`intro-overlay${fadeOut ? ' fade-out' : ''}`} style={{ background: 'black', position: 'fixed', inset: 0, zIndex: 9999, overflow: 'hidden' }}>
+    <div className={`intro-overlay${fadeOut ? ' fade-out' : ''}${fadeIn ? ' fade-in' : ''}`} style={{ background: 'black', position: 'fixed', inset: 0, zIndex: 9999, overflow: 'hidden' }}>
       {/* Use the memoized component with the memoized props */}
       <MemoizedHyperspeed effectOptions={hyperspeedOptions} />
       
