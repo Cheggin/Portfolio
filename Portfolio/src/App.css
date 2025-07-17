@@ -381,3 +381,21 @@
     max-width: 80vw !important;
   }
 }
+
+.app-fade-in {
+  opacity: 1;
+  transform: scale(1);
+  animation: appFadeIn 0.8s cubic-bezier(.4,0,.2,1);
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes appFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

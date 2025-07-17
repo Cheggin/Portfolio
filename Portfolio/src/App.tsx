@@ -253,29 +253,47 @@ const AppWithRouter = () => {
   const [showIntro, setShowIntro] = React.useState(() => {
     return sessionStorage.getItem('introShown') !== 'true';
   });
+  const [appFadeIn, setAppFadeIn] = React.useState(false); // New state for main app fade-in
+  const [introVisible, setIntroVisible] = React.useState(showIntro); // Controls actual mounting
+
+  const FADE_OUT_DURATION = 600; // ms, should match CSS fade-out duration
 
   const handleIntroFinish = () => {
     sessionStorage.setItem('introShown', 'true');
+    // Start fade-out, but keep intro mounted for fade duration
     setShowIntro(false);
+    setTimeout(() => {
+      setIntroVisible(false);
+      setAppFadeIn(true); // Start main app fade-in
+    }, FADE_OUT_DURATION);
   };
+
+  React.useEffect(() => {
+    // If intro is not shown on first load, fade in app immediately
+    if (!showIntro && !introVisible) {
+      setAppFadeIn(true);
+    }
+  }, [showIntro, introVisible]);
 
   return (
     <>
-      {showIntro && <IntroAnimation onFinish={handleIntroFinish} />}
-      {!showIntro && (
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Layout activeNavItem={activeNavItem} setActiveNavItem={setActiveNavItem} />}>
-              <Route path="/" element={<App />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/recruiter" element={<RecruiterPage />} />
-              <Route path="/resume" element={<ResumePage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/recruiter-contact" element={<RecruiterContactPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+      {introVisible && <IntroAnimation onFinish={handleIntroFinish} />}
+      {!introVisible && (
+        <div className={appFadeIn ? 'app-fade-in' : ''}>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout activeNavItem={activeNavItem} setActiveNavItem={setActiveNavItem} />}>
+                <Route path="/" element={<App />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/recruiter" element={<RecruiterPage />} />
+                <Route path="/resume" element={<ResumePage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/recruiter-contact" element={<RecruiterContactPage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </div>
       )}
     </>
   );

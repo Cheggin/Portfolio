@@ -45,7 +45,7 @@ const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
 
   // Fade-in effect on mount
   useEffect(() => {
-    const timer = setTimeout(() => setFadeIn(true), 600); // 800ms delay (was 400ms)
+    const timer = setTimeout(() => setFadeIn(true), 800); // 800ms delay (was 400ms)
     return () => clearTimeout(timer);
   }, []);
 
@@ -90,8 +90,8 @@ const IntroAnimation = ({ onFinish }: { onFinish: () => void }) => {
       return () => clearTimeout(timer);
     }
     if (showFinalText && finalTextIdx === centerFinalText.length) {
-      const fadeTimer = setTimeout(() => setFadeOut(true), 1200);
-      const finishTimer = setTimeout(() => onFinish(), 1800);
+      const fadeTimer = setTimeout(() => setFadeOut(true), 700);
+      const finishTimer = setTimeout(() => onFinish(), 1300);
       return () => {
         clearTimeout(fadeTimer);
         clearTimeout(finishTimer);
