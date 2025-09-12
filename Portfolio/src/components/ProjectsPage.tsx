@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { projects } from './projectsData';
 import ProjectCard from './ProjectCard';
+import SEOHead from './SEOHead';
 import './ProjectsPage.css';
 
 const ProjectsPage: React.FC = () => {
@@ -24,13 +25,42 @@ const ProjectsPage: React.FC = () => {
     activeTab === 'hackathon' ? sortByHackathonWinner(hackathonProjects) :
     otherProjects;
 
+  const projectsStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Reagan Hsu - Software Engineering Projects",
+    "description": "Portfolio of Reagan Hsu's software engineering projects including hackathon-winning applications in AI/ML, full-stack development, and civic technology.",
+    "author": {
+      "@type": "Person",
+      "name": "Reagan Hsu"
+    },
+    "hasPart": projects.map(project => ({
+      "@type": "SoftwareApplication",
+      "name": project.title,
+      "description": project.description,
+      "applicationCategory": project.tech.includes('AI') || project.tech.includes('Machine Learning') ? 'AI/ML Application' : 'Web Application',
+      "operatingSystem": "Web Browser",
+      "award": project.hackathonWinner ? "Hackathon Winner" : undefined,
+      "url": project.link
+    }))
+  };
+
   return (
     <div className="projects-root">
+      <SEOHead
+        title="Projects - Reagan Hsu | AI/ML & Full-Stack Development Portfolio"
+        description="Explore Reagan Hsu's software engineering projects including hackathon-winning applications: CiteTrace (AI research visualization), PillSnap (healthcare AI), SFGovTV++ (civic tech), and more full-stack development projects."
+        keywords="Reagan Hsu projects, software engineering portfolio, hackathon winner, AI ML applications, full stack development, React projects, Python projects, computer vision, civic technology, UCSD student projects"
+        url="https://reaganhsu.com/projects"
+        structuredData={projectsStructuredData}
+      />
       <div className="projects-scroll-container">
         <div className="projects-layout">
           <div className="projects-title-block">
-            <h1 className="projects-title">Projects</h1>
-            <div className="projects-subtitle">Below are some of my projects that I've worked on. I first started developing my own projects after participating in hackathons late 2024. </div>
+            <h1 className="projects-title">Software Engineering Projects</h1>
+            <div className="projects-subtitle">
+              Explore my portfolio of innovative software engineering projects, including multiple hackathon-winning applications in AI/ML, full-stack web development, and civic technology. These projects showcase expertise in React, Python, machine learning, computer vision, and modern web technologies.
+            </div>
           </div>
           
           <div style={{

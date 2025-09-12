@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { navItems, handleNavItemClick } from "./navConfig";
+import SEOHead from "./SEOHead";
 import "./AboutPage.css";
 import aboutMePfp from "./images/aboutmepfp.webp";
 import Eddie from "./images/Eddie.webp";
@@ -574,8 +575,29 @@ const AboutPage: React.FC = () => {
     }
   };
 
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Reagan Hsu - Computer Science Student & Software Engineer",
+    "description": "Learn more about Reagan Hsu, a Computer Science student at UC San Diego passionate about full-stack development, AI/ML, and creating innovative solutions. Discover hobbies including cooking, reading, music, and video creation.",
+    "author": {
+      "@type": "Person",
+      "name": "Reagan Hsu",
+      "jobTitle": "Computer Science Student & Software Engineer",
+      "alumniOf": "University of California San Diego",
+      "interests": ["Software Development", "Artificial Intelligence", "Machine Learning", "Cooking", "Reading", "Music", "Video Creation", "Six of Crows", "Cookie Monster", "Cat Lover"]
+    }
+  };
+
   return (
     <div className="about-root">
+      <SEOHead
+        title="About - Reagan Hsu | Computer Science Student at UCSD & Software Engineer"
+        description="Learn more about Reagan Hsu, a Computer Science student at UC San Diego passionate about full-stack development, AI/ML, and creating innovative solutions. Discover hobbies including cooking, reading, music, and video creation."
+        keywords="Reagan Hsu about, computer science student UCSD, software engineer biography, full stack developer, AI ML enthusiast, hackathon winner, cooking, reading, music, video creation, personal interests"
+        url="https://reaganhsu.com/about"
+        structuredData={aboutStructuredData}
+      />
       
       {/* Smooth Scroll Container */}
       <div className="about-scroll-container">

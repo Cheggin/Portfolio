@@ -47,22 +47,43 @@ const AppleGlowName = () => {
       <h2
         style={{
           display: "block",
-          fontSize: "clamp(2rem, 4vw, 5rem)",
-          fontWeight: 900,
+          fontSize: "clamp(1.2rem, 3vw, 2.5rem)",
+          fontWeight: 600,
           letterSpacing: "-0.01em",
           margin: 0,
-          marginTop: "0.1em",
+          marginTop: "0.5em",
           opacity: showSubtitle ? 1 : 0,
           transform: showSubtitle ? "translateY(0)" : "translateY(20px)",
           transition: "opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)",
-          lineHeight: 1.1,
+          lineHeight: 1.3,
           fontFamily: "'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif",
-          color: "#fff",
+          color: "rgba(255, 255, 255, 0.8)",
           userSelect: "none",
+          maxWidth: "600px",
         }}
       >
-        Portfolio
+        Computer Science Student at UCSD | Full-Stack Developer | AI/ML Enthusiast
       </h2>
+      <p
+        style={{
+          display: "block",
+          fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+          fontWeight: 400,
+          letterSpacing: "-0.005em",
+          margin: 0,
+          marginTop: "0.8em",
+          opacity: showSubtitle ? 1 : 0,
+          transform: showSubtitle ? "translateY(0)" : "translateY(30px)",
+          transition: "opacity 0.8s cubic-bezier(.4,0,.2,1) 0.2s, transform 0.8s cubic-bezier(.4,0,.2,1) 0.2s",
+          lineHeight: 1.4,
+          fontFamily: "'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif",
+          color: "rgba(255, 255, 255, 0.6)",
+          userSelect: "none",
+          maxWidth: "700px",
+        }}
+      >
+        Creating innovative solutions through hackathon-winning applications and full-stack web development. Passionate about machine learning, research visualization, and building accessible technology.
+      </p>
     </div>
   );
 }

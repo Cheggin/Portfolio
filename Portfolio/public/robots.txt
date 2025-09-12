@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://reaganhsu.com/sitemap.xml
+
+# Priority pages for search engines
+Allow: /about
+Allow: /projects
+Allow: /resume
+Allow: /contact
+Allow: /recruiter
+
+# Block unnecessary paths
+Disallow: /src/
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.ts$
+Disallow: /*.tsx$
+Disallow: /node_modules/
+
+# Crawl delay (be nice to servers)
+Crawl-delay: 1

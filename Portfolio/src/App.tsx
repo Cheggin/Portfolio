@@ -6,8 +6,10 @@ import LiquidGlassModal from './components/LiquidGlassModal';
 import AppleGlowName from './components/AppleGlowName';
 import VisitorCounter from './components/VisitorCounter';
 import UniversalNavbar from './components/UniversalNavbar';
+import SEOHead from './components/SEOHead';
 import { navItems, handleNavItemClick } from './components/navConfig';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import RecruiterPage from './components/RecruiterPage';
 import ResumePage from './components/ResumePage';
 import AboutPage from './components/AboutPage';
@@ -169,22 +171,105 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  const homeStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Reagan Hsu Portfolio",
+    "description": "Personal portfolio of Reagan Hsu, Computer Science student at UCSD specializing in full-stack development and AI/ML",
+    "url": "https://reaganhsu.com",
+    "author": {
+      "@type": "Person",
+      "name": "Reagan Hsu",
+      "jobTitle": "Computer Science Student & Software Engineer",
+      "alumniOf": "University of California San Diego"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://reaganhsu.com/projects",
+      "query-input": "required name=search_term"
+    }
+  };
+
   return (
     <div className="App">
+      <SEOHead
+        title="Reagan Hsu - Software Engineer Portfolio | Computer Science Student UCSD"
+        description="Reagan Hsu is a Computer Science student at UCSD specializing in full-stack development, AI/ML projects, and hackathon-winning applications. View projects including CiteTrace, PillSnap, and SFGovTV++."
+        keywords="Reagan Hsu, software engineer, computer science, UCSD, full stack developer, React, Python, AI ML, hackathon winner, portfolio, web developer, student, intern, recruiter"
+        url="https://reaganhsu.com/"
+        structuredData={homeStructuredData}
+      />
       {/* Visitor Counter and GitHub Star at top left */}
       <div style={{ position: 'fixed', top: 24, left: 36, zIndex: 2000 }}>
         <VisitorCounter />
       </div>
       <div className="content">
-        {/* Apple Glow Name Hero (no glass) */}
-        <div style={{ marginTop: '120px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
+        {/* Hero Section with SEO-optimized content */}
+        <header style={{ marginTop: '120px', marginBottom: '60px', display: 'flex', justifyContent: 'center' }}>
           <AppleGlowName />
-        </div>
-        {/* Main Content */}
-        <main style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gap: '32px', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
-            {/* About Section removed as requested */}
-          </div>
+        </header>
+        
+        {/* Main Content with semantic structure */}
+        <main role="main" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+          <section style={{ 
+            textAlign: 'center', 
+            marginBottom: '60px',
+            padding: '40px 20px',
+            background: 'rgba(255, 255, 255, 0.02)',
+            borderRadius: '20px',
+            border: '1px solid rgba(255, 255, 255, 0.1)'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+              fontWeight: 700,
+              marginBottom: '20px',
+              background: 'linear-gradient(45deg, #0a84ff, #5e5ce6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Welcome to My Portfolio
+            </h2>
+            <p style={{
+              fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+              lineHeight: 1.6,
+              color: 'rgba(255, 255, 255, 0.8)',
+              maxWidth: '800px',
+              margin: '0 auto',
+              marginBottom: '30px'
+            }}>
+              I'm a passionate Computer Science student at UC San Diego with experience in full-stack development, 
+              artificial intelligence, and machine learning. I've won multiple hackathons and love creating 
+              innovative solutions to real-world problems. Whether you're a recruiter looking for fresh talent 
+              or someone interested in my work, I'd love to connect!
+            </p>
+            
+            {/* SEO-friendly keywords section */}
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '12px',
+              marginTop: '30px'
+            }}>
+              {[
+                'React', 'Python', 'TypeScript', 'Node.js', 'Machine Learning', 
+                'AI/ML', 'Full-Stack', 'Hackathon Winner', 'UCSD', 'Software Engineer'
+              ].map((skill) => (
+                <span key={skill} style={{
+                  padding: '8px 16px',
+                  background: 'rgba(10, 132, 255, 0.1)',
+                  border: '1px solid rgba(10, 132, 255, 0.3)',
+                  borderRadius: '20px',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontSize: '0.9rem',
+                  fontWeight: 500
+                }}>
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </section>
         </main>
       </div>
       {/* Modal */}
@@ -276,7 +361,7 @@ const AppWithRouter = () => {
   }, [showIntro, introVisible]);
 
   return (
-    <>
+    <HelmetProvider>
       {introVisible && <IntroAnimation onFinish={handleIntroFinish} />}
       {!introVisible && (
         <div className={appFadeIn ? 'app-fade-in' : ''}>
@@ -295,7 +380,7 @@ const AppWithRouter = () => {
           </BrowserRouter>
         </div>
       )}
-    </>
+    </HelmetProvider>
   );
 };
 
