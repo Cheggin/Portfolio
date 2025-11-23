@@ -7,11 +7,11 @@
 }
 
 :root {
-  --bg-primary: #ffffff;
+  --bg-primary: #f0f0f0;
   --text-primary: #1a1a1a;
   --text-secondary: #333;
   --text-muted: #666;
-  --border-color: #e0e0e0;
+  --border-color: #d1d1d1;
   --link-separator: #999;
 }
 

@@ -10,13 +10,13 @@ export default function HomePage() {
       </p>
 
       <p className="body-text">
-        My day-to-day work mostly spans frontend development and product engineering. You can check out my 100 apps, 100 days series with Browser Use <a href = "https://x.com/browser_use/status/1970297754489589966" target="_blank" rel="noopener noreferrer" className="text-link">here!</a> 
+        My day-to-day work mostly spans frontend development and product engineering. However, I'm comfortable working around the stack!
       </p>
 
       <div className="highlight-section">
         <h2 className="section-heading">Current</h2>
         <p className="body-text">
-          Growth Engineer at <a href = "https://browser-use.com/" target="_blank" rel="noopener noreferrer" className="text-link">Browser Use (YC W25)</a>, shipping daily (100 apps, 100 days) and helping identify friction points for users. 
+          Growth Engineer at <a href = "https://browser-use.com/" target="_blank" rel="noopener noreferrer" className="text-link">Browser Use (YC W25)</a>, shipping daily and helping identify friction points for users. 
           <br></br>
           <br></br>
           Claude Campus Ambassador at <a href = "https://www.claudebuildersucsd.com/" target="_blank" rel="noopener noreferrer" className="text-link">Anthropic</a>, hosting events and helping other students build and learn with AI.
