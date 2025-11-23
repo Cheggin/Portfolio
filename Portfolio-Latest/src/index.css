@@ -326,6 +326,21 @@ h1, h2, h3, h4, h5, h6 {
 
   .portfolio-nav {
     gap: 20px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% + 48px);
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .portfolio-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .portfolio-nav .theme-toggle {
