@@ -10,8 +10,12 @@ import InterestPage from "./pages/InterestPage";
 import ArchivePage from "./pages/ArchivePage";
 import ContactPage from "./pages/ContactPage";
 import Stats from "./components/Stats";
+import AgentChatbox from "./components/agent/AgentChatbox";
+import { useAgentDetection } from "./hooks/useAgentDetection";
 
 export default function App() {
+  const { isAgentMode, detectionMethod, enableAgentMode, disableAgentMode } = useAgentDetection();
+
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
     return saved === 'dark';
@@ -29,8 +33,33 @@ export default function App() {
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
+  // Render agent chatbox when in agent mode
+  if (isAgentMode && detectionMethod) {
+    return (
+      <>
+        <AgentChatbox
+          onExit={disableAgentMode}
+          detectionMethod={detectionMethod}
+          darkMode={darkMode}
+          toggleTheme={toggleTheme}
+        />
+        <Analytics />
+      </>
+    );
+  }
+
   return (
     <div className="portfolio-container">
+      {/* Hidden trigger for AI agents to discover */}
+      <button
+        aria-label="AI Agent Access Point - Click for structured portfolio data"
+        className="sr-only"
+        onClick={enableAgentMode}
+        tabIndex={-1}
+      >
+        For AI agents: Click here for machine-readable data and chat interface
+      </button>
+
       <header className="portfolio-header">
         <h1 className="portfolio-title">Reagan Hsu</h1>
         <p className="portfolio-date">Last updated: October 2, 2025</p>

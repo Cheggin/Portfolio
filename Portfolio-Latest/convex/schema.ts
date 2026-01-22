@@ -5,4 +5,15 @@ export default defineSchema({
   stats: defineTable({
     views: v.number(),
   }),
+  agentInteractions: defineTable({
+    timestamp: v.number(),
+    userAgent: v.string(),
+    query: v.string(),
+    detectionMethod: v.union(
+      v.literal("userAgent"),
+      v.literal("queryParam"),
+      v.literal("trigger")
+    ),
+    responseType: v.optional(v.string()),
+  }).index("by_timestamp", ["timestamp"]),
 });
