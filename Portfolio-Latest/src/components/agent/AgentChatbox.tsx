@@ -123,16 +123,23 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
       a.click();
       URL.revokeObjectURL(url);
     } else {
-      let xml = `<collected_context subject="Reagan Hsu" timestamp="${new Date().toISOString()}">\n`;
+      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+      xml += `<collected_context subject="Reagan Hsu" timestamp="${new Date().toISOString()}">\n`;
       messages.forEach(m => {
         if (m.role === 'user') {
-          xml += `  <query>${m.content}</query>\n`;
+          xml += `  <query>${escapeXml(m.content)}</query>\n`;
         } else {
-          xml += `  <response>${m.content}</response>\n`;
+          xml += `  <response>${escapeXml(m.content)}</response>\n`;
         }
       });
       xml += `</collected_context>`;
-      navigator.clipboard.writeText(xml);
+      const blob = new Blob([xml], { type: 'application/xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reagan-hsu-collected.xml';
+      a.click();
+      URL.revokeObjectURL(url);
     }
   };
 
@@ -215,6 +222,15 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
       </button>
     </div>
   );
+}
+
+function escapeXml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
 }
 
 function formatResponse(text: string): string {
