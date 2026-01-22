@@ -699,8 +699,14 @@ h1, h2, h3, h4, h5, h6 {
   text-underline-offset: 2px;
 }
 
-.agent-export-btn:hover {
+.agent-export-btn:hover:not(:disabled) {
   color: var(--text-primary);
+}
+
+.agent-export-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {

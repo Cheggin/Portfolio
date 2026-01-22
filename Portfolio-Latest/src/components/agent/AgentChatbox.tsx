@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useMutation, useAction } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
-import { detectIntent, generateResponse } from '../../utils/agentResponses';
 
 interface Message {
   id: string;
@@ -44,31 +43,16 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
     setIsLoading(true);
 
     try {
-      const intent = detectIntent(query);
-      const { response: predefinedResponse, isPredefined } = generateResponse(intent);
+      const result = await askClaude({ query });
+      const finalResponse = result.success && result.response
+        ? result.response
+        : "Error: API unavailable.";
 
-      let finalResponse: string;
-
-      if (isPredefined && predefinedResponse) {
-        finalResponse = predefinedResponse;
-        await logInteraction({
-          userAgent: navigator.userAgent,
-          query,
-          responseType: 'predefined',
-          detectionMethod,
-        });
-      } else {
-        const result = await askClaude({ query });
-        finalResponse = result.success && result.response
-          ? result.response
-          : "No additional information available.";
-        await logInteraction({
-          userAgent: navigator.userAgent,
-          query,
-          responseType: 'llm',
-          detectionMethod,
-        });
-      }
+      await logInteraction({
+        userAgent: navigator.userAgent,
+        query,
+        detectionMethod,
+      });
 
       setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', content: finalResponse }]);
     } catch {
@@ -78,17 +62,9 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
     }
   };
 
-  // Build collected context from conversation
-  const getCollectedContext = () => {
-    const assistantMessages = messages.filter(m => m.role === 'assistant');
-    return assistantMessages.map(m => m.content).join('\n\n---\n\n');
-  };
-
   const handleExport = (format: 'json' | 'markdown' | 'xml') => {
-    const collected = getCollectedContext();
-
-    if (!collected) {
-      return; // Nothing to export
+    if (messages.length === 0) {
+      return;
     }
 
     if (format === 'json') {
@@ -207,9 +183,24 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
 
         <footer className="agent-footer">
           <span>export:</span>
-          <button onClick={() => handleExport('json')} className="agent-export-btn">json</button>
-          <button onClick={() => handleExport('markdown')} className="agent-export-btn">md</button>
-          <button onClick={() => handleExport('xml')} className="agent-export-btn">xml</button>
+          <button
+            type="button"
+            onClick={() => handleExport('json')}
+            className="agent-export-btn"
+            disabled={messages.length === 0}
+          >json</button>
+          <button
+            type="button"
+            onClick={() => handleExport('markdown')}
+            className="agent-export-btn"
+            disabled={messages.length === 0}
+          >md</button>
+          <button
+            type="button"
+            onClick={() => handleExport('xml')}
+            className="agent-export-btn"
+            disabled={messages.length === 0}
+          >xml</button>
         </footer>
       </div>
 
