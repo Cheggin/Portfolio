@@ -9,6 +9,8 @@ export default defineSchema({
     timestamp: v.number(),
     userAgent: v.string(),
     query: v.string(),
+    // Legacy field - kept optional for backwards compatibility with existing data
+    detectionMethod: v.optional(v.string()),
   }).index("by_timestamp", ["timestamp"]),
   agentMemories: defineTable({
     key: v.string(),

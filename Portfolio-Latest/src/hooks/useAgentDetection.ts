@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 interface UseAgentDetectionResult {
   isAgentMode: boolean;
@@ -7,18 +7,28 @@ interface UseAgentDetectionResult {
 }
 
 /**
- * Agent detection via DOM trigger only.
- * Agents discover the hidden accessible button and click it to enable agent mode.
+ * Agent detection via DOM trigger only (production).
+ * In development, also supports ?agent=true query param for testing.
  */
 export function useAgentDetection(): UseAgentDetectionResult {
-  const [isAgentMode, setIsAgentMode] = useState(false);
+  // Check for dev mode query param
+  const hasDevQueryParam = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    if (import.meta.env.PROD) return false; // Only in dev
+    const params = new URLSearchParams(window.location.search);
+    return params.get('agent') === 'true';
+  }, []);
+
+  const [manualMode, setManualMode] = useState<boolean | null>(null);
+
+  const isAgentMode = manualMode ?? hasDevQueryParam;
 
   const enableAgentMode = useCallback(() => {
-    setIsAgentMode(true);
+    setManualMode(true);
   }, []);
 
   const disableAgentMode = useCallback(() => {
-    setIsAgentMode(false);
+    setManualMode(false);
   }, []);
 
   return {
