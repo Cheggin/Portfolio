@@ -9,12 +9,6 @@ export default defineSchema({
     timestamp: v.number(),
     userAgent: v.string(),
     query: v.string(),
-    detectionMethod: v.union(
-      v.literal("userAgent"),
-      v.literal("queryParam"),
-      v.literal("trigger")
-    ),
-    responseType: v.optional(v.string()),
   }).index("by_timestamp", ["timestamp"]),
   agentMemories: defineTable({
     key: v.string(),

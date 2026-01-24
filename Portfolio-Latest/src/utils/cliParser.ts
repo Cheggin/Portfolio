@@ -1,18 +1,10 @@
 // CLI Parser for Agent Interface
 // Parses user input to detect slash commands vs natural language queries
+// See AGENT_PROTOCOL.md for specification
 
-export interface ParsedCommand {
-  type: 'command' | 'query';
-  command?: string;
-  args: string[];
-  raw: string;
-}
+import type { ParsedCommand, CommandResult } from '../types/agentProtocol';
 
-export interface CommandResult {
-  success: boolean;
-  output: string;
-  type: 'system' | 'data' | 'error' | 'query';
-}
+export type { ParsedCommand, CommandResult };
 
 /**
  * Parse user input to determine if it's a slash command or natural language

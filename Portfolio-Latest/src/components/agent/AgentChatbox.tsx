@@ -12,12 +12,11 @@ interface TerminalLine {
 
 interface AgentChatboxProps {
   onExit: () => void;
-  detectionMethod: 'userAgent' | 'queryParam' | 'trigger';
   darkMode: boolean;
   toggleTheme: () => void;
 }
 
-export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggleTheme }: AgentChatboxProps) {
+export default function AgentChatbox({ onExit, darkMode, toggleTheme }: AgentChatboxProps) {
   const [lines, setLines] = useState<TerminalLine[]>([
     { id: 'welcome', type: 'system', content: 'Reagan Hsu Portfolio CLI v1.0.0' },
     { id: 'hint', type: 'system', content: 'Commands: /query [question], /export [json|md|xml]' },
@@ -128,7 +127,6 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
       await logInteraction({
         userAgent: navigator.userAgent,
         query: question,
-        detectionMethod,
       });
 
       addLine('output', response);
@@ -137,7 +135,7 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
     } finally {
       setIsLoading(false);
     }
-  }, [askClaude, logInteraction, detectionMethod, addLine]);
+  }, [askClaude, logInteraction, addLine]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -152,22 +150,24 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
     const parsed = parseInput(userInput);
 
     if (parsed.type === 'command' && parsed.command) {
-      // Execute slash command
+      // Execute slash command with context
       const result = executeCommand(
         parsed.command,
         parsed.args,
-        { messages: getMessages() },
-        handleExport
+        { 
+          messages: getMessages(),
+          export: handleExport,
+        }
       );
       
-      // If it's a /query command, send to Claude
-      if (result.type === 'query' && result.output) {
+      // If command delegates to backend, send to Claude
+      if (result.type === 'delegate' && result.output) {
         await queryPortfolio(result.output);
       } else {
         addLine(result.type === 'error' ? 'error' : 'system', result.output);
       }
     } else {
-      // Natural language - treat as implicit /query
+      // Natural language - treat as implicit /query (delegate)
       await queryPortfolio(userInput);
     }
   };
@@ -252,7 +252,7 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
       </div>
 
       <div className="cli-status-bar">
-        <span>{detectionMethod}</span>
+        <span>agent cli v1.0</span>
         <span>/query, /export</span>
       </div>
 

@@ -1,59 +1,51 @@
 // Standardized Command Schema for CLI Agent Interface
-// This protocol can be extended for larger projects
+// See AGENT_PROTOCOL.md for full specification
 
-import type { CommandResult } from '../utils/cliParser';
+import type { 
+  Command, 
+  CommandResult, 
+  CommandContext,
+  ExportFormat 
+} from '../types/agentProtocol';
+import { 
+  STANDARD_COMMANDS, 
+  VALID_EXPORT_FORMATS,
+  getCommandHandler 
+} from '../types/agentProtocol';
 
-export interface Command {
-  name: string;
-  description: string;
-  usage: string;
-}
-
-export interface CommandContext {
-  messages: Array<{ role: 'user' | 'assistant'; content: string }>;
-}
-
-// Command definitions - minimal set for scalable protocol
-export const COMMANDS: Command[] = [
-  {
-    name: 'query',
-    description: 'Query portfolio data',
-    usage: '/query [question]',
-  },
-  {
-    name: 'export',
-    description: 'Export conversation',
-    usage: '/export [json|md|xml]',
-  },
-];
+export type { Command, CommandResult, CommandContext };
+export { STANDARD_COMMANDS as COMMANDS, VALID_EXPORT_FORMATS };
 
 // Get all valid command names
 export function getAllCommandNames(): string[] {
-  return COMMANDS.map(cmd => cmd.name);
+  return STANDARD_COMMANDS.map(cmd => cmd.name);
 }
 
-// Resolve command name
-export function resolveCommand(input: string): string | null {
+// Resolve command name and get its definition
+export function resolveCommand(input: string): Command | null {
   const lower = input.toLowerCase();
-  const cmd = COMMANDS.find(c => c.name === lower);
-  return cmd ? cmd.name : null;
+  return STANDARD_COMMANDS.find(c => c.name === lower) || null;
 }
 
 // Generate help text for agents
 export function generateHelpText(): string {
   let output = 'Available commands:\n';
-  for (const cmd of COMMANDS) {
+  for (const cmd of STANDARD_COMMANDS) {
     output += `  ${cmd.usage.padEnd(30)} ${cmd.description}\n`;
   }
   return output;
 }
 
-// Execute a command
+/**
+ * Execute a command.
+ * 
+ * Commands with handlerType 'delegate' return type: 'delegate' 
+ * to signal the caller should pass the output to the backend.
+ */
 export function executeCommand(
   command: string,
   args: string[],
-  context: CommandContext,
-  exportFn: (format: 'json' | 'md' | 'xml') => void
+  context: CommandContext
 ): CommandResult {
   const resolved = resolveCommand(command);
   
@@ -65,18 +57,34 @@ export function executeCommand(
     };
   }
 
-  switch (resolved) {
+  // Check for custom registered handler first
+  const customHandler = getCommandHandler(resolved.name);
+  if (customHandler) {
+    const result = customHandler(args, context);
+    // Handle both sync and async (though executeCommand is sync)
+    if (result instanceof Promise) {
+      return {
+        success: false,
+        output: 'Async handlers not supported in sync execution',
+        type: 'error',
+      };
+    }
+    return result;
+  }
+
+  // Built-in command handlers
+  switch (resolved.name) {
     case 'query':
-      // /query returns a signal to process as natural language
+      // Delegate to backend - return the query text
       return {
         success: true,
         output: args.join(' '),
-        type: 'query' as CommandResult['type'],
+        type: 'delegate',
       };
 
     case 'export': {
-      const format = (args[0]?.toLowerCase() || 'json') as 'json' | 'md' | 'xml';
-      if (!['json', 'md', 'xml'].includes(format)) {
+      const format = (args[0]?.toLowerCase() || 'json') as ExportFormat;
+      if (!VALID_EXPORT_FORMATS.includes(format)) {
         return {
           success: false,
           output: `Invalid format: ${format}. Use json, md, or xml.`,
@@ -90,7 +98,8 @@ export function executeCommand(
           type: 'error',
         };
       }
-      exportFn(format);
+      // Call export function if provided in context
+      context.export?.(format);
       return {
         success: true,
         output: `Exported as ${format}.`,
@@ -101,7 +110,7 @@ export function executeCommand(
     default:
       return {
         success: false,
-        output: `Unknown command: /${command}`,
+        output: `Command not implemented: /${resolved.name}`,
         type: 'error',
       };
   }

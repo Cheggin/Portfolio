@@ -14,7 +14,7 @@ import AgentChatbox from "./components/agent/AgentChatbox";
 import { useAgentDetection } from "./hooks/useAgentDetection";
 
 export default function App() {
-  const { isAgentMode, detectionMethod, enableAgentMode, disableAgentMode } = useAgentDetection();
+  const { isAgentMode, enableAgentMode, disableAgentMode } = useAgentDetection();
 
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
@@ -33,13 +33,12 @@ export default function App() {
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
-  // Render agent chatbox when in agent mode
-  if (isAgentMode && detectionMethod) {
+  // Render agent CLI when in agent mode
+  if (isAgentMode) {
     return (
       <>
         <AgentChatbox
           onExit={disableAgentMode}
-          detectionMethod={detectionMethod}
           darkMode={darkMode}
           toggleTheme={toggleTheme}
         />

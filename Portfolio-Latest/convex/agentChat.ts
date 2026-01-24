@@ -121,18 +121,12 @@ export const logInteraction = mutation({
   args: {
     userAgent: v.string(),
     query: v.string(),
-    detectionMethod: v.union(
-      v.literal("userAgent"),
-      v.literal("queryParam"),
-      v.literal("trigger")
-    ),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("agentInteractions", {
       timestamp: Date.now(),
       userAgent: args.userAgent,
       query: args.query,
-      detectionMethod: args.detectionMethod,
     });
   },
 });
