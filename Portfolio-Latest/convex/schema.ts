@@ -16,4 +16,12 @@ export default defineSchema({
     ),
     responseType: v.optional(v.string()),
   }).index("by_timestamp", ["timestamp"]),
+  agentMemories: defineTable({
+    key: v.string(),
+    value: v.string(),
+    sessionId: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_key", ["key"])
+    .index("by_session", ["sessionId"]),
 });

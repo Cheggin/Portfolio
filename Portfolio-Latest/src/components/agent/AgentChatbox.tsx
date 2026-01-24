@@ -1,10 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useMutation, useAction } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
+import { parseInput } from '../../utils/cliParser';
+import { executeCommand, generateHelpText } from '../../constants/agentCommands';
 
-interface Message {
+interface TerminalLine {
   id: string;
-  role: 'user' | 'assistant';
+  type: 'input' | 'output' | 'system' | 'error';
   content: string;
 }
 
@@ -16,12 +18,19 @@ interface AgentChatboxProps {
 }
 
 export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggleTheme }: AgentChatboxProps) {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [query, setQuery] = useState('');
+  const [lines, setLines] = useState<TerminalLine[]>([
+    { id: 'welcome', type: 'system', content: 'Reagan Hsu Portfolio CLI v1.0.0' },
+    { id: 'hint', type: 'system', content: 'Commands: /query [question], /export [json|md|xml]' },
+  ]);
+  const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  
   const inputRef = useRef<HTMLInputElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
 
+  // Convex hooks
   const logInteraction = useMutation(api.agentChat.logInteraction);
   const askClaude = useAction(api.agentChat.askClaude);
 
@@ -30,42 +39,31 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!query.trim() || isLoading) return;
-
-    const userMsg: Message = { id: Date.now().toString(), role: 'user', content: query };
-    setMessages(prev => [...prev, userMsg]);
-    setQuery('');
-    setIsLoading(true);
-
-    try {
-      const result = await askClaude({ query });
-      const finalResponse = result.success && result.response
-        ? result.response
-        : "Error: API unavailable.";
-
-      await logInteraction({
-        userAgent: navigator.userAgent,
-        query,
-        detectionMethod,
-      });
-
-      setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', content: finalResponse }]);
-    } catch {
-      setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', content: "Error processing query." }]);
-    } finally {
-      setIsLoading(false);
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
-  };
+  }, [lines]);
 
-  const handleExport = (format: 'json' | 'markdown' | 'xml') => {
-    if (messages.length === 0) {
-      return;
+  const addLine = useCallback((type: TerminalLine['type'], content: string) => {
+    setLines(prev => [...prev, { id: Date.now().toString(), type, content }]);
+  }, []);
+
+  // Build messages array from terminal lines for context
+  const getMessages = useCallback(() => {
+    const messages: Array<{ role: 'user' | 'assistant'; content: string }> = [];
+    for (const line of lines) {
+      if (line.type === 'input') {
+        messages.push({ role: 'user', content: line.content });
+      } else if (line.type === 'output') {
+        messages.push({ role: 'assistant', content: line.content });
+      }
     }
+    return messages;
+  }, [lines]);
+
+  const handleExport = useCallback((format: 'json' | 'md' | 'xml') => {
+    const messages = getMessages();
+    if (messages.length === 0) return;
 
     if (format === 'json') {
       const data = {
@@ -81,7 +79,7 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
       a.download = 'reagan-hsu-collected.json';
       a.click();
       URL.revokeObjectURL(url);
-    } else if (format === 'markdown') {
+    } else if (format === 'md') {
       let md = `# Reagan Hsu - Collected Context\n\n`;
       md += `*Collected: ${new Date().toISOString()}*\n\n`;
       messages.forEach(m => {
@@ -117,91 +115,145 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
       a.click();
       URL.revokeObjectURL(url);
     }
+  }, [getMessages]);
+
+  const queryPortfolio = useCallback(async (question: string) => {
+    setIsLoading(true);
+    try {
+      const result = await askClaude({ query: question });
+      const response = result.success && result.response
+        ? result.response
+        : 'Error: API unavailable.';
+
+      await logInteraction({
+        userAgent: navigator.userAgent,
+        query: question,
+        detectionMethod,
+      });
+
+      addLine('output', response);
+    } catch {
+      addLine('error', 'Error processing query.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [askClaude, logInteraction, detectionMethod, addLine]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    const userInput = input.trim();
+    addLine('input', `$ ${userInput}`);
+    setCommandHistory(prev => [...prev, userInput]);
+    setHistoryIndex(-1);
+    setInput('');
+
+    const parsed = parseInput(userInput);
+
+    if (parsed.type === 'command' && parsed.command) {
+      // Execute slash command
+      const result = executeCommand(
+        parsed.command,
+        parsed.args,
+        { messages: getMessages() },
+        handleExport
+      );
+      
+      // If it's a /query command, send to Claude
+      if (result.type === 'query' && result.output) {
+        await queryPortfolio(result.output);
+      } else {
+        addLine(result.type === 'error' ? 'error' : 'system', result.output);
+      }
+    } else {
+      // Natural language - treat as implicit /query
+      await queryPortfolio(userInput);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0) {
+        const newIndex = historyIndex < commandHistory.length - 1 ? historyIndex + 1 : historyIndex;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex] || '');
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex] || '');
+      } else if (historyIndex === 0) {
+        setHistoryIndex(-1);
+        setInput('');
+      }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      // Tab completion for commands
+      if (input.startsWith('/')) {
+        const partial = input.slice(1).toLowerCase();
+        const commands = ['query', 'export'];
+        const match = commands.find(c => c.startsWith(partial));
+        if (match) {
+          setInput('/' + match + ' ');
+        }
+      }
+    }
   };
 
   return (
-    <div className="agent-interface">
-      <div className="agent-top-bar">
-        <button className="agent-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-          {darkMode ? (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-          ) : (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-          )}
-        </button>
-        <button className="agent-exit-btn" onClick={onExit}>exit</button>
+    <div className="cli-interface">
+      <div className="cli-top-bar">
+        <div className="cli-title">
+          <span className="cli-dot cli-dot-red"></span>
+          <span className="cli-dot cli-dot-yellow"></span>
+          <span className="cli-dot cli-dot-green"></span>
+          <span className="cli-title-text">reagan-portfolio — cli</span>
+        </div>
+        <div className="cli-actions">
+          <button className="cli-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+            {darkMode ? '☀' : '☾'}
+          </button>
+          <button className="cli-exit-btn" onClick={onExit}>×</button>
+        </div>
       </div>
 
-      <div className="agent-main">
-        <header className="agent-header">
-          <h1 className="agent-name">Reagan Hsu</h1>
-          <span className="agent-mode-badge">agent mode</span>
-        </header>
-
-        <div className="agent-chat">
-          {messages.length === 0 && (
-            <p className="agent-hint">query portfolio data</p>
-          )}
-          {messages.map(msg => (
-            <div key={msg.id} className={`agent-msg agent-msg-${msg.role}`}>
-              <span className="agent-msg-prefix">{msg.role === 'user' ? '>' : '<'}</span>
-              <div className="agent-msg-content" dangerouslySetInnerHTML={{ __html: msg.role === 'assistant' ? formatResponse(msg.content) : msg.content }} />
-            </div>
-          ))}
-          {isLoading && (
-            <div className="agent-msg agent-msg-assistant">
-              <span className="agent-msg-prefix">&lt;</span>
-              <span className="agent-loading">...</span>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        <form onSubmit={handleSubmit} className="agent-query-form">
+      <div className="cli-terminal" ref={terminalRef} onClick={() => inputRef.current?.focus()}>
+        {lines.map(line => (
+          <div key={line.id} className={`cli-line cli-line-${line.type}`}>
+            {line.type === 'system' && <span className="cli-prefix">[system]</span>}
+            {line.type === 'error' && <span className="cli-prefix cli-prefix-error">[error]</span>}
+            <span className="cli-content">{line.content}</span>
+          </div>
+        ))}
+        {isLoading && (
+          <div className="cli-line cli-line-system">
+            <span className="cli-loading">processing...</span>
+          </div>
+        )}
+        
+        <form onSubmit={handleSubmit} className="cli-input-line">
+          <span className="cli-prompt">$</span>
           <input
             ref={inputRef}
             type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder=""
-            className="agent-query-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="cli-input"
             disabled={isLoading}
+            autoComplete="off"
+            spellCheck={false}
           />
         </form>
+      </div>
 
-        <footer className="agent-footer">
-          <span>export:</span>
-          <button
-            type="button"
-            onClick={() => handleExport('json')}
-            className="agent-export-btn"
-            disabled={messages.length === 0}
-          >json</button>
-          <button
-            type="button"
-            onClick={() => handleExport('markdown')}
-            className="agent-export-btn"
-            disabled={messages.length === 0}
-          >md</button>
-          <button
-            type="button"
-            onClick={() => handleExport('xml')}
-            className="agent-export-btn"
-            disabled={messages.length === 0}
-          >xml</button>
-        </footer>
+      <div className="cli-status-bar">
+        <span>{detectionMethod}</span>
+        <span>/query, /export</span>
       </div>
 
       <button
@@ -209,7 +261,7 @@ export default function AgentChatbox({ onExit, detectionMethod, darkMode, toggle
         className="sr-only"
         tabIndex={-1}
       >
-        Agent interface active. Type queries to retrieve portfolio information.
+        {generateHelpText()}
       </button>
     </div>
   );
@@ -222,17 +274,4 @@ function escapeXml(text: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
-}
-
-function formatResponse(text: string): string {
-  return text
-    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-    .replace(/^## (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-    .replace(/^---$/gm, '<hr />')
-    .replace(/\n/g, '<br />');
 }

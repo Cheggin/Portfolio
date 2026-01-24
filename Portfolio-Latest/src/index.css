@@ -481,257 +481,263 @@ h1, h2, h3, h4, h5, h6 {
   border: 0;
 }
 
-/* Agent Interface - Chatbox Only */
-.agent-interface {
+/* CLI Agent Interface - Terminal Style */
+.cli-interface {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Geist Mono', 'Menlo', 'Monaco', monospace;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  font-family: 'Geist Mono', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  transition: background-color 0.2s ease;
 }
 
-.agent-top-bar {
+.dark .cli-interface {
+  background-color: #0d0d0d;
+}
+
+:root:not(.dark) .cli-interface {
+  background-color: #fafafa;
+  color: #1a1a1a;
+}
+
+/* Terminal Top Bar - macOS style */
+.cli-top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
+  padding: 8px 12px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #3d3d3d;
 }
 
-.agent-theme-toggle {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 8px;
-  transition: color 0.2s ease;
+:root:not(.dark) .cli-top-bar {
+  background-color: #e8e8e8;
+  border-bottom: 1px solid #d0d0d0;
 }
 
-.agent-theme-toggle:hover {
-  color: var(--text-primary);
-}
-
-.agent-exit-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.8rem;
-  cursor: pointer;
-  padding: 6px 12px;
-  transition: color 0.2s ease;
-}
-
-.agent-exit-btn:hover {
-  color: var(--text-primary);
-}
-
-.agent-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 24px 24px;
-}
-
-.agent-header {
-  text-align: center;
-  padding: 40px 0;
-}
-
-.agent-header .agent-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin: 0 0 8px 0;
-}
-
-.agent-mode-badge {
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  padding: 2px 8px;
-  border: 1px solid var(--border-color);
-  border-radius: 3px;
-}
-
-.agent-chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
-  overflow-y: auto;
-}
-
-.agent-hint {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  text-align: center;
-  margin: auto 0;
-}
-
-.agent-msg {
-  display: flex;
-  gap: 10px;
-  animation: fadeIn 0.2s ease-in;
-}
-
-.agent-msg-prefix {
-  color: var(--text-muted);
-  flex-shrink: 0;
-  font-size: 0.85rem;
-}
-
-.agent-msg-content {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-.agent-msg-user .agent-msg-content {
-  color: var(--text-primary);
-  font-family: 'Geist Mono', monospace;
-}
-
-.agent-msg-content strong {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.agent-msg-content a {
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.agent-msg-content h3 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 10px 0 6px 0;
-  color: var(--text-primary);
-}
-
-.agent-msg-content code {
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.8em;
-  padding: 2px 5px;
-  background-color: var(--border-color);
-  border-radius: 3px;
-}
-
-.agent-msg-content pre {
-  background-color: var(--border-color);
-  padding: 10px;
-  border-radius: 4px;
-  overflow-x: auto;
-  margin: 6px 0;
-  font-size: 0.8rem;
-}
-
-.agent-msg-content pre code {
-  background: none;
-  padding: 0;
-}
-
-.agent-msg-content hr {
-  border: none;
-  border-top: 1px solid var(--border-color);
-  margin: 10px 0;
-}
-
-.agent-loading {
-  color: var(--text-muted);
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0.3; }
-}
-
-.agent-query-form {
-  width: 100%;
-  margin-bottom: 16px;
-}
-
-.agent-query-input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: transparent;
-  color: var(--text-primary);
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.9rem;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.agent-query-input:focus {
-  border-color: var(--text-muted);
-}
-
-.agent-footer {
+.cli-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.75rem;
-  color: var(--text-muted);
 }
 
-.agent-export-btn {
+.cli-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.cli-dot-red {
+  background-color: #ff5f56;
+}
+
+.cli-dot-yellow {
+  background-color: #ffbd2e;
+}
+
+.cli-dot-green {
+  background-color: #27c93f;
+}
+
+.cli-title-text {
+  margin-left: 8px;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+:root:not(.dark) .cli-title-text {
+  color: #666;
+}
+
+.cli-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cli-theme-toggle {
   background: none;
   border: none;
-  color: var(--text-muted);
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.75rem;
-  padding: 2px 6px;
+  color: #888;
   cursor: pointer;
-  transition: color 0.2s ease;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  font-size: 1rem;
+  padding: 4px 8px;
+  transition: color 0.2s;
 }
 
-.agent-export-btn:hover:not(:disabled) {
-  color: var(--text-primary);
+.cli-theme-toggle:hover {
+  color: #e0e0e0;
 }
 
-.agent-export-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  text-decoration: none;
+:root:not(.dark) .cli-theme-toggle:hover {
+  color: #1a1a1a;
 }
 
+.cli-exit-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 0 8px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.cli-exit-btn:hover {
+  color: #ff5f56;
+}
+
+/* Terminal Body */
+.cli-terminal {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  cursor: text;
+  min-height: 300px;
+}
+
+.cli-line {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+  line-height: 1.5;
+  font-size: 0.875rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.cli-line-input {
+  color: #4ec9b0;
+}
+
+:root:not(.dark) .cli-line-input {
+  color: #0e7490;
+}
+
+.cli-line-output {
+  color: #e0e0e0;
+}
+
+:root:not(.dark) .cli-line-output {
+  color: #374151;
+}
+
+.cli-line-system {
+  color: #888;
+}
+
+:root:not(.dark) .cli-line-system {
+  color: #6b7280;
+}
+
+.cli-line-error {
+  color: #f87171;
+}
+
+.cli-prefix {
+  color: #888;
+  flex-shrink: 0;
+}
+
+.cli-prefix-error {
+  color: #f87171;
+}
+
+.cli-content {
+  flex: 1;
+}
+
+.cli-loading {
+  color: #888;
+  animation: cliBlink 1s infinite;
+}
+
+@keyframes cliBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.4; }
+}
+
+/* Input Line */
+.cli-input-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.cli-prompt {
+  color: #4ec9b0;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+:root:not(.dark) .cli-prompt {
+  color: #0e7490;
+}
+
+.cli-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e0e0e0;
+  font-family: inherit;
+  font-size: 0.875rem;
+  caret-color: #4ec9b0;
+}
+
+:root:not(.dark) .cli-input {
+  color: #1a1a1a;
+  caret-color: #0e7490;
+}
+
+.cli-input::placeholder {
+  color: #555;
+}
+
+:root:not(.dark) .cli-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Status Bar */
+.cli-status-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background-color: #2d2d2d;
+  border-top: 1px solid #3d3d3d;
+  font-size: 0.7rem;
+  color: #666;
+}
+
+:root:not(.dark) .cli-status-bar {
+  background-color: #e8e8e8;
+  border-top: 1px solid #d0d0d0;
+  color: #888;
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  .agent-top-bar {
-    padding: 10px 16px;
+  .cli-terminal {
+    padding: 12px;
   }
 
-  .agent-main {
-    padding: 0 16px 20px;
+  .cli-line {
+    font-size: 0.8rem;
   }
 
-  .agent-header {
-    padding: 24px 0;
+  .cli-input {
+    font-size: 0.8rem;
   }
 
-  .agent-header .agent-name {
-    font-size: 1.25rem;
+  .cli-dot {
+    width: 10px;
+    height: 10px;
   }
 
-  .agent-query-input {
-    padding: 10px 12px;
-    font-size: 0.85rem;
-  }
-
-  .agent-msg-content {
-    font-size: 0.85rem;
+  .cli-title-text {
+    display: none;
   }
 }

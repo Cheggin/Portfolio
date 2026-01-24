@@ -1,6 +1,120 @@
 import { v } from "convex/values";
-import { action, mutation } from "./_generated/server";
+import { action, mutation, query } from "./_generated/server";
 import Anthropic from "@anthropic-ai/sdk";
+
+// ============================================
+// Memory CRUD Operations
+// ============================================
+
+// Save a memory
+export const saveMemory = mutation({
+  args: {
+    key: v.string(),
+    value: v.string(),
+    sessionId: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    // Check if memory with this key already exists
+    const existing = await ctx.db
+      .query("agentMemories")
+      .withIndex("by_key", (q) => q.eq("key", args.key))
+      .first();
+
+    if (existing) {
+      // Update existing memory
+      await ctx.db.patch(existing._id, {
+        value: args.value,
+        createdAt: Date.now(),
+      });
+      return { id: existing._id, updated: true };
+    }
+
+    // Create new memory
+    const id = await ctx.db.insert("agentMemories", {
+      key: args.key,
+      value: args.value,
+      sessionId: args.sessionId,
+      createdAt: Date.now(),
+    });
+    return { id, updated: false };
+  },
+});
+
+// Get a specific memory by key
+export const getMemory = query({
+  args: {
+    key: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const memory = await ctx.db
+      .query("agentMemories")
+      .withIndex("by_key", (q) => q.eq("key", args.key))
+      .first();
+    return memory;
+  },
+});
+
+// List all memories (optionally filtered by session)
+export const listMemories = query({
+  args: {
+    sessionId: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    if (args.sessionId) {
+      return await ctx.db
+        .query("agentMemories")
+        .withIndex("by_session", (q) => q.eq("sessionId", args.sessionId))
+        .collect();
+    }
+    return await ctx.db.query("agentMemories").collect();
+  },
+});
+
+// Delete a memory by key
+export const deleteMemory = mutation({
+  args: {
+    key: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const memory = await ctx.db
+      .query("agentMemories")
+      .withIndex("by_key", (q) => q.eq("key", args.key))
+      .first();
+
+    if (memory) {
+      await ctx.db.delete(memory._id);
+      return { deleted: true };
+    }
+    return { deleted: false };
+  },
+});
+
+// Clear all memories (optionally by session)
+export const clearMemories = mutation({
+  args: {
+    sessionId: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    let memories;
+    if (args.sessionId) {
+      memories = await ctx.db
+        .query("agentMemories")
+        .withIndex("by_session", (q) => q.eq("sessionId", args.sessionId))
+        .collect();
+    } else {
+      memories = await ctx.db.query("agentMemories").collect();
+    }
+
+    for (const memory of memories) {
+      await ctx.db.delete(memory._id);
+    }
+    return { deleted: memories.length };
+  },
+});
+
+// ============================================
+// Agent Interactions
+// ============================================
 
 // Log an agent interaction
 export const logInteraction = mutation({
