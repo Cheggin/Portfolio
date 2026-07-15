@@ -60,6 +60,22 @@ export const personalInfo: PersonalInfo = {
 
 export const projects: Project[] = [
   {
+    name: 'Browser Use Desktop',
+    award: '',
+    date: 'Apr. 2026',
+    description: 'A cross-platform desktop app for running a team of browser agents locally. Ports your cookies into a fresh Chromium so agents are logged in everywhere you are, and spawns tasks from anywhere with a keyboard shortcut.',
+    tech: 'Electron, React, TypeScript, Browser Harness',
+    link: 'https://github.com/browser-use/desktop',
+  },
+  {
+    name: 'Minecraft Use',
+    award: '',
+    date: 'Apr. 2026',
+    description: 'Turns Minecraft into a coding workstation — spawn Claude Code as a villager, open VS Code in-game, and find and build web-sourced schematics in your world, all from chat.',
+    tech: 'Java, Claude Code, Browser Use, tmux',
+    link: 'https://www.minecraft-code.com/',
+  },
+  {
     name: 'BetterWeb',
     award: '1st Place Overall + Best Use of Web Agents @ Dedalus Labs (YC S25) x YC Agents Hackathon',
     date: 'Aug. 2025',

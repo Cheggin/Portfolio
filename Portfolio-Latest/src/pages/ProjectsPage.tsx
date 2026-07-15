@@ -1,6 +1,22 @@
 export default function ProjectsPage() {
   const projects = [
     {
+      name: "Browser Use Desktop",
+      award: "",
+      date: "Apr. 2026",
+      description: "A cross-platform desktop app for running a team of browser agents locally. Ports your cookies into a fresh Chromium so agents are logged in everywhere you are, and spawns tasks from anywhere with a keyboard shortcut.",
+      tech: "Electron, React, TypeScript, Browser Harness",
+      link: "https://github.com/browser-use/desktop"
+    },
+    {
+      name: "Minecraft Use",
+      award: "",
+      date: "Apr. 2026",
+      description: "Turns Minecraft into a coding workstation — spawn Claude Code as a villager, open VS Code in-game, and find and build web-sourced schematics in your world, all from chat.",
+      tech: "Java, Claude Code, Browser Use, tmux",
+      link: "https://www.minecraft-code.com/"
+    },
+    {
       name: "BetterWeb",
       award: "1st Place Overall + Best Use of Web Agents @ Dedalus Labs (YC S25) x YC Agents Hackathon",
       date: "Aug. 2025",
@@ -58,7 +74,9 @@ export default function ProjectsPage() {
         {projects.map((project, index) => (
           <div key={index} className="project-item">
             <h3 className="project-name">{project.name}</h3>
-            {project.award && <p className="project-tech">{project.award} · {project.date}</p>}
+            {(project.award || project.date) && (
+              <p className="project-tech">{[project.award, project.date].filter(Boolean).join(" · ")}</p>
+            )}
             <p className="body-text">{project.description}</p>
             <p className="project-tech">{project.tech}</p>
             <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-link">

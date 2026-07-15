@@ -61,7 +61,7 @@ export default function App() {
 
       <header className="portfolio-header">
         <h1 className="portfolio-title">Reagan Hsu</h1>
-        <p className="portfolio-date">Last updated: October 2, 2025</p>
+        <p className="portfolio-date">Last updated: July 14, 2026</p>
       </header>
 
       <nav className="portfolio-nav">
