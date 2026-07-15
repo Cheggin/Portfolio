@@ -21,7 +21,7 @@ export default defineConfig({
     {
       name: "serve-v1",
       configureServer(server) {
-        server.middlewares.use((req, res, next) => {
+        server.middlewares.use((req, _res, next) => {
           if (req.url === "/v1" || req.url === "/v1/") {
             req.url = "/v1/index.html";
           }
@@ -30,6 +30,10 @@ export default defineConfig({
       },
     },
   ],
+  optimizeDeps: {
+    // Only scan the main entry; the prebuilt /public/v1 archive must not be crawled
+    entries: ["index.html"],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

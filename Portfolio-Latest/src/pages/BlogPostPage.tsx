@@ -34,7 +34,7 @@ export default function BlogPostPage() {
     );
   }
 
-  const { Component, title, date, readTime, tags } = post;
+  const { Component, title, date, readTime } = post;
 
   return (
     <div className="section">
