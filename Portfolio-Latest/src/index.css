@@ -326,16 +326,35 @@ h1, h2, h3, h4, h5, h6 {
 .projects-list {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 36px;
   margin-top: 32px;
 }
 
-.project-item {
-  border-left: 2px solid var(--border-color);
-  padding-left: 24px;
+.project-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-name a:hover {
+  text-decoration: underline;
+}
+
+.star-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0;
 }
 
 .project-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
@@ -343,7 +362,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-.project-tech {
+.meta-text {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.9rem;
   color: var(--text-muted);

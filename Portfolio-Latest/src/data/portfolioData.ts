@@ -10,11 +10,12 @@ export interface PersonalInfo {
     github: string;
     linkedin: string;
   };
-  currentWork: {
+  work: {
     role: string;
     company: string;
     url: string;
-    description: string;
+    dates?: string;
+    description?: string;
   }[];
 }
 
@@ -25,6 +26,7 @@ export interface Project {
   description: string;
   tech: string;
   link: string;
+  repo?: string;
 }
 
 export interface Skill {
@@ -42,12 +44,19 @@ export const personalInfo: PersonalInfo = {
     github: 'https://github.com/Cheggin',
     linkedin: 'https://linkedin.com/in/reaganhsu',
   },
-  currentWork: [
+  work: [
     {
-      role: 'Growth Engineer',
+      role: 'Member of Technical Staff',
+      company: 'Datacurve AI',
+      url: 'https://datacurve.ai/',
+      dates: 'Aug. 2026 - Present',
+    },
+    {
+      role: 'Founding Engineer',
       company: 'Browser Use (YC W25)',
       url: 'https://browser-use.com/',
-      description: 'Shipping daily and helping identify friction points for users.',
+      dates: 'Sep. 2025 - Aug. 2026',
+      description: 'Worked on Browser Use Cloud, Browser Use Desktop, and Browser Use Terminal.',
     },
     {
       role: 'Claude Campus Ambassador',
@@ -60,12 +69,22 @@ export const personalInfo: PersonalInfo = {
 
 export const projects: Project[] = [
   {
+    name: 'Browser Use Terminal',
+    award: '',
+    date: 'May 2026',
+    description: 'A Rust terminal UI for browser agents. Runs tasks against your logged-in Chrome, headless Chromium, or Browser Use cloud, and lets you watch, steer, stop, and resume each run from the terminal.',
+    tech: 'Rust, Ratatui, Python, Browser Use',
+    link: 'https://github.com/browser-use/terminal',
+    repo: 'browser-use/terminal',
+  },
+  {
     name: 'Browser Use Desktop',
     award: '',
     date: 'Apr. 2026',
     description: 'A cross-platform desktop app for running a team of browser agents locally. Ports your cookies into a fresh Chromium so agents are logged in everywhere you are, and spawns tasks from anywhere with a keyboard shortcut.',
     tech: 'Electron, React, TypeScript, Browser Harness',
     link: 'https://github.com/browser-use/desktop',
+    repo: 'browser-use/desktop',
   },
   {
     name: 'Minecraft Use',
@@ -74,6 +93,7 @@ export const projects: Project[] = [
     description: 'Turns Minecraft into a coding workstation — spawn Claude Code as a villager, open VS Code in-game, and find and build web-sourced schematics in your world, all from chat.',
     tech: 'Java, Claude Code, Browser Use, tmux',
     link: 'https://www.minecraft-code.com/',
+    repo: 'Cheggin/minecraft-use',
   },
   {
     name: 'BetterWeb',
@@ -90,6 +110,7 @@ export const projects: Project[] = [
     description: 'A job application agent that fills out any job application form in real time with automated form filling, profile creation, and company research.',
     tech: 'Browser Use, Convex, React, TypeScript, Vite',
     link: 'https://github.com/Cheggin/Job-Use',
+    repo: 'Cheggin/Job-Use',
   },
   {
     name: 'FinHog',
@@ -158,9 +179,11 @@ export function formatAsMarkdown(): string {
   let md = `# ${personalInfo.name}\n\n`;
   md += `## About\n${personalInfo.bio}\n\n${personalInfo.currentFocus}\n\n`;
 
-  md += `## Current Work\n`;
-  personalInfo.currentWork.forEach(work => {
-    md += `- **${work.role}** at [${work.company}](${work.url}): ${work.description}\n`;
+  md += `## Work\n`;
+  personalInfo.work.forEach(work => {
+    const dates = work.dates ? ` (${work.dates})` : '';
+    const description = work.description ? `: ${work.description}` : '';
+    md += `- **${work.role}** at [${work.company}](${work.url})${dates}${description}\n`;
   });
   md += '\n';
 
@@ -200,16 +223,17 @@ export function formatAsXML(): string {
   xml += `      <github>${personalInfo.contact.github}</github>\n`;
   xml += `      <linkedin>${personalInfo.contact.linkedin}</linkedin>\n`;
   xml += `    </contact>\n`;
-  xml += `    <current_work>\n`;
-  personalInfo.currentWork.forEach(work => {
+  xml += `    <work>\n`;
+  personalInfo.work.forEach(work => {
     xml += `      <position>\n`;
     xml += `        <role>${work.role}</role>\n`;
     xml += `        <company>${work.company}</company>\n`;
     xml += `        <url>${work.url}</url>\n`;
-    xml += `        <description>${work.description}</description>\n`;
+    if (work.dates) xml += `        <dates>${work.dates}</dates>\n`;
+    if (work.description) xml += `        <description>${work.description}</description>\n`;
     xml += `      </position>\n`;
   });
-  xml += `    </current_work>\n`;
+  xml += `    </work>\n`;
   xml += `  </personal_info>\n\n`;
 
   xml += `  <projects>\n`;
