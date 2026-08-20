@@ -352,6 +352,38 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+.tech-list {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-top: -8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+}
+
+.tech-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Monochrome mark: masked so it always paints in the current text color */
+.tech-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+
 .contact-info {
   margin-top: 32px;
   margin-bottom: 32px;
