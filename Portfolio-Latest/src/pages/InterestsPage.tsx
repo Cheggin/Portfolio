@@ -16,7 +16,7 @@ export default function InterestsPage() {
   if (loading) {
     return (
       <div className="section">
-        <h2 className="section-heading">Interests</h2>
+        <h1 className="page-title">Interests</h1>
         <p className="body-text">Loading...</p>
       </div>
     );
@@ -24,7 +24,7 @@ export default function InterestsPage() {
 
   return (
     <div className="section">
-      <h2 className="section-heading">Interests</h2>
+      <h1 className="page-title">Interests</h1>
 
       <ul style={{
         listStyle: 'none',

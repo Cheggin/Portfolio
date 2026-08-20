@@ -158,10 +158,11 @@ IMPORTANT RULES:
 - **Coursework:** Data Structures, OO Design, Systems Programming, Data Science, DSA, AI/ML, Web Dev
 
 ## Current Positions
-1. **Growth Engineer at Browser Use (YC W25)** - Shipping daily and helping identify friction points for users.
+1. **Member of Technical Staff at Datacurve AI (datacurve.ai)** (Aug. 2026 - Present)
 2. **Claude Campus Ambassador at Anthropic** - Hosting events and helping other students build and learn with AI.
 
 ## Previous Experience
+- **Founding Engineer @ Browser Use (YC W25)** (Sep. 2025 - Aug. 2026) - Worked on Browser Use Cloud, Browser Use Desktop, and Browser Use Terminal
 - **AI/ML Researcher @ Algoverse** - GAIA framework for LLM benchmarking, Letta stateful agent reasoning pipeline
 - **Front End Lead @ NetSerpent Startup** - React Native Web with Expo and Tauri, mentoring junior developers
 - **Cancer Researcher @ UC San Diego Ongkeko Lab** - Multi-modality imaging model for HNSCC diagnosis

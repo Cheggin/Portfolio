@@ -300,6 +300,41 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 32px;
 }
 
+.work-item {
+  margin-bottom: 32px;
+}
+
+.work-item:last-child {
+  margin-bottom: 0;
+}
+
+.work-item .meta-text {
+  margin-top: -18px;
+  margin-bottom: 18px;
+}
+
+.work-logo {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.15em;
+  margin-right: 0.4em;
+  vertical-align: -0.15em;
+  background-color: currentColor;
+  -webkit-mask: center / contain no-repeat;
+  mask: center / contain no-repeat;
+}
+
+.work-logo-datacurve {
+  -webkit-mask-image: url('./assets/logos/datacurve.svg');
+  mask-image: url('./assets/logos/datacurve.svg');
+}
+
+.work-logo-browser-use {
+  -webkit-mask-image: url('./assets/logos/browser-use.svg');
+  mask-image: url('./assets/logos/browser-use.svg');
+}
+
 .link-section {
   margin-top: 48px;
   display: flex;

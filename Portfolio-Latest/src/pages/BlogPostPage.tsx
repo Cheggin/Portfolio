@@ -27,8 +27,8 @@ export default function BlogPostPage() {
     return (
       <div className="section">
         <h2 className="section-heading">Post Not Found</h2>
-        <Link to="/blog" className="body-text" style={{ textDecoration: 'underline' }}>
-          ← Back to blog
+        <Link to="/writing" className="body-text" style={{ textDecoration: 'underline' }}>
+          ← Back to writing
         </Link>
       </div>
     );
@@ -39,7 +39,7 @@ export default function BlogPostPage() {
   return (
     <div className="section">
       <Link
-        to="/blog"
+        to="/writing"
         style={{
           color: 'rgba(255, 255, 255, 0.6)',
           textDecoration: 'none',
@@ -51,7 +51,7 @@ export default function BlogPostPage() {
         onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 1)'}
         onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)'}
       >
-        ← Back to blog
+        ← Back to writing
       </Link>
 
       <article style={{ maxWidth: '900px' }}>

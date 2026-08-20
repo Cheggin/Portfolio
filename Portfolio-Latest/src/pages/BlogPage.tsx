@@ -35,7 +35,7 @@ export default function BlogPage() {
   if (loading) {
     return (
       <div className="section">
-        <h2 className="section-heading">Writing</h2>
+        <h1 className="page-title">Writing</h1>
         <p className="body-text">Loading...</p>
       </div>
     );
@@ -44,7 +44,7 @@ export default function BlogPage() {
   if (blogPosts.length === 0) {
     return (
       <div className="section">
-        <h2 className="section-heading">Writing</h2>
+        <h1 className="page-title">Writing</h1>
         <p className="body-text">
           Coming soon. Thoughts on AI, software engineering, and building products.
         </p>
@@ -54,7 +54,7 @@ export default function BlogPage() {
 
   return (
     <div className="section">
-      <h2 className="section-heading">Writing</h2>
+      <h1 className="page-title">Writing</h1>
 
       <div style={{
         display: 'flex',
@@ -88,7 +88,7 @@ export default function BlogPage() {
             {/* Right side: Title and description */}
             <div>
               <Link
-                to={`/blog/${post.id}`}
+                to={`/writing/${post.id}`}
                 style={{
                   textDecoration: 'none',
                   color: 'inherit'
