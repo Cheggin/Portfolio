@@ -80,6 +80,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.4;
+  /* the swapped message sets a smaller font-size, so pin the row to the taller
+     state or the mark re-centres and everything below it jumps */
+  min-height: calc(1.05rem * 1.4);
 }
 
 .sidebar-mark-button {
@@ -130,9 +133,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-mark {
   width: var(--mark-size);
-  height: var(--mark-size);
+  /* the viewBox is cropped to the artwork, so let the height follow its aspect
+     and the flex row can centre the ink rather than a box of empty space */
+  height: auto;
   flex-shrink: 0;
   display: block;
+  /* the row centres on the full line box, but the eye reads the cap height:
+     measured 1.8px high against "Reagan Hsu", so drop it back down */
+  transform: translateY(2px);
 }
 
 .sidebar-nav {

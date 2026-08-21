@@ -8,7 +8,7 @@ export default function HomePage() {
       </p>
 
       <p className="body-text">
-        I love working on products to make them seamless for users and making people's lives better via software.
+        I enjoy programming sometimes, and you can otherwise find me reading, trying new restaurants, cooking, baking, vlogging, or playing video games.
       </p>
 
       <div className="highlight-section">

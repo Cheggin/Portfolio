@@ -37,7 +37,7 @@ export interface Skill {
 export const personalInfo: PersonalInfo = {
   name: 'Reagan Hsu',
   role: 'Software Engineer',
-  bio: "Hey, I'm Reagan! I'm a software engineer currently trying to build the future of web automations with browser agents. I love working on products to make them seamless for users and making people's lives better via software.",
+  bio: "Hey, I'm Reagan! I'm a software engineer currently trying to build the future of web automations with browser agents. I enjoy programming sometimes, and you can otherwise find me reading, trying new restaurants, cooking, baking, vlogging, or playing video games.",
   currentFocus: 'My day-to-day work mostly spans frontend development and product engineering. However, I\'m comfortable working around the stack!',
   contact: {
     email: 'reaganhsu123@gmail.com',
