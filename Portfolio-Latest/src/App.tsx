@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/react";
 import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import BlogPage from "./pages/BlogPage";
-import BlogPostPage from "./pages/BlogPostPage";
 import InterestsPage from "./pages/InterestsPage";
 import InterestPage from "./pages/InterestPage";
 import ArchivePage from "./pages/ArchivePage";
@@ -69,7 +68,6 @@ export default function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/writing" element={<BlogPage />} />
-              <Route path="/writing/:id" element={<BlogPostPage />} />
               <Route path="/interests" element={<InterestsPage />} />
               <Route path="/interests/:id" element={<InterestPage />} />
               <Route path="/archive" element={<ArchivePage />} />
@@ -79,7 +77,7 @@ export default function App() {
 
           <footer className="portfolio-footer">
             <Stats />
-            <p className="footer-date">Last updated: August 20, 2026</p>
+            <p className="footer-date">Last updated: September 21, 2026</p>
           </footer>
         </div>
       </div>
