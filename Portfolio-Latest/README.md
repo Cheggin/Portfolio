@@ -22,3 +22,11 @@ npm run dev
 - `/src/pages` - Page components (Home, Projects, Blog, Archive, Contact)
 - `/src/components` - Shared components (Stats)
 - `/public/v1` - Archived V1 portfolio (static build)
+
+## Flow Free
+
+The interactive simulator and research notes live at `/writing/flow-free`.
+Its model and React components are in `src/components/flow-free`; the article is
+`src/content/blog/flow-free.mdx`. The simulator supports pointer drawing,
+animated solution playback, SVG export, and both portfolio themes. See the
+component directory's README for its import surface.

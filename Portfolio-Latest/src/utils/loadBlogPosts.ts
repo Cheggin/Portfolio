@@ -1,38 +1,28 @@
+import type { ComponentType } from "react";
+
 export interface BlogPost {
   id: string;
   title: string;
-  date: string;
-  readTime: string;
-  excerpt: string;
-  tags: string[];
-  Component: React.ComponentType;
+  date?: string;
+  readTime?: string;
+  excerpt?: string;
+  tags?: string[];
+  Component: ComponentType;
 }
 
-export async function loadBlogPosts(): Promise<BlogPost[]> {
-  const modules = import.meta.glob('../content/blog/*.mdx', { eager: true });
+const modules = import.meta.glob<{
+  frontmatter: Omit<BlogPost, "id" | "Component">;
+  default: ComponentType;
+}>("../content/blog/*.mdx", { eager: true });
 
-  const posts: BlogPost[] = [];
-
-  for (const path in modules) {
-    const module = modules[path] as any;
-    const frontmatter = module.frontmatter || {};
-
-    // Extract filename without extension for the ID
-    const filename = path.split('/').pop()?.replace('.mdx', '') || '';
-
-    posts.push({
-      id: filename,
-      title: frontmatter.title || 'Untitled',
-      date: frontmatter.date || '',
-      readTime: frontmatter.readTime || '',
-      excerpt: frontmatter.excerpt || '',
-      tags: frontmatter.tags || [],
-      Component: module.default,
-    });
-  }
-
-  // Sort by date (newest first)
-  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return posts;
-}
+export const blogPosts: BlogPost[] = Object.entries(modules)
+  .map(([path, module]) => ({
+    ...module.frontmatter,
+    id: path.slice(path.lastIndexOf("/") + 1, -".mdx".length),
+    Component: module.default,
+  }))
+  .sort((a, b) => {
+    if (!a.date) return b.date ? 1 : 0;
+    if (!b.date) return -1;
+    return Date.parse(b.date) - Date.parse(a.date);
+  });

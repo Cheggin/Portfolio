@@ -1,0 +1,118 @@
+.flow-free-figure {
+  --flow-free-max-width: 36rem;
+  --flow-free-space: 0.75rem;
+  --flow-free-control-height: 2.25rem;
+
+  width: 100%;
+  max-width: var(--flow-free-max-width);
+  margin-block: 1.5rem;
+}
+
+.flow-free-metrics {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+}
+
+.flow-free-metrics > span {
+  white-space: nowrap;
+}
+
+.flow-free-board {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.flow-free-board.is-interactive {
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.flow-free-board-background {
+  fill: var(--bg-primary);
+}
+
+.flow-free-grid line {
+  stroke: var(--border-color);
+  stroke-width: 0.025;
+}
+
+.flow-free-segment {
+  stroke-dasharray: 1;
+  animation: flow-free-draw-segment var(--flow-free-segment-duration) ease-out
+    both;
+}
+
+.flow-free-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--flow-free-space);
+}
+
+.flow-free-action {
+  min-height: var(--flow-free-control-height);
+  padding-inline: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.flow-free-action:hover:not(:disabled) {
+  border-color: var(--text-muted);
+}
+
+.flow-free-action:focus-visible {
+  outline: 2px solid var(--blog-link-color);
+  outline-offset: 2px;
+}
+
+.flow-free-action:disabled {
+  color: var(--text-muted);
+  cursor: default;
+  opacity: 0.55;
+}
+
+.flow-free-status,
+.flow-free-figure figcaption {
+  margin-top: var(--flow-free-space);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.flow-free-figure figcaption {
+  margin-bottom: 0;
+}
+
+@keyframes flow-free-draw-segment {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-free-segment {
+    animation: none;
+  }
+}

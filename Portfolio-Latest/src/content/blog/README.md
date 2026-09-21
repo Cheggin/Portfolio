@@ -31,7 +31,7 @@ Write your content here using **Markdown** or MDX!
 - And even React components!
 
 \```javascript
-// Code blocks with syntax highlighting
+// Fenced code blocks
 const greeting = "Hello, world!";
 \```
 ```
@@ -47,6 +47,6 @@ const greeting = "Hello, world!";
 
 ## Tips
 
-- The filename becomes the URL slug (e.g., `my-post.mdx` → `/blog/my-post`)
-- Posts are automatically sorted by date (newest first)
-- All frontmatter fields are required for best display
+- The filename becomes the URL slug (e.g., `my-post.mdx` → `/writing/my-post`)
+- Posts are sorted by date (newest first), with undated posts last
+- `title` is required; `date`, `readTime`, `excerpt`, and `tags` are optional
